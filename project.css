@@ -990,6 +990,7 @@ main {
   --user-groups-sticky-top: 103px;
   --user-groups-card-height: 199px;
   --user-groups-card-peek-gap: 28px;
+  --user-groups-start-delay: 220px;
   --user-groups-exit-hold: 90px;
   --user-groups-card-gap: calc(
     var(--user-groups-card-height) +

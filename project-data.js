@@ -1560,23 +1560,30 @@ function initialiseStackedUserGroups() {
         window.innerHeight - stickyTop
       );
 
-      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+const sectionTop = section.getBoundingClientRect().top + window.scrollY;
 
-      const exitHold = getNumberFromCssVariable(
-        section,
-        "--user-groups-exit-hold",
-        80
-      );
+const startDelay = getNumberFromCssVariable(
+  section,
+  "--user-groups-start-delay",
+  220
+);
 
-    animationStart = sectionTop + stickyTop + pinTopPadding;
+const exitHold = getNumberFromCssVariable(
+  section,
+  "--user-groups-exit-hold",
+  80
+);
 
-    section.style.height = `${
-      pinHeight +
-      stickyTop +
-      scrollDistance +
-      pinTopPadding +
-      exitHold
-    }px`;
+animationStart = sectionTop + stickyTop + pinTopPadding + startDelay;
+
+section.style.height = `${
+  pinHeight +
+  stickyTop +
+  scrollDistance +
+  pinTopPadding +
+  startDelay +
+  exitHold
+}px`;
 
     diagram.style.height = `${cardHeight + (cards.length - 1) * cardGap}px`;
 
