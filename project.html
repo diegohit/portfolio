@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="UX design case study by Diego Cárdenas Mora." />
+    <title>Project — Diego Cárdenas Mora</title>
+    <link
+      id="animated-favicon"
+      rel="icon"
+      type="image/svg+xml"
+      href="assets/favicons/favicon-black.svg"
+    />
+    <link rel="stylesheet" href="project.css" />
+    <script src="favicon.js" defer></script>
+    <script src="cursor.js" defer></script>
+    <script src="project-data.js" defer></script>
+  </head>
+  <body>
+    <header class="case-header">
+      <a class="case-name" href="index.html">Diego Cárdenas Mora</a>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a class="is-active" href="index.html#projects">Projects</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <a class="case-logo" href="index.html#contact" aria-label="Go to contact">
+        <img src="assets/logo.svg" alt="" />
+      </a>
+    </header>
+
+    <div class="case-section-indicator" id="case-section-indicator" aria-hidden="true">
+      <strong id="indicator-project-title"></strong>
+      <div class="case-section-indicator-label" aria-live="polite">
+        <span class="is-current" id="indicator-section-current"></span>
+        <span class="is-next" id="indicator-section-next"></span>
+      </div>
+      <div class="case-reading-progress" aria-hidden="true">
+        <span id="case-reading-progress-bar"></span>
+      </div>
+    </div>
+
+    <main id="case-study">
+      <section class="case-hero">
+        <p class="case-number" id="project-number"></p>
+        <h1 id="project-title"></h1>
+      </section>
+
+      <section class="case-summary" data-section-title="Project Overview">
+        <aside class="case-meta">
+          <div>
+            <h2>Skills</h2>
+            <p id="project-skills"></p>
+          </div>
+          <div>
+            <h2>Tools</h2>
+            <p id="project-tools"></p>
+          </div>
+        </aside>
+        <div class="case-overview">
+          <h2>Project Overview</h2>
+          <div id="project-overview"></div>
+        </div>
+      </section>
+
+      <figure class="case-media" id="project-media">
+        <div id="project-media-content">
+          <span>Project image</span>
+        </div>
+        <figcaption id="project-media-caption">Visual material will be added here.</figcaption>
+      </figure>
+
+      <div id="project-sections"></div>
+
+      <nav class="case-next" aria-label="Project navigation">
+        <p>Next project</p>
+        <a id="next-project" href="#">
+          <span id="next-project-title"></span>
+          <img src="assets/arrow-up-right.svg" alt="" />
+        </a>
+      </nav>
+    </main>
+
+    <a class="case-back" href="index.html#projects">
+      <img src="assets/arrow-up-right.svg" alt="" />
+      <span>Back to projects</span>
+    </a>
+  </body>
+</html>

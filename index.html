@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portfolio de Diego Cárdenas Mora, diseñador de interacción."
+    />
+    <title>Diego Cárdenas Mora — Interaction Designer</title>
+    <link
+      id="animated-favicon"
+      rel="icon"
+      type="image/svg+xml"
+      href="assets/favicons/favicon-black.svg"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="favicon.js" defer></script>
+    <script src="cursor.js" defer></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <button class="back-to-top is-hidden" type="button" aria-label="Volver al inicio">
+      <strong>Back to top</strong>
+      <img src="assets/arrow-up-right.svg" alt="" />
+    </button>
+
+    <header class="site-header is-home">
+      <a class="site-name" href="#home">Diego Cárdenas Mora</a>
+      <p class="header-role">Interaction Designer</p>
+      <nav class="header-nav" aria-label="Navegación">
+        <a class="is-active" href="#home" aria-current="page">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="header-mark" href="#contact" aria-label="Ir a contacto">
+        <img src="assets/logo.svg" alt="" />
+      </a>
+    </header>
+
+    <main>
+      <section class="hero section-shell" id="home">
+        <div class="hero-intro">
+          <div class="home-title">
+            <h1>Home</h1>
+            <span class="home-icon" tabindex="0" aria-label="Knock knock">
+              <img class="home-icon-default" src="assets/home-icon.svg" alt="" />
+              <img class="home-icon-hover" src="assets/home-icon-hover.svg" alt="" />
+            </span>
+          </div>
+
+          <div class="home-navigation-row">
+            <nav class="main-nav" aria-label="Navegación principal">
+              <a href="#projects"><span>01</span><strong>Projects</strong><img src="assets/arrow-up-right.svg" alt="" /></a>
+              <a href="#services"><span>02</span><strong>Services</strong><img src="assets/arrow-up-right.svg" alt="" /></a>
+              <a href="#about"><span>03</span><strong>About</strong><img src="assets/arrow-up-right.svg" alt="" /></a>
+              <a href="#contact"><span>04</span><strong>Contact</strong><img src="assets/arrow-up-right.svg" alt="" /></a>
+            </nav>
+          </div>
+        </div>
+
+        <figure class="hero-visual">
+          <div class="portrait-placeholder">
+            <img
+              src="assets/images/home/diego-portrait.jpeg"
+              alt="Diego Cárdenas Mora smiling"
+            />
+          </div>
+        </figure>
+
+        <div class="skills-marquee" aria-label="Especialidades">
+          <p>My skills</p>
+          <div class="marquee-window">
+            <div class="marquee-track">
+              <span>UX Design · UX Research · Service Design · Interaction Design · UX Writing · Information Architecture · Interaction Design · Usability Testing · Conversational Design · Content Audit · Experience Measurement ·</span>
+              <span aria-hidden="true">UX Design · UX Research · Service Design · Interaction Design · UX Writing · Information Architecture · Interaction Design · Usability Testing · Conversational Design · Content Audit · Experience Measurement ·</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects section-shell" id="projects">
+        <div class="section-heading">
+          <p>01 / My work</p>
+          <h2>Projects</h2>
+        </div>
+
+        <div class="project-list">
+          <article class="project-card">
+            <a class="project-card-link" href="project.html?id=rural-healthcare" aria-label="Ver Field Tool for Rural Healthcare Access">
+              <div class="project-card-face project-card-front">
+                <span class="project-number">01</span>
+                <div class="project-image project-image-cover">
+                  <img
+                    src="assets/images/projects/offline-tool-cover.png"
+                    alt="Offline-first healthcare field tool shown across three tablet screens"
+                  />
+                </div>
+                <div class="project-info">
+                  <i aria-hidden="true"></i>
+                  <h3>Field Tool For Rural<br />Healthcare Access</h3>
+                </div>
+              </div>
+              <div class="project-card-face project-card-back">
+                <span class="project-number">01</span>
+                <div class="project-outcomes">
+                  <strong>Outcomes</strong>
+                  <div class="project-outcome-rotator">
+                    <p class="is-active">Supported 70,000+ patients in rural areas of Colombia</p>
+                    <p>Reduced the risk of losing personal information and special category health data</p>
+                  </div>
+                </div>
+                <div class="project-card-action">
+                  <span>See More</span>
+                  <i aria-hidden="true"></i>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="project-card">
+            <a class="project-card-link" href="project.html?id=app-redesign" aria-label="Ver App Redesign for Nueva EPS">
+              <div class="project-card-face project-card-front">
+                <span class="project-number">02</span>
+                <div class="project-image project-image-cover">
+                  <img
+                    src="assets/images/projects/app-redesign-cover.png"
+                    alt="Nueva EPS app redesign showing healthcare service shortcuts"
+                  />
+                </div>
+                <div class="project-info">
+                  <i aria-hidden="true"></i>
+                  <h3>App Redesign for Nueva EPS</h3>
+                </div>
+              </div>
+              <div class="project-card-face project-card-back">
+                <span class="project-number">02</span>
+                <div class="project-outcomes">
+                  <strong>Outcomes</strong>
+                  <div class="project-outcome-rotator">
+                    <p class="is-active">Redesigned a patient-facing app used by 1M+ members monthly</p>
+                    <p>Restructured the information architecture to make key healthcare services easier to find</p>
+                    <p>Simplified navigation and access to essential self-service journeys</p>
+                  </div>
+                </div>
+                <div class="project-card-action">
+                  <span>See More</span>
+                  <i aria-hidden="true"></i>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="project-card">
+            <a class="project-card-link" href="project.html?id=whatsapp-appointments" aria-label="Ver WhatsApp Medical Appointments">
+              <div class="project-card-face project-card-front">
+                <span class="project-number">03</span>
+                <div class="project-image project-image-cover">
+                  <img
+                    src="assets/images/projects/whatsapp-appointments-cover.png"
+                    alt="WhatsApp chatbot for managing medical appointments"
+                  />
+                </div>
+                <div class="project-info">
+                  <i aria-hidden="true"></i>
+                  <h3>WhatsApp Medical Appointments</h3>
+                </div>
+              </div>
+              <div class="project-card-face project-card-back">
+                <span class="project-number">03</span>
+                <div class="project-outcomes">
+                  <strong>Outcomes</strong>
+                  <div class="project-outcome-rotator">
+                    <p class="is-active">Supported 1.8M+ monthly users through a WhatsApp-based appointment service</p>
+                    <p>97% of surveyed users reported being happy with the service</p>
+                    <p>Helped users schedule, check, reschedule, and cancel appointments through a familiar channel</p>
+                  </div>
+                </div>
+                <div class="project-card-action">
+                  <span>See More</span>
+                  <i aria-hidden="true"></i>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="project-card">
+            <a class="project-card-link" href="project.html?id=maternal-health" aria-label="Ver Maternal Health Support">
+              <div class="project-card-face project-card-front">
+                <span class="project-number">04</span>
+                <div class="project-image project-image-cover">
+                  <img
+                    src="assets/images/projects/maternal-health-cover.png"
+                    alt="WhatsApp maternal health support shown across two mobile screens"
+                  />
+                </div>
+                <div class="project-info">
+                  <i aria-hidden="true"></i>
+                  <h3>Maternal Health Support</h3>
+                </div>
+              </div>
+              <div class="project-card-face project-card-back">
+                <span class="project-number">04</span>
+                <div class="project-outcomes">
+                  <strong>Outcomes</strong>
+                  <div class="project-outcome-rotator">
+                    <p class="is-active">Supported approximately 500 pregnant women in Antioquia through WhatsApp-based guidance</p>
+                  </div>
+                </div>
+                <div class="project-card-action">
+                  <span>See More</span>
+                  <i aria-hidden="true"></i>
+                </div>
+              </div>
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section class="services section-shell" id="services">
+        <div class="services-sticky">
+          <div class="section-heading">
+            <p>02 / What I do</p>
+            <h2>Services</h2>
+          </div>
+          <div class="service-list">
+            <article>
+              <span>01</span>
+              <h3>UX & Product Design</h3>
+              <p>Digital products that are clear, useful, and built to scale.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Service Design</h3>
+              <p>Connected service experiences across people, processes, channels, and touchpoints.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Research & Strategy</h3>
+              <p>Design decisions grounded in user needs, context, evidence, and business constraints.</p>
+            </article>
+            <article>
+              <span>04</span>
+              <h3>Content Design</h3>
+              <p>Guided interactions, flows, and UX writing that make complex services easier to understand and complete.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="about section-shell" id="about">
+        <div class="section-heading">
+          <p>03 / Profile</p>
+          <h2>About</h2>
+        </div>
+        <div class="about-copy">
+          <figure class="about-media">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="assets/videos/about-loch-ness.mp4" type="video/mp4" />
+              Your browser does not support HTML video.
+            </video>
+            <figcaption>Loch Ness</figcaption>
+          </figure>
+          <div class="about-description">
+            <p>
+              Hi, I’m Diego Cárdenas Mora, an Interaction Designer born in
+              Bogotá, Colombia, and currently based in the UK. I focus on
+              creating and improving digital products and services through a
+              user-centered design approach, applied research and close
+              collaboration with interdisciplinary teams.
+            </p>
+            <p>
+              Driven by the desire to deepen my research practice and strengthen
+              my methodological approach, I decided to move to the UK to pursue
+              a Master’s degree in Human Computer Interaction at the University
+              of St Andrews. Throughout this experience, I have refined my use
+              of scientific methods in design, integrating qualitative and
+              quantitative research to address problems from a critical,
+              ethical, and human-centred perspective.
+            </p>
+            <p>
+              I’m always open to new collaborations where design can help make
+              complex systems easier to understand and use.
+            </p>
+            <div class="about-actions">
+              <a class="text-link" href="#" download>
+                <strong>Download CV</strong>
+                <img src="assets/arrow-up-right.svg" alt="" />
+              </a>
+              <a class="text-link text-link-dark" href="#contact">
+                <strong>Let's talk!</strong>
+                <img src="assets/arrow-up-right.svg" alt="" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact section-shell" id="contact">
+        <p>04 / Let's work together</p>
+        <h2>Want to work<br />together?</h2>
+        <a class="contact-link" href="mailto:diegohit@gmail.com">
+          <span>diegohit@gmail.com</span>
+          <img src="assets/contact-arrow.svg" alt="" />
+        </a>
+        <a
+          class="contact-link"
+          href="https://www.linkedin.com/in/diego-cardenasm"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>LinkedIn</span>
+          <img src="assets/contact-arrow.svg" alt="" />
+        </a>
+        <footer>
+          <p>© <span id="year"></span> Diego Cárdenas Mora</p>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>
