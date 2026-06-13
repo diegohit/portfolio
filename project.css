@@ -990,8 +990,8 @@ main {
   --user-groups-sticky-top: 103px;
   --user-groups-card-height: 199px;
   --user-groups-card-peek-gap: 28px;
-  --user-groups-start-delay: 220px;
-  --user-groups-exit-hold: 90px;
+  --user-groups-exit-hold: 96px;
+  --user-groups-content-opacity: 1;
   --user-groups-card-gap: calc(
     var(--user-groups-card-height) +
     var(--user-groups-card-peek-gap)
@@ -1043,6 +1043,12 @@ main {
   padding-bottom: 0;
 }
 
+.user-groups-pin > h2,
+.user-groups-pin .case-section-content {
+  opacity: var(--user-groups-content-opacity);
+  will-change: opacity;
+}
+
 .user-groups-diagram--stacked::after {
   display: none;
 }
@@ -1068,6 +1074,21 @@ main {
   box-shadow: 0 -1px 0 #010101;
   transform: translate3d(0, 0, 0);
   will-change: transform;
+}
+
+@media (min-width: 521px) and (prefers-reduced-motion: no-preference) {
+  .case-section--stacked-followup {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    transition:
+      opacity 480ms ease,
+      transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .case-section--stacked-followup.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 .user-group-row img {
@@ -1427,7 +1448,7 @@ main {
   .case-section--stacked-user-groups {
     --user-groups-card-height: 180px;
     --user-groups-card-peek-gap: 24px;
-    --user-groups-exit-hold: 140px;
+    --user-groups-exit-hold: 104px;
     --user-groups-card-gap: calc(
       var(--user-groups-card-height) +
       var(--user-groups-card-peek-gap)

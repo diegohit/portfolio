@@ -583,6 +583,7 @@ const projects = {
       },
       {
         title: "Main User Groups",
+        stackUserGroups: true,
         userGroups: [
           {
             image: "assets/images/projects/maternal-user-follow-up.png",
@@ -1006,6 +1007,10 @@ function initialiseHorizontalScroll() {
   });
 }
 
+function getCaseSectionIndicatorThreshold() {
+  return document.querySelector(".case-header")?.offsetHeight || 52;
+}
+
 function initialiseSectionIndicator() {
   const indicator = document.querySelector("#case-section-indicator");
   const projectTitle = document.querySelector("#indicator-project-title");
@@ -1018,7 +1023,6 @@ function initialiseSectionIndicator() {
       title: section.dataset.sectionTitle,
     })
   );
-  const headerHeight = document.querySelector(".case-header").offsetHeight;
   let activeTitle = "";
   let ticking = false;
   let transitionTimer;
@@ -1050,6 +1054,7 @@ function initialiseSectionIndicator() {
   };
 
   const update = () => {
+    const headerHeight = getCaseSectionIndicatorThreshold();
     let activeSection = null;
 
     sections.forEach((item) => {
@@ -1474,28 +1479,22 @@ function initialiseStackedUserGroups() {
     if (cards.length < 2) return;
 
     let stickyTop = 103;
-    let pinTopPadding = 55;
     let cardHeight = 199;
     let cardGap = 120;
     let scrollDistance = 1;
-    let animationStart = 0;
+    let indicatorThreshold = 52;
+    let exitHold = 120;
     let ticking = false;
+    const nextSection = section.nextElementSibling;
+
+    if (nextSection?.classList.contains("case-section")) {
+      nextSection.classList.add("case-section--stacked-followup");
+    }
 
     const getNumberFromCssVariable = (element, variableName, fallback) => {
       const value = window
         .getComputedStyle(element)
         .getPropertyValue(variableName)
-        .trim();
-
-      const number = Number.parseFloat(value);
-
-      return Number.isNaN(number) ? fallback : number;
-    };
-
-    const getNumberFromCssProperty = (element, propertyName, fallback) => {
-      const value = window
-        .getComputedStyle(element)
-        .getPropertyValue(propertyName)
         .trim();
 
       const number = Number.parseFloat(value);
@@ -1515,6 +1514,8 @@ function initialiseStackedUserGroups() {
     const reset = () => {
       section.style.height = "";
       diagram.style.height = "";
+      section.style.setProperty("--user-groups-content-opacity", "1");
+      nextSection?.classList.add("is-visible");
 
       cards.forEach((card, index) => {
         card.style.zIndex = String(index + 1);
@@ -1548,8 +1549,6 @@ function initialiseStackedUserGroups() {
 
       cardGap = Math.max(cardHeight + 24, cssCardGap);
 
-      pinTopPadding = getNumberFromCssProperty(pin, "padding-top", 55);
-
       scrollDistance = Math.max(
         1,
         (cards.length - 1) * cardGap
@@ -1560,36 +1559,26 @@ function initialiseStackedUserGroups() {
         window.innerHeight - stickyTop
       );
 
-const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+      exitHold = getNumberFromCssVariable(
+        section,
+        "--user-groups-exit-hold",
+        120
+      );
 
-const startDelay = getNumberFromCssVariable(
-  section,
-  "--user-groups-start-delay",
-  220
-);
+      indicatorThreshold = getCaseSectionIndicatorThreshold();
 
-const exitHold = getNumberFromCssVariable(
-  section,
-  "--user-groups-exit-hold",
-  80
-);
+      section.style.height = `${Math.max(
+        pinHeight,
+        pinHeight + scrollDistance + exitHold - indicatorThreshold
+      )}px`;
 
-animationStart = sectionTop + stickyTop + pinTopPadding + startDelay;
+      diagram.style.height = `${
+        cardHeight + (cards.length - 1) * cardGap
+      }px`;
 
-section.style.height = `${
-  pinHeight +
-  stickyTop +
-  scrollDistance +
-  pinTopPadding +
-  startDelay +
-  exitHold
-}px`;
-
-    diagram.style.height = `${cardHeight + (cards.length - 1) * cardGap}px`;
-
-    setCardPositions(0);
-    update();
-  };
+      setCardPositions(0);
+      update();
+    };
 
     const update = () => {
       if (reducedMotion.matches || mobileLayout.matches) {
@@ -1597,15 +1586,31 @@ section.style.height = `${
         return;
       }
 
+      indicatorThreshold = getCaseSectionIndicatorThreshold();
+
+      const currentScroll =
+        indicatorThreshold - section.getBoundingClientRect().top;
+
       const progress = Math.min(
         cards.length - 1,
-        Math.max(
-          0,
-          (window.scrollY - animationStart) / cardGap
-        )
+        Math.max(0, currentScroll / cardGap)
       );
 
+      const fadeProgress = Math.min(
+        1,
+        Math.max(0, (currentScroll - scrollDistance) / exitHold)
+      );
+
+      const contentOpacity = 1 - fadeProgress;
+
       setCardPositions(progress);
+
+      section.style.setProperty(
+        "--user-groups-content-opacity",
+        contentOpacity.toFixed(4)
+      );
+
+      nextSection?.classList.toggle("is-visible", fadeProgress >= 0.98);
 
       ticking = false;
     };
@@ -1616,6 +1621,10 @@ section.style.height = `${
       ticking = true;
       window.requestAnimationFrame(update);
     };
+
+    if (!nextSection || reducedMotion.matches || mobileLayout.matches) {
+      nextSection?.classList.add("is-visible");
+    }
 
     setCardPositions(0);
     window.requestAnimationFrame(measure);
