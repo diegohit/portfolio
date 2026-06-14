@@ -21,6 +21,7 @@ html {
 
 body {
   margin: 0;
+  overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
   cursor: url("assets/cursors/monster.svg") 19 19, auto;
@@ -1166,22 +1167,112 @@ h2 {
   }
 }
 
+@media (max-width: 1100px) {
+  .site-header {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .header-nav {
+    gap: 7px;
+  }
+
+  .header-nav a {
+    min-width: 68px;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  .project-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .project-card-link {
+    min-height: 540px;
+  }
+
+  .service-list article {
+    grid-template-columns: 44px minmax(0, 1.25fr) minmax(220px, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .services {
+    min-height: auto;
+  }
+
+  .services-sticky {
+    position: static;
+    display: block;
+    min-height: 0;
+    padding: 36px 0 54px;
+  }
+
+  .service-list article {
+    min-height: 112px;
+    height: auto;
+  }
+}
+
 @media (max-width: 760px) {
   html {
     scroll-snap-type: y proximity;
   }
 
   .site-header {
+    grid-template-rows: 52px auto;
     grid-template-columns: 1fr auto;
+    min-height: 52px;
     font-size: 13px;
   }
 
+  .site-header:not(.is-home) {
+    padding-bottom: 8px;
+  }
+
+  .site-name {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .header-role {
+    display: none;
+  }
+
+  .header-mark {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
   .header-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .header-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .header-nav a {
+    min-width: auto;
+    flex: 0 0 auto;
+    padding: 4px 9px;
+  }
+
+  .site-header.is-home .header-nav {
     display: none;
   }
 
   .section-shell {
     padding-top: 34px;
+    padding-bottom: 46px;
+    scroll-margin-top: 94px;
   }
 
   .projects {
@@ -1191,18 +1282,50 @@ h2 {
   .hero {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
+    height: auto;
+    min-height: 0;
+    gap: 22px;
+    padding-top: 34px;
+  }
+
+  .hero::before {
+    top: 34px;
+  }
+
+  .hero-intro,
+  .hero-visual {
+    padding-top: 14px;
+  }
+
+  .home-title {
+    justify-content: space-between;
+  }
+
+  .home-icon {
+    height: clamp(30px, 10vw, 42px);
+    margin-left: 18px;
   }
 
   .hero-visual {
-    min-height: 320px;
+    min-height: 0;
   }
 
   .portrait-placeholder {
-    min-height: 320px;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
   }
 
   .skills-marquee {
     grid-column: 1;
+    margin-top: 0;
+  }
+
+  .skills-marquee > p {
+    font-size: 20px;
+  }
+
+  .marquee-window {
+    --marquee-type-size: clamp(34px, 10vw, 42px);
   }
 
   .section-heading,
@@ -1246,14 +1369,15 @@ h2 {
   .project-list {
     grid-template-columns: 1fr;
     margin-top: 44px;
+    padding-bottom: 90px;
   }
 
   .project-card-link {
-    min-height: 490px;
+    min-height: min(520px, calc(100vw + 110px));
   }
 
   .project-image {
-    min-height: 300px;
+    min-height: 0;
   }
 
   .service-list article {
@@ -1262,19 +1386,36 @@ h2 {
     min-height: 150px;
   }
 
-  .services {
-    min-height: calc(100svh - 52px);
-  }
-
   .services-sticky {
-    position: static;
-    display: block;
-    min-height: 0;
-    padding-bottom: 0;
+    padding-top: 22px;
+    padding-bottom: 36px;
   }
 
   .service-list p {
     grid-column: 2;
+    justify-self: start;
+  }
+
+  .service-list h3 {
+    font-size: clamp(28px, 9vw, 40px);
+  }
+
+  .about-description {
+    margin-top: 0;
+  }
+
+  .contact {
+    min-height: calc(100svh - 52px);
+  }
+
+  .contact h2 {
+    font-size: clamp(48px, 15vw, 76px);
+  }
+
+  .contact-link {
+    gap: 16px;
+    font-size: clamp(22px, 7vw, 34px);
+    overflow-wrap: anywhere;
   }
 
   .contact footer,
@@ -1285,7 +1426,94 @@ h2 {
   .back-to-top {
     right: 20px;
     bottom: 16px;
-    min-width: 145px;
+    min-width: 128px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --page-pad: 20px;
+  }
+
+  .site-name {
+    font-size: 12px;
+  }
+
+  h1,
+  h2 {
+    font-size: clamp(58px, 19vw, 76px);
+  }
+
+  .projects .section-heading h2 {
+    font-size: clamp(68px, 20vw, 92px);
+  }
+
+  .section-heading {
+    padding-bottom: 38px;
+  }
+
+  .project-card-face {
+    padding: 14px 16px 16px;
+  }
+
+  .project-info {
+    grid-template-columns: 16px 1fr;
+  }
+
+  .service-list article {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 12px;
+    min-height: 138px;
+    padding: 14px;
+  }
+
+  .about-actions {
+    gap: 12px;
+  }
+
+  .about-actions .text-link {
+    width: calc(50% - 6px);
+    min-width: 0;
+  }
+
+  .contact footer {
+    gap: 8px;
+    font-size: 11px;
+  }
+
+  .back-to-top {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    grid-template-columns: 1fr;
+    place-items: center;
+    padding: 0;
+  }
+
+  .back-to-top strong {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 339px) {
+  .site-header:not(.is-home) {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .header-nav {
+    gap: 4px;
+  }
+
+  .header-nav a {
+    padding: 3px 7px;
+    font-size: 11px;
   }
 }
 

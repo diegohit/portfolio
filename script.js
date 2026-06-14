@@ -58,7 +58,7 @@ let serviceTicking = false;
 function updateActiveService() {
   if (!serviceCards.length || !servicesSection || !serviceList) return;
 
-  const mobile = window.innerWidth <= 760;
+  const mobile = window.innerWidth <= 900;
   const headerHeight =
     document.querySelector(".site-header")?.offsetHeight ?? 52;
   const activationStart =

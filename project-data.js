@@ -1446,7 +1446,7 @@ function initialiseStackedUserGroups() {
     "(prefers-reduced-motion: reduce)"
   );
 
-  const mobileLayout = window.matchMedia("(max-width: 520px)");
+  const mobileLayout = window.matchMedia("(max-width: 339px)");
 
   sections.forEach((section) => {
     const heading =
@@ -1541,13 +1541,13 @@ function initialiseStackedUserGroups() {
         199
       );
 
-      const cssCardGap = getNumberFromCssVariable(
+      const cardPeekGap = getNumberFromCssVariable(
         section,
-        "--user-groups-card-gap",
-        cardHeight + 28
+        "--user-groups-card-peek-gap",
+        8
       );
 
-      cardGap = Math.max(cardHeight + 24, cssCardGap);
+      cardGap = Math.max(1, cardHeight + cardPeekGap);
 
       scrollDistance = Math.max(
         1,
