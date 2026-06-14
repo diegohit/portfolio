@@ -864,7 +864,7 @@ function renderHeartTable(rows = []) {
   `;
 }
 
-function renderArchitecture(columns = [], title = "") {
+function renderArchitecture(columns = [], title = "", variant = "") {
   if (!columns.length) return "";
 
   const renderArchitectureItems = (items = []) => `
@@ -885,7 +885,7 @@ function renderArchitecture(columns = [], title = "") {
 
   return `
     <div
-      class="architecture-diagram"
+      class="architecture-diagram${variant ? ` architecture-diagram--${variant}` : ""}"
       style="--architecture-columns: ${columns.length}"
       aria-label="Information architecture diagram"
     >
@@ -956,7 +956,11 @@ function renderSection(section, isAfterPainPoints = false) {
         ${trailing}
         ${tree}
         ${renderHeartTable(section.heartTable)}
-        ${renderArchitecture(section.architecture, section.architectureTitle)}
+        ${renderArchitecture(
+          section.architecture,
+          section.architectureTitle,
+          section.title === "Interaction Model" ? "interaction-model" : ""
+        )}
         ${renderUserGroups(section.userGroups, section.stackUserGroups)}
         ${renderToneVoice(section.toneVoice)}
       </div>

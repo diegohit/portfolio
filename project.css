@@ -985,6 +985,28 @@ main {
   transform: translate3d(0, 0, 0);
 }
 
+.architecture-diagram--interaction-model {
+  align-content: start;
+  row-gap: 0;
+  padding-top: 32px;
+}
+
+.architecture-diagram--interaction-model .architecture-root {
+  margin-bottom: 65px;
+}
+
+.architecture-diagram--interaction-model .architecture-line {
+  top: calc(32px + clamp(20px, 2vw, 30px) + 32px);
+}
+
+.architecture-diagram--interaction-model .architecture-column h3 {
+  min-height: 0;
+}
+
+.architecture-diagram--interaction-model .architecture-column ul {
+  margin-top: 32px;
+}
+
 .user-groups-diagram {
   width: 100%;
 }
@@ -1487,6 +1509,11 @@ main {
   .case-section .architecture-root {
     padding-bottom: 10px;
     border-bottom: 1px solid #6e7885;
+  }
+
+  .architecture-diagram--interaction-model .architecture-root {
+    margin-bottom: 32px;
+    padding-bottom: 32px;
   }
 
   .case-section .architecture-column h3 {
