@@ -463,21 +463,11 @@ const projects = {
         ],
       },
       {
-        title: "Tone in Practice",
-        blocks: [
-          {
-            heading: "Selecting the type of appointment",
-            text: "Please select the type of appointment you would like to schedule: General medicine, Dentistry, Psychology, Gynaecology, Obstetrics, Other services, or Main menu.",
-          },
-          {
-            heading: "Viewing appointment availability",
-            text: "To secure your selection, choose the option you prefer by entering its corresponding number. The chatbot then presented date, time, doctor, provider, address, city, and modality.",
-          },
-          {
-            heading: "Confirmation before booking",
-            text: "The chatbot summarised the selected appointment and asked users to confirm, return to the appointment menu, or exit the chat.",
-          },
+        title: "Sample Messages",
+        paragraphs: [
+          "Here are a few examples of the original Spanish UX copy translated into English for portfolio purposes.",
         ],
+        sampleMessages: true,
       },
       {
         title: "Experience Measurement",
@@ -927,6 +917,48 @@ function renderUserGroups(groups = [], stacked = false) {
   `;
 }
 
+function renderSampleMessages(enabled = false) {
+  if (!enabled) return "";
+
+  const screens = [
+    {
+      title: "Selecting the Service",
+      src: "assets/images/projects/whatsapp-selecting-service.svg",
+      alt: "WhatsApp screen for selecting an appointment service",
+    },
+    {
+      title: "Selecting the type of appointment",
+      src: "assets/images/projects/whatsapp-type-of-appointment.svg",
+      alt: "WhatsApp screen for selecting the type of appointment",
+    },
+    {
+      title: "Viewing appointment availability",
+      src: "assets/images/projects/whatsapp-appointment-availability.svg",
+      alt: "WhatsApp screen showing available medical appointments",
+    },
+  ];
+
+  return `
+    <div class="sample-messages" aria-label="Translated WhatsApp UX copy examples">
+      ${screens
+        .map(
+          (screen) => `
+            <article class="sample-message-card">
+              <h3>${screen.title}</h3>
+              <img
+                class="sample-message-screen"
+                src="${screen.src}"
+                alt="${screen.alt}"
+                loading="lazy"
+              />
+            </article>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
 function renderSection(section, isAfterPainPoints = false) {
   const blocks = (section.blocks || [])
     .map(
@@ -963,6 +995,7 @@ function renderSection(section, isAfterPainPoints = false) {
         )}
         ${renderUserGroups(section.userGroups, section.stackUserGroups)}
         ${renderToneVoice(section.toneVoice)}
+        ${renderSampleMessages(section.sampleMessages)}
       </div>
       ${renderPainPoints(section.painPoints)}
       ${renderInlineMedia(section.media)}

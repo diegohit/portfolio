@@ -693,9 +693,8 @@ main {
 .tone-voice-diagram {
   display: grid;
   gap: 8px;
-  width: min(900px, calc(100vw - (2 * var(--pad))));
-  margin: 38px 0 0 50%;
-  transform: translateX(-50%);
+  width: 100%;
+  margin: 38px 0 0;
 }
 
 .tone-voice-row {
@@ -756,6 +755,35 @@ main {
 
 .tone-voice-row p {
   margin-top: 18px;
+}
+
+.sample-messages {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 261px));
+  gap: 33px;
+  width: min(849px, calc(100vw - (2 * var(--pad))));
+  margin: 42px 0 0 50%;
+  align-items: start;
+  justify-content: center;
+  transform: translateX(-50%);
+}
+
+.sample-message-card {
+  min-width: 0;
+}
+
+.case-section .sample-message-card > h3 {
+  min-height: 38px;
+  margin: 0 0 12px;
+  font-size: 16px;
+  line-height: 1.15;
+  text-align: center;
+}
+
+.sample-message-screen {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .card-sorting-collage {
@@ -1318,6 +1346,28 @@ main {
   .case-logo {
     grid-column: 2;
     grid-row: 1;
+  }
+
+  .sample-messages {
+    display: flex;
+    width: calc(100vw - (2 * var(--pad)));
+    justify-content: flex-start;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding-bottom: 14px;
+    scroll-padding-inline: 0;
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: none;
+  }
+
+  .sample-messages::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sample-message-card {
+    width: 261px;
+    flex: 0 0 261px;
+    scroll-snap-align: start;
   }
 }
 
