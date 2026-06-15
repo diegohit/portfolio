@@ -552,6 +552,18 @@ main {
   padding-top: 0;
 }
 
+.case-section--has-architecture {
+  padding-bottom: 0;
+}
+
+.case-section--has-architecture + .case-section--after-pain-points {
+  padding-top: 55px;
+}
+
+.case-section--has-architecture + .case-section--after-pain-points > h2 {
+  margin-top: 0;
+}
+
 .case-section--after-pain-points .case-section-content {
   grid-column: 1 / -1;
   width: min(100%, 680px);
@@ -1015,20 +1027,35 @@ main {
 
 .architecture-diagram--interaction-model {
   align-content: start;
-  row-gap: 0;
-  padding-top: 32px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  row-gap: 32px;
+  column-gap: 32px;
+  width: 100%;
+  max-width: 680px;
+  min-height: 0;
+  margin: 46px auto 0;
+  padding: 0;
+  overflow: visible;
+  background: transparent;
+  color: #010101;
+  transform: none;
 }
 
 .architecture-diagram--interaction-model .architecture-root {
-  margin-bottom: 65px;
+  margin-bottom: 0;
 }
 
 .architecture-diagram--interaction-model .architecture-line {
-  top: calc(32px + clamp(20px, 2vw, 30px) + 32px);
+  position: static;
+  grid-column: 1 / -1;
+  width: 100%;
+  background: #010101;
 }
 
 .architecture-diagram--interaction-model .architecture-column h3 {
   min-height: 0;
+  font-size: clamp(22px, 2vw, 28px);
+  white-space: nowrap;
 }
 
 .architecture-diagram--interaction-model .architecture-column ul {
@@ -1430,6 +1457,10 @@ main {
     padding: 44px 0;
   }
 
+  .case-section--has-architecture + .case-section--after-pain-points {
+    padding-top: 44px;
+  }
+
   .case-overview > h2,
   .case-section > h2 {
     font-size: clamp(32px, 9vw, 40px);
@@ -1552,6 +1583,13 @@ main {
     transform: none;
   }
 
+  .architecture-diagram--interaction-model {
+    grid-template-columns: 1fr;
+    column-gap: 30px;
+    max-width: none;
+    margin: 36px 0 0;
+  }
+
   .architecture-line {
     display: none;
   }
@@ -1568,6 +1606,10 @@ main {
 
   .case-section .architecture-column h3 {
     min-height: 0;
+    white-space: normal;
+  }
+
+  .architecture-diagram--interaction-model .architecture-column h3 {
     white-space: normal;
   }
 

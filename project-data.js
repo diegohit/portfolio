@@ -977,6 +977,9 @@ function renderSection(section, isAfterPainPoints = false) {
   if (section.stackUserGroups) {
     sectionClasses.push("case-section--stacked-user-groups");
   }
+  if (section.architecture?.length) {
+    sectionClasses.push("case-section--has-architecture");
+  }
 
   return `
     <section class="${sectionClasses.join(" ")}" data-section-title="${section.title}">
