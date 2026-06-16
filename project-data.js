@@ -591,13 +591,14 @@ const projects = {
       },
       {
         title: "Information Architecture",
+        architectureVariant: "maternal-information-architecture",
         paragraphs: [
           "I conducted a content audit to review how information was organised, identify unclear labels, and detect categories that were too administrative or grouped together unrelated needs.",
           "The pregnancy follow-up flow used a needs-based menu. The maternal morbidity flow required a guided triage structure, asking how the user was feeling and whether she was experiencing specific symptoms before recommending urgent care or follow-up.",
         ],
         architecture: [
           {
-            heading: "Flow 1: Pregnancy Follow-up",
+            heading: "Pregnancy Follow-up",
             items: [
               "Symptoms or discomfort",
               {
@@ -617,7 +618,7 @@ const projects = {
             ],
           },
           {
-            heading: "Flow 2: Maternal Morbidity",
+            heading: "Maternal Morbidity",
             items: [
               "Initial check-in",
               "Need for support",
@@ -994,7 +995,8 @@ function renderSection(section, isAfterPainPoints = false) {
         ${renderArchitecture(
           section.architecture,
           section.architectureTitle,
-          section.title === "Interaction Model" ? "interaction-model" : ""
+          section.architectureVariant ||
+            (section.title === "Interaction Model" ? "interaction-model" : "")
         )}
         ${renderUserGroups(section.userGroups, section.stackUserGroups)}
         ${renderToneVoice(section.toneVoice)}
