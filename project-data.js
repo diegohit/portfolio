@@ -52,91 +52,28 @@ const projects = {
           "When PIS did not have internet connection, the tool needed to collect only the essential information required to save the request safely: member details, contact information, supporting documents, and optional observations. The experience also needed to make clear what was being stored locally, what would happen when the connection returned, and how the PIS could track whether each request had been successfully synchronised.",
           "These requirements helped define the core structure of the tool: a simple home screen with two main actions, one for submitting approval requests and another for managing synchronisation.",
         ],
+        imagePair: [
+          {
+            src: "assets/images/projects/rural-healthcare/requirements-sync-progress.png",
+            alt: "Synchronisation progress interface displayed on a tablet mockup",
+          },
+          {
+            src: "assets/images/projects/rural-healthcare/requirements-offline-submit.png",
+            alt: "Offline healthcare service approval request interface displayed on a tablet mockup",
+          },
+          {
+            src: "assets/images/projects/rural-healthcare/requirements-sync-error.png",
+            alt: "Non-synchronised requests interface displayed on a tablet mockup",
+          },
+        ],
       },
       {
         title: "Interaction Model",
-        blocks: [
-          {
-            heading: "Submit requests",
-            text: "Used by PIS to create healthcare service approval requests in online or offline mode.",
-          },
-          {
-            heading: "Synchronise requests",
-            text: "Used to review pending, synchronised, and non-synchronised requests once connection was available.",
-          },
-        ],
-        paragraphs: [
-          "This reduced the experience to the two actions that mattered most in the field: capturing requests safely and making sure they were processed later.",
-        ],
-        imagePair: [
-          {
-            src: "assets/images/projects/rural-healthcare/synchronise-requests.png",
-            alt: "Synchronise requests interface displayed on a tablet",
-          },
-          {
-            src: "assets/images/projects/rural-healthcare/submit-request-offline.png",
-            alt: "Offline healthcare service approval request interface displayed on a tablet",
-          },
-        ],
-        architectureTitle: "Offline-First Field Tool",
-        architecture: [
-          {
-            heading: "Submit requests",
-            items: ["Online submission", "Offline submission"],
-          },
-          {
-            heading: "Synchronise requests",
-            items: ["Pending", "Synchronised", "Not synchronised"],
-          },
-        ],
-      },
-      {
-        title: "Offline-First Authorisation Flow",
-        paragraphs: [
-          "This flow was designed to adapt depending on connectivity.",
-          "If the PIS had internet connection, the tool could validate the member’s information against Nueva EPS systems and submit the request immediately.",
-          "If the PIS did not have connection, the tool displayed an offline form where the PIS could enter the member’s name, document type, document number, phone number, supporting files, and optional observations. The request was then stored locally and prepared for automatic synchronisation once the connection returned.",
-        ],
-        fullBleedMedia: {
-          src: "assets/images/projects/rural-healthcare/offline-authorisation-flow.png",
-          alt: "Offline-first healthcare service authorisation flow",
-          color: true,
-        },
-      },
-      {
-        title: "Synchronisation Flow",
-        paragraphs: [
-          "The synchronisation flow was designed to give PIS visibility and control over requests saved offline. The Sincronizar section was organised into three tabs.",
-        ],
-        blocks: [
-          {
-            heading: "Pendientes",
-            text: "Requests saved offline and waiting to be synchronised.",
-          },
-          {
-            heading: "Sincronizadas",
-            text: "Requests that had already been successfully synchronised.",
-          },
-          {
-            heading: "No sincronizadas",
-            text: "Requests that could not be synchronised because of a validation issue. These requests could be edited and corrected.",
-          },
-        ],
-        trailing:
-          "The flow also included automatic synchronisation when internet connection became available, a progress indicator, notifications for requests with issues, search by member name or document number, and filters by date.",
-        fullBleedMedia: {
-          src: "assets/images/projects/rural-healthcare/synchronisation-flow.png",
-          alt: "Offline-first request synchronisation flow",
-          color: true,
-        },
+        flowModel: "offline-first-authorisation",
       },
       {
         title: "Outcome",
-        paragraphs: [
-          "The tool was implemented to support healthcare field operations in rural areas of Colombia, helping PIS submit healthcare service approval requests even in low-connectivity contexts.",
-          "During 2025–2026, the solution supported care for more than 70,000 people in rural areas, while reducing the time required to process approval requests. By allowing PIS to capture, store, and synchronise requests in an offline-first solution, the tool also reduced the need to carry or photocopy physical medical documents, helping lower the risk of losing personal information and special category health data.",
-          "Beyond improving an internal process, the project helped make healthcare access more reliable for members in dispersed rural communities.",
-        ],
+        offlineOutcome: true,
       },
     ],
   },
@@ -715,9 +652,11 @@ function renderMatrices(images = []) {
 
 function renderStaticImagePair(images = [], reveal = false) {
   if (!images.length) return "";
+  const layoutClass =
+    images.length === 3 ? " card-sorting-matrices--three" : "";
 
   return `
-    <div class="card-sorting-matrices" aria-label="Offline-first field tool interfaces">
+    <div class="card-sorting-matrices${layoutClass}" aria-label="Offline-first field tool interfaces">
       ${images
         .map(
           (image) => `
@@ -745,6 +684,108 @@ function renderSectionParagraphs(section) {
       return `<p>${paragraph}</p>${gallery}${matrices}`;
     })
     .join("");
+}
+
+function renderOfflineOutcome(shouldRender = false) {
+  if (!shouldRender) return "";
+
+  const metrics = [
+    {
+      kicker: "Reach",
+      value: "70K+",
+      label: "People in rural areas supported during 2025–2026.",
+      modifier: "offline-outcome-card--primary",
+    },
+    {
+      kicker: "Processing",
+      value: "Faster",
+      label: "Reduced the time required to process healthcare service approval requests.",
+      modifier: "offline-outcome-card--system",
+    },
+    {
+      kicker: "Continuity",
+      value: "Offline",
+      label: "Allowed PIS to capture, store and synchronise requests when connection returned.",
+      modifier: "offline-outcome-card--offline",
+    },
+    {
+      kicker: "Data handling",
+      value: "Less paper",
+      label: "Reduced the need to carry or photocopy physical medical documents.",
+      modifier: "offline-outcome-card--online",
+    },
+  ];
+
+  return `
+    <div class="offline-outcome" aria-label="Offline-first field tool outcome">
+      <div class="offline-outcome-heading">
+        <h3>Outcome</h3>
+        <p>
+          The tool was implemented to support healthcare field operations in rural areas
+          of Colombia, helping PIS submit healthcare service approval requests even in
+          low-connectivity contexts.
+        </p>
+      </div>
+
+      <div class="offline-outcome-grid" aria-label="Project impact metrics">
+        ${metrics
+          .map(
+            (metric) => `
+              <article class="offline-outcome-card ${metric.modifier}">
+                <div>
+                  <p class="offline-outcome-card-kicker">${metric.kicker}</p>
+                  <p class="offline-outcome-card-value">${metric.value}</p>
+                </div>
+
+                <p class="offline-outcome-card-label">${metric.label}</p>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+
+      <div class="offline-outcome-story">
+        <article class="offline-outcome-story-panel">
+          <h4>From field constraint to service continuity</h4>
+          <p>
+            By allowing PIS to capture, store and synchronise requests in an offline-first
+            solution, the experience supported work in rural contexts where connectivity
+            could be unstable or unavailable.
+          </p>
+        </article>
+
+        <article class="offline-outcome-story-panel offline-outcome-story-panel--impact">
+          <h4>Operational and data protection impact</h4>
+          <ul class="offline-outcome-impact-list">
+            <li>
+              <span>01</span>
+              <p>
+                Helped lower the risk of losing personal information and special category
+                health data.
+              </p>
+            </li>
+
+            <li>
+              <span>02</span>
+              <p>Reduced dependency on physical paperwork during field visits.</p>
+            </li>
+
+            <li>
+              <span>03</span>
+              <p>Made healthcare access more reliable for members in low-connectivity areas.</p>
+            </li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="offline-outcome-quote">
+        <p>
+          Beyond improving an internal process, the project helped make healthcare access
+          more reliable for members in dispersed rural communities.
+        </p>
+      </div>
+    </div>
+  `;
 }
 
 function renderPainPoints(items) {
@@ -896,6 +937,295 @@ function renderArchitecture(columns = [], title = "", variant = "") {
   `;
 }
 
+function renderOfflineFirstFlowModel(type = "") {
+  if (type !== "offline-first-authorisation") return "";
+
+  return `
+    <div class="offline-flow" aria-label="Offline-first authorisation interaction model">
+      <section aria-labelledby="offline-flow-overview-title">
+        <div class="offline-flow-heading">
+          <h3 id="offline-flow-overview-title">End-to-end flow overview</h3>
+          <p>
+            The system had to branch depending on connectivity, member status, file upload
+            validity and synchronisation results. This simplified model turns the full
+            documentation into a readable interaction model.
+          </p>
+        </div>
+
+        <div class="offline-flow-legend" aria-label="Legend">
+          <div class="offline-flow-legend-item">
+            <span class="offline-flow-dot offline-flow-dot--online"></span>
+            Online path
+          </div>
+          <div class="offline-flow-legend-item">
+            <span class="offline-flow-dot offline-flow-dot--offline"></span>
+            Offline path
+          </div>
+          <div class="offline-flow-legend-item">
+            <span class="offline-flow-dot offline-flow-dot--system"></span>
+            System process
+          </div>
+          <div class="offline-flow-legend-item">
+            <span class="offline-flow-dot offline-flow-dot--error"></span>
+            Error or recovery
+          </div>
+        </div>
+
+        <div class="offline-flow-map">
+          <div class="offline-flow-row">
+            <div class="offline-flow-lane-label">Access and routing</div>
+            <div class="offline-flow-lane-track">
+              <article class="offline-flow-node offline-flow-node--system">
+                <h4>Open tool</h4>
+                <p>PIS enters document type and document number.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--system">
+                <h4>Validate user</h4>
+                <p>The system checks whether the PIS is authorised.</p>
+              </article>
+              <article class="offline-flow-node">
+                <h4>Home</h4>
+                <p>PIS chooses between Radicar ordenamientos and Sincronizar.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--system">
+                <h4>Check connection</h4>
+                <p>The tool decides whether the request can continue online or offline.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="offline-flow-row">
+            <div class="offline-flow-lane-label">Online request</div>
+            <div class="offline-flow-lane-track">
+              <article class="offline-flow-node offline-flow-node--online">
+                <h4>Search member</h4>
+                <p>PIS enters the member’s document information.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--online">
+                <h4>Validate member</h4>
+                <p>The system checks whether the member exists and is active.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--online">
+                <h4>Confirm phone</h4>
+                <p>PIS confirms or updates the member’s phone number.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--online">
+                <h4>Submit request</h4>
+                <p>PIS attaches files and submits the authorisation request.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="offline-flow-row">
+            <div class="offline-flow-lane-label">Offline request</div>
+            <div class="offline-flow-lane-track">
+              <article class="offline-flow-node offline-flow-node--offline">
+                <h4>Open offline form</h4>
+                <p>The tool displays only the fields needed to save the request safely.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--offline">
+                <h4>Add information</h4>
+                <p>PIS enters member details, phone number and optional observations.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--offline">
+                <h4>Attach supports</h4>
+                <p>PIS adds files from camera, gallery or PDF upload.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--offline">
+                <h4>Save locally</h4>
+                <p>The request is stored locally for later synchronisation.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="offline-flow-row">
+            <div class="offline-flow-lane-label">Sync and recovery</div>
+            <div class="offline-flow-lane-track">
+              <article class="offline-flow-node offline-flow-node--system">
+                <h4>Connection returns</h4>
+                <p>Automatic synchronisation starts when pending requests exist.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--system">
+                <h4>Process queue</h4>
+                <p>The system synchronises requests one by one and shows progress.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--error">
+                <h4>Handle issues</h4>
+                <p>Requests with validation issues move to No Sincronizadas.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--online">
+                <h4>Complete</h4>
+                <p>Successful requests move to Sincronizadas.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="offline-flow-scenarios-title">
+        <div class="offline-flow-heading">
+          <h3 id="offline-flow-scenarios-title">Scenario breakdown</h3>
+          <p>
+            The flow was designed to help PIS continue their work without losing progress,
+            while still supporting validation, traceability and correction when the system
+            recovered connectivity.
+          </p>
+        </div>
+
+        <div class="offline-flow-scenario-grid">
+          <article class="offline-flow-scenario-card">
+            <h4>1. Login and access</h4>
+            <ol>
+              <li>PIS opens the tool.</li>
+              <li>PIS enters document type and document number.</li>
+              <li>The system checks whether the user is authorised.</li>
+              <li>If the user is authorised, PIS enters Home.</li>
+              <li>If the user is not recognised, the system displays an error message.</li>
+              <li>If the allowed number of attempts is exceeded, access is blocked temporarily.</li>
+            </ol>
+          </article>
+
+          <article class="offline-flow-scenario-card">
+            <h4>2. Home and routing</h4>
+            <ol>
+              <li>PIS lands on Home.</li>
+              <li>PIS can select Radicar ordenamientos to create a request.</li>
+              <li>PIS can select Sincronizar to manage requests saved offline.</li>
+              <li>If pending requests exist and connection is available, automatic synchronisation can start.</li>
+            </ol>
+          </article>
+
+          <article class="offline-flow-scenario-card">
+            <h4>3. Online request</h4>
+            <ol>
+              <li>PIS enters the member’s document information.</li>
+              <li>The system searches for the member in Nueva EPS systems.</li>
+              <li>If the member is not found, the system asks PIS to review the document number.</li>
+              <li>If the member is not active, the system stops the request.</li>
+              <li>If the member is active, PIS confirms or updates the phone number.</li>
+              <li>PIS attaches supporting files and submits the request.</li>
+            </ol>
+          </article>
+
+          <article class="offline-flow-scenario-card">
+            <h4>4. Offline request</h4>
+            <ol>
+              <li>If there is no internet connection, the tool displays an offline form.</li>
+              <li>PIS enters the member’s name, document type, document number and phone number.</li>
+              <li>PIS attaches supporting files and adds optional observations.</li>
+              <li>The submit action remains inactive until required fields are complete.</li>
+              <li>The request is saved locally.</li>
+              <li>The system confirms that it will synchronise the request when service is available.</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="offline-flow-statuses-title">
+        <div class="offline-flow-heading">
+          <h3 id="offline-flow-statuses-title">Synchronisation statuses</h3>
+          <p>
+            The Sincronizar section gave PIS visibility over the status of requests saved
+            offline, so they could understand what was waiting, what had been completed and
+            what needed correction.
+          </p>
+        </div>
+
+        <div class="offline-flow-status-board">
+          <article class="offline-flow-status-card">
+            <h4>Pendientes</h4>
+            <p>
+              Requests saved offline and waiting to be synchronised. When synchronisation
+              is running, the system displays progress until all pending requests are processed.
+            </p>
+          </article>
+
+          <article class="offline-flow-status-card">
+            <h4>Sincronizadas</h4>
+            <p>
+              Requests that were successfully synchronised. PIS can review submitted records,
+              including member details, submission date and authorisation information.
+            </p>
+          </article>
+
+          <article class="offline-flow-status-card">
+            <h4>No Sincronizadas</h4>
+            <p>
+              Requests that could not be synchronised because of validation issues or missing
+              information. PIS can open them, correct them and prepare them for another attempt.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="offline-flow-recovery-title">
+        <div class="offline-flow-heading">
+          <h3 id="offline-flow-recovery-title">Failed synchronisation<br />recovery</h3>
+          <p>
+            The recovery path was important because failed requests could represent real
+            healthcare needs. The tool allowed PIS to correct issues instead of losing the
+            request or starting over.
+          </p>
+        </div>
+
+        <div class="offline-flow-recovery-flow">
+          <article class="offline-flow-recovery-step">
+            <span>01</span>
+            <div>
+              <h4>Open No Sincronizadas</h4>
+              <p>PIS reviews the list of requests that could not be submitted successfully.</p>
+            </div>
+          </article>
+
+          <article class="offline-flow-recovery-step">
+            <span>02</span>
+            <div>
+              <h4>Edit the request</h4>
+              <p>
+                PIS opens a failed request, reviews the stored information and edits what needs
+                to be corrected.
+              </p>
+            </div>
+          </article>
+
+          <article class="offline-flow-recovery-step">
+            <span>03</span>
+            <div>
+              <h4>Manage supporting files</h4>
+              <p>
+                PIS can preview files, add more supports, remove incorrect files or upload a
+                smaller file if the previous one exceeded the allowed size.
+              </p>
+            </div>
+          </article>
+
+          <article class="offline-flow-recovery-step">
+            <span>04</span>
+            <div>
+              <h4>Save locally again</h4>
+              <p>
+                Corrections are saved in the local table so the request can be included in a
+                future synchronisation attempt.
+              </p>
+            </div>
+          </article>
+
+          <article class="offline-flow-recovery-step">
+            <span>05</span>
+            <div>
+              <h4>Delete when needed</h4>
+              <p>
+                If the request should no longer continue, PIS can delete it after confirming the
+                action and selecting a reason.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  `;
+}
+
 function renderUserGroups(groups = [], stacked = false) {
   if (!groups.length) return "";
 
@@ -981,6 +1311,12 @@ function renderSection(section, isAfterPainPoints = false) {
   if (section.architecture?.length) {
     sectionClasses.push("case-section--has-architecture");
   }
+  if (section.title === "Interaction Model") {
+    sectionClasses.push("case-section--interaction-model");
+  }
+  if (section.offlineOutcome) {
+    sectionClasses.push("case-section--offline-outcome");
+  }
 
   return `
     <section class="${sectionClasses.join(" ")}" data-section-title="${section.title}">
@@ -998,6 +1334,8 @@ function renderSection(section, isAfterPainPoints = false) {
           section.architectureVariant ||
             (section.title === "Interaction Model" ? "interaction-model" : "")
         )}
+        ${renderOfflineFirstFlowModel(section.flowModel)}
+        ${renderOfflineOutcome(section.offlineOutcome)}
         ${renderUserGroups(section.userGroups, section.stackUserGroups)}
         ${renderToneVoice(section.toneVoice)}
         ${renderSampleMessages(section.sampleMessages)}
