@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "build": "node scripts/generate-static-pages.mjs"
+  }
+}

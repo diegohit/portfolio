@@ -1589,63 +1589,101 @@ function initialiseStickyMeta() {
   }
 }
 
+const projectUrls = Object.fromEntries(
+  projectOrder.map((id) => [id, `projects/${id}/`])
+);
+
+function getProjectIdFromPath(pathname) {
+  const match = pathname.match(/\/projects\/([^/]+)\/?$/);
+  return match && projects[match[1]] ? match[1] : "";
+}
+
 const params = new URLSearchParams(window.location.search);
 const requestedId = params.get("id");
-const projectId = projects[requestedId] ? requestedId : projectOrder[0];
+const pathProjectId = getProjectIdFromPath(window.location.pathname);
+
+if (
+  requestedId &&
+  projects[requestedId] &&
+  window.location.pathname.endsWith("/project.html")
+) {
+  window.location.replace(`${projectUrls[requestedId]}${window.location.hash}`);
+}
+
+const projectId = pathProjectId || (projects[requestedId] ? requestedId : projectOrder[0]);
 const project = projects[projectId];
 const nextId =
   projectOrder[(projectOrder.indexOf(projectId) + 1) % projectOrder.length];
 const nextProject = projects[nextId];
+const caseStudy = document.querySelector("#case-study");
+const isPrerenderedProject =
+  document.body?.dataset.staticProject === "true" ||
+  caseStudy?.dataset.prerendered === "true";
 
-document.title = `${project.title} — Diego Cárdenas Mora`;
-document.querySelector("#project-number").textContent = project.number;
-document.querySelector("#project-title").textContent = project.title;
-document.querySelector("#project-skills").textContent = project.skills;
-document.querySelector("#project-tools").textContent = project.tools;
-document.querySelector("#project-overview").className = "rich-copy";
-document.querySelector("#project-overview").innerHTML = renderParagraphs(
-  project.overview
-);
+function renderProjectDom() {
+  document.title = `${project.title} — Diego Cárdenas Mora`;
+  document.querySelector("#project-number").textContent = project.number;
+  document.querySelector("#project-title").textContent = project.title;
+  document.querySelector("#project-skills").textContent = project.skills;
+  document.querySelector("#project-tools").textContent = project.tools;
+  document.querySelector("#project-overview").className = "rich-copy";
+  document.querySelector("#project-overview").innerHTML = renderParagraphs(
+    project.overview
+  );
 
-const mediaFigure = document.querySelector("#project-media");
-const mediaContent = document.querySelector("#project-media-content");
-const mediaCaption = document.querySelector("#project-media-caption");
+  const mediaFigure = document.querySelector("#project-media");
+  const mediaContent = document.querySelector("#project-media-content");
+  const mediaCaption = document.querySelector("#project-media-caption");
 
-if (project.media?.type === "video") {
-  mediaFigure.classList.add("has-video");
-  mediaContent.classList.add("case-video");
-  mediaContent.innerHTML = `
-    <video autoplay muted loop playsinline preload="metadata" aria-label="${project.media.caption}">
-      <source src="${project.media.src}" type="video/mp4">
-      Your browser does not support HTML video.
-    </video>
-  `;
-  mediaCaption.remove();
-} else if (project.media?.type === "image") {
-  mediaFigure.classList.add("has-image");
-  mediaContent.classList.add("case-image");
-  if (
-    projectId === "rural-healthcare" ||
-    projectId === "maternal-health" ||
-    projectId === "whatsapp-appointments"
-  ) {
-    mediaFigure.classList.add("case-media--closer-to-overview");
-  }
-  if (
-    projectId === "rural-healthcare" ||
-    projectId === "maternal-health" ||
-    projectId === "whatsapp-appointments"
-  ) {
-    mediaContent.classList.add("case-image--scroll-reveal");
-  }
-  mediaContent.innerHTML = `
-    <img src="${project.media.src}" alt="${project.media.alt}">
-  `;
-  if (project.media.caption) {
-    mediaCaption.textContent = project.media.caption;
-  } else {
+  if (project.media?.type === "video") {
+    mediaFigure.classList.add("has-video");
+    mediaContent.classList.add("case-video");
+    mediaContent.innerHTML = `
+      <video autoplay muted loop playsinline preload="metadata" aria-label="${project.media.caption}">
+        <source src="${project.media.src}" type="video/mp4">
+        Your browser does not support HTML video.
+      </video>
+    `;
     mediaCaption.remove();
+  } else if (project.media?.type === "image") {
+    mediaFigure.classList.add("has-image");
+    mediaContent.classList.add("case-image");
+    if (
+      projectId === "rural-healthcare" ||
+      projectId === "maternal-health" ||
+      projectId === "whatsapp-appointments"
+    ) {
+      mediaFigure.classList.add("case-media--closer-to-overview");
+    }
+    if (
+      projectId === "rural-healthcare" ||
+      projectId === "maternal-health" ||
+      projectId === "whatsapp-appointments"
+    ) {
+      mediaContent.classList.add("case-image--scroll-reveal");
+    }
+    mediaContent.innerHTML = `
+      <img src="${project.media.src}" alt="${project.media.alt}">
+    `;
+    if (project.media.caption) {
+      mediaCaption.textContent = project.media.caption;
+    } else {
+      mediaCaption.remove();
+    }
   }
+
+  const painPointsSectionIndex = project.sections.findIndex(
+    (section) => section.painPoints?.length
+  );
+
+  document.querySelector("#project-sections").innerHTML = project.sections
+    .map((section, index) =>
+      renderSection(
+        section,
+        painPointsSectionIndex >= 0 && index > painPointsSectionIndex
+      )
+    )
+    .join("");
 }
 
 function initialiseMediaReveals() {
@@ -1801,19 +1839,6 @@ function initialiseArchitectureDiagram() {
 
   observer.observe(diagram);
 }
-
-const painPointsSectionIndex = project.sections.findIndex(
-  (section) => section.painPoints?.length
-);
-
-document.querySelector("#project-sections").innerHTML = project.sections
-  .map((section, index) =>
-    renderSection(
-      section,
-      painPointsSectionIndex >= 0 && index > painPointsSectionIndex
-    )
-  )
-  .join("");
 
 function initialiseStackedUserGroups() {
   const sections = [
@@ -2016,6 +2041,10 @@ function initialiseStackedUserGroups() {
   });
 }
 
+if (!isPrerenderedProject) {
+  renderProjectDom();
+}
+
 initialiseHorizontalScroll();
 initialiseSectionIndicator();
 initialiseReadingProgress();
@@ -2027,5 +2056,5 @@ initialiseToneVoice();
 initialiseArchitectureDiagram();
 initialiseStackedUserGroups();
 
-document.querySelector("#next-project").href = `project.html?id=${nextId}`;
+document.querySelector("#next-project").href = projectUrls[nextId];
 document.querySelector("#next-project-title").textContent = nextProject.title;

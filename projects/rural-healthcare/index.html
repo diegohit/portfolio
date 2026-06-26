@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="../../" />
+    <title>Field Tool for Rural Healthcare Access — Diego Cárdenas Mora</title>
+    <meta name="description" content="UX case study on an offline-first field tool that helped healthcare promoters submit approval requests in rural, low-connectivity areas of Colombia." />
+    <link rel="canonical" href="https://dcm-design-portfolio.netlify.app/projects/rural-healthcare/" />
+    <meta property="og:title" content="Field Tool for Rural Healthcare Access — Diego Cárdenas Mora" />
+    <meta property="og:description" content="UX case study on an offline-first field tool that helped healthcare promoters submit approval requests in rural, low-connectivity areas of Colombia." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://dcm-design-portfolio.netlify.app/projects/rural-healthcare/" />
+    <meta property="og:image" content="https://dcm-design-portfolio.netlify.app/assets/images/projects/offline-tool-cover.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Field Tool for Rural Healthcare Access — Diego Cárdenas Mora" />
+    <meta name="twitter:description" content="UX case study on an offline-first field tool that helped healthcare promoters submit approval requests in rural, low-connectivity areas of Colombia." />
+    <meta name="twitter:image" content="https://dcm-design-portfolio.netlify.app/assets/images/projects/offline-tool-cover.png" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","headline":"Field Tool for Rural Healthcare Access","name":"Field Tool for Rural Healthcare Access","description":"UX case study on an offline-first field tool that helped healthcare promoters submit approval requests in rural, low-connectivity areas of Colombia.","url":"https://dcm-design-portfolio.netlify.app/projects/rural-healthcare/","image":"https://dcm-design-portfolio.netlify.app/assets/images/projects/offline-tool-cover.png","author":{"@type":"Person","name":"Diego Cárdenas Mora","jobTitle":"Experience Designer","url":"https://dcm-design-portfolio.netlify.app","sameAs":["https://www.linkedin.com/in/diego-cardenasm"]},"about":"UX Design · Service Design · Interaction Design · User Flow Design · UX Writing · Offline-First Design"}</script>
+    <link
+      id="animated-favicon"
+      rel="icon"
+      type="image/svg+xml"
+      href="assets/favicons/favicon-black.svg"
+    />
+    <link rel="stylesheet" href="project.css" />
+    <script src="favicon.js" defer></script>
+    <script src="cursor.js" defer></script>
+    <script src="project-data.js" defer></script>
+  </head>
+  <body data-static-project="true">
+    <header class="case-header">
+      <a class="case-name" href="index.html">Diego Cárdenas Mora</a>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a class="is-active" href="index.html#projects">Projects</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <a class="case-logo" href="index.html#contact" aria-label="Go to contact">
+        <img src="assets/logo.svg" alt="" />
+      </a>
+    </header>
+
+    <div class="case-section-indicator" id="case-section-indicator" aria-hidden="true">
+      <strong id="indicator-project-title">Field Tool for Rural Healthcare Access</strong>
+      <div class="case-section-indicator-label" aria-live="polite">
+        <span class="is-current" id="indicator-section-current"></span>
+        <span class="is-next" id="indicator-section-next"></span>
+      </div>
+      <div class="case-reading-progress" aria-hidden="true">
+        <span id="case-reading-progress-bar"></span>
+      </div>
+    </div>
+
+    <main id="case-study" data-prerendered="true">
+      <section class="case-hero">
+        <p class="case-number" id="project-number">01</p>
+        <h1 id="project-title">Field Tool for Rural Healthcare Access</h1>
+      </section>
+
+      <section class="case-summary" data-section-title="Project Overview">
+        <aside class="case-meta">
+          <div>
+            <h2>Skills</h2>
+            <p id="project-skills">UX Design · Service Design · Interaction Design · User Flow Design · UX Writing · Offline-First Design</p>
+          </div>
+          <div>
+            <h2>Tools</h2>
+            <p id="project-tools">Figma · FigJam</p>
+          </div>
+        </aside>
+        <div class="case-overview">
+          <h2>Project Overview</h2>
+          <div class="rich-copy" id="project-overview">
+            <p>Nueva EPS has a large number of members living in rural areas of Colombia, where communities are dispersed and connectivity can be limited. In municipalities with fewer than 1,000 members, opening a physical service office is not cost-effective, so Promotores Integrales de Salud (PIS) play a key role in connecting members with the insurer’s services.</p><p>PIS support members during field visits, including administrative tasks such as submitting healthcare service approval requests. However, the existing mobile and web app depended on internet connectivity, which created friction in rural areas with unstable or unavailable signal. When connectivity failed, PIS sometimes had to carry members’ medical documents until they could submit the request later, increasing the risk of document loss and exposure of sensitive health information.</p><p>The project aimed to design a responsive, offline-first tool that allowed PIS to submit approval requests with or without internet connection, store pending requests locally, and synchronise them automatically once the service became available.</p>
+          </div>
+        </div>
+      </section>
+
+      
+      <figure class="case-media has-image case-media--closer-to-overview" id="project-media">
+        <div class="case-image case-image--scroll-reveal" id="project-media-content">
+          <img src="assets/images/projects/rural-healthcare/home.png" alt="Nueva EPS field healthcare worker with two children in a rural community">
+        </div>
+        <figcaption id="project-media-caption">PIS are community health promoters who support members during field visits, helping them access insurer services and submit healthcare service approval requests.</figcaption>
+      </figure>
+    
+
+      <div id="project-sections">
+    <section class="case-section" data-section-title="My Role">
+      <h2>My Role</h2>
+      <div class="case-section-content rich-copy">
+        <p>My role was to lead the UX and service experience definition for a new offline-first tool designed to support healthcare field operations in rural areas.</p><p>I worked closely with healthcare professionals, project managers, developers, and business stakeholders from the areas involved in the process to translate an initial idea into a feasible digital solution. This required understanding the operational needs of PIS, aligning business requirements, negotiating decisions with multiple stakeholders, and defining how the tool should work across online and offline scenarios.</p><p>I was responsible for structuring the experience, mapping the user flows, defining interaction rules, documenting screen states, and writing the UX copy for key moments such as authentication, offline submission, file upload, synchronisation, errors, and confirmation messages.</p><p>I worked on making a complex administrative process easier to complete in the field, while supporting the organisation’s need to protect sensitive health information and improve service delivery in low-connectivity territories.</p>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </div>
+      
+      
+      
+    </section>
+  
+    <section class="case-section" data-section-title="The Problem">
+      <h2>The Problem</h2>
+      <div class="case-section-content rich-copy">
+        <p>PIS were responsible for supporting members with healthcare service approval requests during field visits. These requests could involve medical orders, clinical history documents, member identification, contact information, and administrative validation.</p><p>The existing process was difficult because the tools available to PIS depended on internet connection. When connectivity was unavailable during field visits, PIS could not always submit approval requests at the point of service. Instead, they sometimes had to carry members’ medical documents until they reached a place with connectivity or until their regional route allowed them to return the documents to the members.</p><p>This could take days, as PIS travelled across dispersed rural communities. During that time, sensitive health documents remained in their custody, increasing the risk of loss, data exposure, and reputational damage for the organisation.</p><p>Some PIS also had to make photocopies of members’ documents using their own money. Given the volume of requests they handled and the fact that many PIS earned close to the minimum wage in Colombia, this represented a meaningful personal expense and added further friction to their work.</p><p>The design challenge was to create a tool that worked in the reality of rural field work: unstable internet, sensitive documents, administrative complexity, and a need for fast, reliable service.</p>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </div>
+      
+    <div class="pain-points-scroll" data-horizontal-scroll>
+      <div class="pain-points-sticky">
+        <div class="pain-points-track">
+          <article class="pain-points-cover">
+            <strong>User</strong>
+            <h3>Pain points</h3>
+            <img src="assets/pain-points-arrow.svg" alt="" aria-hidden="true" />
+          </article>
+          
+        <article class="pain-point-card">
+          <div class="pain-point-letter" aria-hidden="true">
+            A
+          </div>
+          <p>Unstable connectivity prevented PIS from submitting requests during field visits.</p>
+        </article>
+      
+        <article class="pain-point-card">
+          <div class="pain-point-letter" aria-hidden="true">
+            B
+          </div>
+          <p>PIS had to carry sensitive medical documents until they could reconnect.</p>
+        </article>
+      
+        <article class="pain-point-card">
+          <div class="pain-point-letter" aria-hidden="true">
+            C
+          </div>
+          <p>Medical documents could be lost or expose sensitive health information.</p>
+        </article>
+      
+        <article class="pain-point-card">
+          <div class="pain-point-letter" aria-hidden="true">
+            D
+          </div>
+          <p>Returning documents could take days due to long rural routes.</p>
+        </article>
+      
+        <article class="pain-point-card">
+          <div class="pain-point-letter" aria-hidden="true">
+            E
+          </div>
+          <p>Some PIS paid for photocopies with their own money, which could be costly.</p>
+        </article>
+      
+          <article class="pain-points-end" aria-hidden="true">!</article>
+        </div>
+      </div>
+    </div>
+  
+      
+      
+    </section>
+  
+    <section class="case-section case-section--after-pain-points" data-section-title="Requirements Gathering">
+      <h2>Requirements Gathering</h2>
+      <div class="case-section-content rich-copy">
+        <p>After several meetings with business stakeholders, healthcare professionals, project managers, developers, and PIS working in the field, we identified that the tool needed to support two operating conditions: online work and offline work.</p><p>When PIS had internet connection, the system needed to validate the member’s information in real time, confirm whether the member was active, update contact details if needed, and submit the healthcare service approval request immediately.</p><p>When PIS did not have internet connection, the tool needed to collect only the essential information required to save the request safely: member details, contact information, supporting documents, and optional observations. The experience also needed to make clear what was being stored locally, what would happen when the connection returned, and how the PIS could track whether each request had been successfully synchronised.</p><p>These requirements helped define the core structure of the tool: a simple home screen with two main actions, one for submitting approval requests and another for managing synchronisation.</p>
+        
+        
+    <div class="card-sorting-matrices card-sorting-matrices--three" aria-label="Offline-first field tool interfaces">
+      
+            <figure>
+              <img src="assets/images/projects/rural-healthcare/requirements-sync-progress.png" alt="Synchronisation progress interface displayed on a tablet mockup" loading="lazy" />
+            </figure>
+          
+            <figure>
+              <img src="assets/images/projects/rural-healthcare/requirements-offline-submit.png" alt="Offline healthcare service approval request interface displayed on a tablet mockup" loading="lazy" />
+            </figure>
+          
+            <figure>
+              <img src="assets/images/projects/rural-healthcare/requirements-sync-error.png" alt="Non-synchronised requests interface displayed on a tablet mockup" loading="lazy" />
+            </figure>
+          
+    </div>
+  
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </div>
+      
+      
+      
+    </section>
+  
+    <section class="case-section case-section--after-pain-points case-section--interaction-model" data-section-title="Interaction Model">
+      <h2>Interaction Model</h2>
+      <div class="case-section-content rich-copy">
+        
+        
+        
+        
+        
+        
+        
+        
+    <div class="offline-flow" aria-label="Offline-first authorisation interaction model">
+      <section aria-labelledby="offline-flow-overview-title">
+        <div class="offline-flow-heading">
+          <h3 id="offline-flow-overview-title">End-to-end flow overview</h3>
+          <p>
+            The system had to branch depending on connectivity, member status, file upload
+            validity and synchronisation results. This simplified model turns the full
+            documentation into a readable interaction model.
+          </p>
+        </div>
+
+        <div class="offline-flow-legend" aria-label="Legend">
+          <div class="offline-flow-legend-item">
+            <span class="offline-flow-dot offline-flow-dot--online"></span>
+            Online path
+          </div>
+          <div class="offline-flow-legend-item">
+            <span class="offline-flow-dot offline-flow-dot--offline"></span>
+            Offline path
+          </div>
+          <div class="offline-flow-legend-item">
+            <span class="offline-flow-dot offline-flow-dot--system"></span>
+            System process
+          </div>
+          <div class="offline-flow-legend-item">
+            <span class="offline-flow-dot offline-flow-dot--error"></span>
+            Error or recovery
+          </div>
+        </div>
+
+        <div class="offline-flow-map">
+          <div class="offline-flow-row">
+            <div class="offline-flow-lane-label">Access and routing</div>
+            <div class="offline-flow-lane-track">
+              <article class="offline-flow-node offline-flow-node--system">
+                <h4>Open tool</h4>
+                <p>PIS enters document type and document number.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--system">
+                <h4>Validate user</h4>
+                <p>The system checks whether the PIS is authorised.</p>
+              </article>
+              <article class="offline-flow-node">
+                <h4>Home</h4>
+                <p>PIS chooses between Radicar ordenamientos and Sincronizar.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--system">
+                <h4>Check connection</h4>
+                <p>The tool decides whether the request can continue online or offline.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="offline-flow-row">
+            <div class="offline-flow-lane-label">Online request</div>
+            <div class="offline-flow-lane-track">
+              <article class="offline-flow-node offline-flow-node--online">
+                <h4>Search member</h4>
+                <p>PIS enters the member’s document information.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--online">
+                <h4>Validate member</h4>
+                <p>The system checks whether the member exists and is active.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--online">
+                <h4>Confirm phone</h4>
+                <p>PIS confirms or updates the member’s phone number.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--online">
+                <h4>Submit request</h4>
+                <p>PIS attaches files and submits the authorisation request.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="offline-flow-row">
+            <div class="offline-flow-lane-label">Offline request</div>
+            <div class="offline-flow-lane-track">
+              <article class="offline-flow-node offline-flow-node--offline">
+                <h4>Open offline form</h4>
+                <p>The tool displays only the fields needed to save the request safely.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--offline">
+                <h4>Add information</h4>
+                <p>PIS enters member details, phone number and optional observations.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--offline">
+                <h4>Attach supports</h4>
+                <p>PIS adds files from camera, gallery or PDF upload.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--offline">
+                <h4>Save locally</h4>
+                <p>The request is stored locally for later synchronisation.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="offline-flow-row">
+            <div class="offline-flow-lane-label">Sync and recovery</div>
+            <div class="offline-flow-lane-track">
+              <article class="offline-flow-node offline-flow-node--system">
+                <h4>Connection returns</h4>
+                <p>Automatic synchronisation starts when pending requests exist.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--system">
+                <h4>Process queue</h4>
+                <p>The system synchronises requests one by one and shows progress.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--error">
+                <h4>Handle issues</h4>
+                <p>Requests with validation issues move to No Sincronizadas.</p>
+              </article>
+              <article class="offline-flow-node offline-flow-node--online">
+                <h4>Complete</h4>
+                <p>Successful requests move to Sincronizadas.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="offline-flow-scenarios-title">
+        <div class="offline-flow-heading">
+          <h3 id="offline-flow-scenarios-title">Scenario breakdown</h3>
+          <p>
+            The flow was designed to help PIS continue their work without losing progress,
+            while still supporting validation, traceability and correction when the system
+            recovered connectivity.
+          </p>
+        </div>
+
+        <div class="offline-flow-scenario-grid">
+          <article class="offline-flow-scenario-card">
+            <h4>1. Login and access</h4>
+            <ol>
+              <li>PIS opens the tool.</li>
+              <li>PIS enters document type and document number.</li>
+              <li>The system checks whether the user is authorised.</li>
+              <li>If the user is authorised, PIS enters Home.</li>
+              <li>If the user is not recognised, the system displays an error message.</li>
+              <li>If the allowed number of attempts is exceeded, access is blocked temporarily.</li>
+            </ol>
+          </article>
+
+          <article class="offline-flow-scenario-card">
+            <h4>2. Home and routing</h4>
+            <ol>
+              <li>PIS lands on Home.</li>
+              <li>PIS can select Radicar ordenamientos to create a request.</li>
+              <li>PIS can select Sincronizar to manage requests saved offline.</li>
+              <li>If pending requests exist and connection is available, automatic synchronisation can start.</li>
+            </ol>
+          </article>
+
+          <article class="offline-flow-scenario-card">
+            <h4>3. Online request</h4>
+            <ol>
+              <li>PIS enters the member’s document information.</li>
+              <li>The system searches for the member in Nueva EPS systems.</li>
+              <li>If the member is not found, the system asks PIS to review the document number.</li>
+              <li>If the member is not active, the system stops the request.</li>
+              <li>If the member is active, PIS confirms or updates the phone number.</li>
+              <li>PIS attaches supporting files and submits the request.</li>
+            </ol>
+          </article>
+
+          <article class="offline-flow-scenario-card">
+            <h4>4. Offline request</h4>
+            <ol>
+              <li>If there is no internet connection, the tool displays an offline form.</li>
+              <li>PIS enters the member’s name, document type, document number and phone number.</li>
+              <li>PIS attaches supporting files and adds optional observations.</li>
+              <li>The submit action remains inactive until required fields are complete.</li>
+              <li>The request is saved locally.</li>
+              <li>The system confirms that it will synchronise the request when service is available.</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="offline-flow-statuses-title">
+        <div class="offline-flow-heading">
+          <h3 id="offline-flow-statuses-title">Synchronisation statuses</h3>
+          <p>
+            The Sincronizar section gave PIS visibility over the status of requests saved
+            offline, so they could understand what was waiting, what had been completed and
+            what needed correction.
+          </p>
+        </div>
+
+        <div class="offline-flow-status-board">
+          <article class="offline-flow-status-card">
+            <h4>Pendientes</h4>
+            <p>
+              Requests saved offline and waiting to be synchronised. When synchronisation
+              is running, the system displays progress until all pending requests are processed.
+            </p>
+          </article>
+
+          <article class="offline-flow-status-card">
+            <h4>Sincronizadas</h4>
+            <p>
+              Requests that were successfully synchronised. PIS can review submitted records,
+              including member details, submission date and authorisation information.
+            </p>
+          </article>
+
+          <article class="offline-flow-status-card">
+            <h4>No Sincronizadas</h4>
+            <p>
+              Requests that could not be synchronised because of validation issues or missing
+              information. PIS can open them, correct them and prepare them for another attempt.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="offline-flow-recovery-title">
+        <div class="offline-flow-heading">
+          <h3 id="offline-flow-recovery-title">Failed synchronisation<br />recovery</h3>
+          <p>
+            The recovery path was important because failed requests could represent real
+            healthcare needs. The tool allowed PIS to correct issues instead of losing the
+            request or starting over.
+          </p>
+        </div>
+
+        <div class="offline-flow-recovery-flow">
+          <article class="offline-flow-recovery-step">
+            <span>01</span>
+            <div>
+              <h4>Open No Sincronizadas</h4>
+              <p>PIS reviews the list of requests that could not be submitted successfully.</p>
+            </div>
+          </article>
+
+          <article class="offline-flow-recovery-step">
+            <span>02</span>
+            <div>
+              <h4>Edit the request</h4>
+              <p>
+                PIS opens a failed request, reviews the stored information and edits what needs
+                to be corrected.
+              </p>
+            </div>
+          </article>
+
+          <article class="offline-flow-recovery-step">
+            <span>03</span>
+            <div>
+              <h4>Manage supporting files</h4>
+              <p>
+                PIS can preview files, add more supports, remove incorrect files or upload a
+                smaller file if the previous one exceeded the allowed size.
+              </p>
+            </div>
+          </article>
+
+          <article class="offline-flow-recovery-step">
+            <span>04</span>
+            <div>
+              <h4>Save locally again</h4>
+              <p>
+                Corrections are saved in the local table so the request can be included in a
+                future synchronisation attempt.
+              </p>
+            </div>
+          </article>
+
+          <article class="offline-flow-recovery-step">
+            <span>05</span>
+            <div>
+              <h4>Delete when needed</h4>
+              <p>
+                If the request should no longer continue, PIS can delete it after confirming the
+                action and selecting a reason.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  
+        
+        
+        
+        
+      </div>
+      
+      
+      
+    </section>
+  
+    <section class="case-section case-section--after-pain-points case-section--offline-outcome" data-section-title="Outcome">
+      <h2>Outcome</h2>
+      <div class="case-section-content rich-copy">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    <div class="offline-outcome" aria-label="Offline-first field tool outcome">
+      <div class="offline-outcome-heading">
+        <h3>Outcome</h3>
+        <p>
+          The tool was implemented to support healthcare field operations in rural areas
+          of Colombia, helping PIS submit healthcare service approval requests even in
+          low-connectivity contexts.
+        </p>
+      </div>
+
+      <div class="offline-outcome-grid" aria-label="Project impact metrics">
+        
+              <article class="offline-outcome-card offline-outcome-card--primary">
+                <div>
+                  <p class="offline-outcome-card-kicker">Reach</p>
+                  <p class="offline-outcome-card-value">70K+</p>
+                </div>
+
+                <p class="offline-outcome-card-label">People in rural areas supported during 2025–2026.</p>
+              </article>
+            
+              <article class="offline-outcome-card offline-outcome-card--system">
+                <div>
+                  <p class="offline-outcome-card-kicker">Processing</p>
+                  <p class="offline-outcome-card-value">Faster</p>
+                </div>
+
+                <p class="offline-outcome-card-label">Reduced the time required to process healthcare service approval requests.</p>
+              </article>
+            
+              <article class="offline-outcome-card offline-outcome-card--offline">
+                <div>
+                  <p class="offline-outcome-card-kicker">Continuity</p>
+                  <p class="offline-outcome-card-value">Offline</p>
+                </div>
+
+                <p class="offline-outcome-card-label">Allowed PIS to capture, store and synchronise requests when connection returned.</p>
+              </article>
+            
+              <article class="offline-outcome-card offline-outcome-card--online">
+                <div>
+                  <p class="offline-outcome-card-kicker">Data handling</p>
+                  <p class="offline-outcome-card-value">Less paper</p>
+                </div>
+
+                <p class="offline-outcome-card-label">Reduced the need to carry or photocopy physical medical documents.</p>
+              </article>
+            
+      </div>
+
+      <div class="offline-outcome-story">
+        <article class="offline-outcome-story-panel">
+          <h4>From field constraint to service continuity</h4>
+          <p>
+            By allowing PIS to capture, store and synchronise requests in an offline-first
+            solution, the experience supported work in rural contexts where connectivity
+            could be unstable or unavailable.
+          </p>
+        </article>
+
+        <article class="offline-outcome-story-panel offline-outcome-story-panel--impact">
+          <h4>Operational and data protection impact</h4>
+          <ul class="offline-outcome-impact-list">
+            <li>
+              <span>01</span>
+              <p>
+                Helped lower the risk of losing personal information and special category
+                health data.
+              </p>
+            </li>
+
+            <li>
+              <span>02</span>
+              <p>Reduced dependency on physical paperwork during field visits.</p>
+            </li>
+
+            <li>
+              <span>03</span>
+              <p>Made healthcare access more reliable for members in low-connectivity areas.</p>
+            </li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="offline-outcome-quote">
+        <p>
+          Beyond improving an internal process, the project helped make healthcare access
+          more reliable for members in dispersed rural communities.
+        </p>
+      </div>
+    </div>
+  
+        
+        
+        
+      </div>
+      
+      
+      
+    </section>
+  </div>
+
+      <nav class="case-next" aria-label="Project navigation">
+        <p>Next project</p>
+        <a id="next-project" href="projects/app-redesign/">
+          <span id="next-project-title">App Redesign for Nueva EPS</span>
+          <img src="assets/arrow-up-right.svg" alt="" />
+        </a>
+      </nav>
+    </main>
+
+    <a class="case-back" href="index.html#projects">
+      <img src="assets/arrow-up-right.svg" alt="" />
+      <span>Back to projects</span>
+    </a>
+  </body>
+</html>

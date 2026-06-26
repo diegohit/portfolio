@@ -4,7 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="UX design case study by Diego Cárdenas Mora." />
+    <meta name="robots" content="noindex, follow" />
     <title>Project — Diego Cárdenas Mora</title>
+    <script>
+      (() => {
+        const urls = {
+          "rural-healthcare": "projects/rural-healthcare/",
+          "app-redesign": "projects/app-redesign/",
+          "whatsapp-appointments": "projects/whatsapp-appointments/",
+          "maternal-health": "projects/maternal-health/",
+        };
+        const id = new URLSearchParams(window.location.search).get("id");
+        if (urls[id]) window.location.replace(`${urls[id]}${window.location.hash}`);
+      })();
+    </script>
     <link
       id="animated-favicon"
       rel="icon"

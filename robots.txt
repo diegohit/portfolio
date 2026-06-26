@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dcm-design-portfolio.netlify.app/sitemap.xml
