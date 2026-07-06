@@ -3,8 +3,8 @@ const canUseCustomCursor = window.matchMedia(
 ).matches;
 
 if (canUseCustomCursor) {
-  const openEyesSrc = "assets/cursors/monster-eyes-open.svg";
-  const closedEyesSrc = "assets/cursors/monster-eyes-closed.svg";
+  const openEyesSrc = "/assets/cursors/monster-eyes-open.svg";
+  const closedEyesSrc = "/assets/cursors/monster-eyes-closed.svg";
   const cursor = document.createElement("div");
   cursor.className = "monster-cursor";
   cursor.setAttribute("aria-hidden", "true");

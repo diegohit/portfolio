@@ -25,7 +25,7 @@ const { projects, projectOrder, renderParagraphs, renderSection } =
   getProjectModule();
 
 const projectUrls = Object.fromEntries(
-  projectOrder.map((id) => [id, `projects/${id}/`])
+  projectOrder.map((id) => [id, `/projects/${id}/`])
 );
 
 const metaDescriptions = {
@@ -58,6 +58,28 @@ function absoluteUrl(relativePath = "") {
   return `${siteUrl}/${relativePath.replace(/^\/+/, "")}`;
 }
 
+function rootRelativePath(relativePath = "") {
+  if (
+    !relativePath ||
+    relativePath.startsWith("/") ||
+    relativePath.startsWith("#") ||
+    /^[a-z][a-z0-9+.-]*:/i.test(relativePath)
+  ) {
+    return relativePath;
+  }
+
+  return `/${relativePath.replace(/^\.?\//, "")}`;
+}
+
+function rootRelativeHtml(html = "") {
+  return html
+    .replace(/\b(src|href|poster)="(assets\/[^"]*)"/g, '$1="/$2"')
+    .replace(/\b(src|href|poster)='(assets\/[^']*)'/g, "$1='/$2'")
+    .replace(/url\("(assets\/[^"]*)"\)/g, 'url("/$1")')
+    .replace(/url\('(assets\/[^']*)'\)/g, "url('/$1')")
+    .replace(/url\((assets\/[^)]*)\)/g, "url(/$1)");
+}
+
 function renderJsonLd(data) {
   return JSON.stringify(data)
     .replaceAll("</", "<\\/")
@@ -70,7 +92,7 @@ function renderMedia(project, projectId) {
       <figure class="case-media has-video" id="project-media">
         <div class="case-video" id="project-media-content">
           <video autoplay muted loop playsinline preload="metadata" aria-label="${escapeHtml(project.media.caption || project.title)}">
-            <source src="${project.media.src}" type="video/mp4">
+            <source src="${rootRelativePath(project.media.src)}" type="video/mp4">
             Your browser does not support HTML video.
           </video>
         </div>
@@ -101,7 +123,7 @@ function renderMedia(project, projectId) {
     return `
       <figure class="${mediaClasses}" id="project-media">
         <div class="${imageClasses}" id="project-media-content">
-          <img src="${project.media.src}" alt="${escapeHtml(project.media.alt || "")}">
+          <img src="${rootRelativePath(project.media.src)}" alt="${escapeHtml(project.media.alt || "")}">
         </div>
         ${
           project.media.caption
@@ -141,6 +163,8 @@ function renderProjectPage(projectId) {
       )
     )
     .join("");
+  const prerenderedSections = rootRelativeHtml(sections);
+  const prerenderedOverview = rootRelativeHtml(renderParagraphs(project.overview));
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -165,7 +189,6 @@ function renderProjectPage(projectId) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <base href="../../" />
     <title>${escapeHtml(project.title)} — Diego Cárdenas Mora</title>
     <meta name="description" content="${escapeHtml(description)}" />
     <link rel="canonical" href="${url}" />
@@ -183,25 +206,25 @@ function renderProjectPage(projectId) {
       id="animated-favicon"
       rel="icon"
       type="image/svg+xml"
-      href="assets/favicons/favicon-black.svg"
+      href="/assets/favicons/favicon-black.svg"
     />
-    <link rel="stylesheet" href="project.css" />
-    <script src="favicon.js" defer></script>
-    <script src="cursor.js" defer></script>
-    <script src="project-data.js" defer></script>
+    <link rel="stylesheet" href="/project.css" />
+    <script src="/favicon.js" defer></script>
+    <script src="/cursor.js" defer></script>
+    <script src="/project-data.js" defer></script>
   </head>
   <body data-static-project="true">
     <header class="case-header">
-      <a class="case-name" href="index.html">Diego Cárdenas Mora</a>
+      <a class="case-name" href="/">Diego Cárdenas Mora</a>
       <nav aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a class="is-active" href="index.html#projects">Projects</a>
-        <a href="index.html#services">Services</a>
-        <a href="index.html#about">About</a>
-        <a href="index.html#contact">Contact</a>
+        <a href="/">Home</a>
+        <a class="is-active" href="/#projects">Projects</a>
+        <a href="/#services">Services</a>
+        <a href="/#about">About</a>
+        <a href="/#contact">Contact</a>
       </nav>
-      <a class="case-logo" href="index.html#contact" aria-label="Go to contact">
-        <img src="assets/logo.svg" alt="" />
+      <a class="case-logo" href="/#contact" aria-label="Go to contact">
+        <img src="/assets/logo.svg" alt="" />
       </a>
     </header>
 
@@ -236,26 +259,26 @@ function renderProjectPage(projectId) {
         <div class="case-overview">
           <h2>Project Overview</h2>
           <div class="rich-copy" id="project-overview">
-            ${renderParagraphs(project.overview)}
+            ${prerenderedOverview}
           </div>
         </div>
       </section>
 
       ${renderMedia(project, projectId)}
 
-      <div id="project-sections">${sections}</div>
+      <div id="project-sections">${prerenderedSections}</div>
 
       <nav class="case-next" aria-label="Project navigation">
         <p>Next project</p>
         <a id="next-project" href="${projectUrls[nextId]}">
           <span id="next-project-title">${escapeHtml(nextProject.title)}</span>
-          <img src="assets/arrow-up-right.svg" alt="" />
+          <img src="/assets/arrow-up-right.svg" alt="" />
         </a>
       </nav>
     </main>
 
-    <a class="case-back" href="index.html#projects">
-      <img src="assets/arrow-up-right.svg" alt="" />
+    <a class="case-back" href="/#projects">
+      <img src="/assets/arrow-up-right.svg" alt="" />
       <span>Back to projects</span>
     </a>
   </body>

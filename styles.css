@@ -24,14 +24,14 @@ body {
   overflow-x: clip;
   background: var(--paper);
   color: var(--ink);
-  cursor: url("assets/cursors/monster.svg") 19 19, auto;
+  cursor: url("/assets/cursors/monster.svg") 19 19, auto;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
 }
 
 a,
 button {
-  cursor: url("assets/cursors/monster.svg") 19 19, pointer;
+  cursor: url("/assets/cursors/monster.svg") 19 19, pointer;
 }
 
 p,
@@ -1001,7 +1001,7 @@ h2 {
   font-size: 13px;
   text-transform: uppercase;
   backdrop-filter: blur(12px);
-  cursor: url("assets/cursors/monster.svg") 19 19, pointer;
+  cursor: url("/assets/cursors/monster.svg") 19 19, pointer;
   transition:
     padding 180ms ease,
     background-size 650ms cubic-bezier(0.76, 0, 0.24, 1),

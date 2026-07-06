@@ -149,6 +149,7 @@ const projects = {
       },
       {
         title: "Information Architecture",
+        architectureVariant: "app-information-architecture",
         paragraphs: [
           "Based on the card sorting results, I reorganised the app around clearer content areas that reflected how users expected to find services.",
           "The new structure prioritised healthcare tasks and separated them from account settings and general customer service actions. This helped reduce ambiguity and made the app easier to scan.",
@@ -899,6 +900,29 @@ function renderHeartTable(rows = []) {
 function renderArchitecture(columns = [], title = "", variant = "") {
   if (!columns.length) return "";
 
+  if (variant === "app-information-architecture") {
+    const cards = columns
+      .map(
+        (column) => `
+          <article class="ia-category">
+            <h3>${column.heading}</h3>
+            <ul>
+              ${column.items.map((item) => `<li>${item}</li>`).join("")}
+            </ul>
+          </article>
+        `.trim()
+      )
+      .join("");
+
+    return `
+      <div class="ia-diagram" aria-label="Information architecture diagram">
+        <div class="ia-diagram__canvas" aria-label="Redesigned app information architecture">
+          <div class="ia-categories" aria-label="Primary content areas">${cards}</div>
+        </div>
+      </div>
+    `.trim();
+  }
+
   const renderArchitectureItems = (items = []) => `
     <ul>
       ${items
@@ -1590,7 +1614,7 @@ function initialiseStickyMeta() {
 }
 
 const projectUrls = Object.fromEntries(
-  projectOrder.map((id) => [id, `projects/${id}/`])
+  projectOrder.map((id) => [id, `/projects/${id}/`])
 );
 
 function getProjectIdFromPath(pathname) {
