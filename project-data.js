@@ -196,50 +196,19 @@ const projects = {
         ],
       },
       {
-        title: "Login and Access Flow",
-        paragraphs: [
-          "One of the most important parts of the redesign was the login experience. In the previous app, the access screen tried to expose multiple actions at the same time, including login, registration, password recovery, and biometric access.",
-          "I tested alternative login flows to understand which version felt clearer and more comfortable. The redesigned approach reduced the number of elements on the screen and gave each action a more defined place.",
-        ],
-      },
-      {
         title: "Key Flows",
         blocks: [
           {
-            heading: "Home",
-            text: "The redesigned home screen prioritised frequently used services and gave users quick access to recent items, notifications, and key healthcare actions.",
-            fullBleedMedia: {
-              src: "assets/images/projects/app-redesign-home-wireflow.png",
-              alt: "Home screen wireflow for the Nueva EPS app redesign",
-              color: true,
-            },
+            homeFlow: true,
           },
           {
-            heading: "Healthcare Service Approvals",
-            text: "This flow allowed users to submit, consult, and download documents related to healthcare service approvals, clearly explaining what users needed to provide and what would happen next.",
-            fullBleedMedia: {
-              src: "assets/images/projects/app-redesign-authorisations-flow.png",
-              alt: "Healthcare service approvals wireflow for the Nueva EPS app redesign",
-              color: true,
-            },
+            approvalFlow: true,
           },
           {
-            heading: "Medical leave certificates",
-            text: "This flow allowed users to check whether their medical leave payment had been processed and track the status of the payment request.",
-            fullBleedMedia: {
-              src: "assets/images/projects/app-redesign-medical-leave-flow.png",
-              alt: "Medical leave certificates wireflow for the Nueva EPS app redesign",
-              color: true,
-            },
+            medicalLeaveFlow: true,
           },
           {
-            heading: "Healthcare Network Search",
-            text: "Using form fields, filters, and result lists, the flow helped users find healthcare providers according to their health plan, location, and type of care.",
-            fullBleedMedia: {
-              src: "assets/images/projects/app-redesign-healthcare-network-flow.png",
-              alt: "Healthcare network search wireflow for the Nueva EPS app redesign",
-              color: true,
-            },
+            networkFlow: true,
           },
         ],
       },
@@ -897,6 +866,635 @@ function renderHeartTable(rows = []) {
   `;
 }
 
+function renderHomeFlow() {
+  const screens = [
+    {
+      src: "assets/images/projects/app-redesign-home-flow/home-access-screen.png",
+      alt: "Access screen mockup",
+    },
+    {
+      src: "assets/images/projects/app-redesign-home-flow/home-biometric-setup.png",
+      alt: "Biometric setup mockup",
+    },
+    {
+      src: "assets/images/projects/app-redesign-home-flow/home-hub.png",
+      alt: "Home hub mockup",
+    },
+  ];
+
+  const steps = [
+    {
+      label: "Step 01",
+      title: "Access check",
+      text: "Password, first-time biometrics, collaborator entry and account validation.",
+    },
+    {
+      label: "Step 02",
+      title: "First visit",
+      text: "Short onboarding explains the new app structure before Home.",
+    },
+    {
+      label: "Step 03",
+      title: "Home hub",
+      text: "Recent features, notifications and frequent healthcare tasks.",
+    },
+    {
+      label: "Step 04",
+      title: "Next route",
+      text: "Users continue to Health, Certificates, Support or Network.",
+    },
+  ];
+
+  const decisions = [
+    {
+      title: "Reduce choices before login",
+      text: "The first screen focused on access. Secondary actions moved into clearer routes.",
+    },
+    {
+      title: "Show recent interactions",
+      text: "Home let members see the latest features they had used, so they could return faster.",
+    },
+    {
+      title: "Add useful notifications",
+      text: "Notifications included medical appointment reminders and confirmations for healthcare service approvals.",
+    },
+  ];
+
+  return `
+    <section class="home-flow" aria-labelledby="home-flow-title">
+      <div class="home-flow__intro">
+        <h2 id="home-flow-title">Home and access logic</h2>
+        <p>I treated Home as the app’s entry layer. With the redesign, biometric access was added for the first time. Home also helped members return to recent features, check notifications, and reach key services.</p>
+      </div>
+
+      <div class="home-flow__screens" aria-label="Selected Home flow screens">
+        ${screens
+          .map(
+            (screen) => `
+              <figure class="home-flow__screen">
+                <img src="${screen.src}" alt="${screen.alt}" loading="lazy" />
+              </figure>
+            `.trim()
+          )
+          .join("")}
+      </div>
+
+      <div class="home-flow__map" aria-label="Home flow logic map">
+        <div class="home-flow__lane">
+          <div class="home-flow__lane-label">Main path</div>
+          <div class="home-flow__track">
+            ${steps
+              .map(
+                (step) => `
+                  <article class="home-flow__node">
+                    <span>${step.label}</span>
+                    <h3>${step.title}</h3>
+                    <p>${step.text}</p>
+                  </article>
+                `.trim()
+              )
+              .join("")}
+          </div>
+        </div>
+      </div>
+
+      <div class="home-flow__logic-section">
+        <div class="home-flow__logic-heading">
+          <span>Design decisions</span>
+        </div>
+        <div class="home-flow__logic" aria-label="Design decisions">
+          ${decisions
+            .map(
+              (decision) => `
+                <article class="home-flow__logic-card">
+                  <h3>${decision.title}</h3>
+                  <p>${decision.text}</p>
+                </article>
+              `.trim()
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `.trim();
+}
+
+function renderApprovalFlow() {
+  const lanes = [
+    {
+      label: "Request path",
+      steps: [
+        {
+          label: "Step 01",
+          title: "Choose action",
+          text: "Users enter Authorisations and choose between requesting or checking.",
+        },
+        {
+          label: "Step 02",
+          title: "Select member",
+          text: "The request can be made for the user or someone in their family group.",
+        },
+        {
+          label: "Step 03",
+          title: "Upload documents",
+          text: "Users add the medical order and supporting clinical history if needed.",
+        },
+        {
+          label: "Step 04",
+          title: "Review and send",
+          text: "The final step lets users check documents and observations before submission.",
+        },
+      ],
+    },
+    {
+      label: "Follow-up path",
+      steps: [
+        {
+          label: "Step 01",
+          title: "Confirm phone",
+          text: "The app checks the phone number used for status updates.",
+        },
+        {
+          label: "Step 02",
+          title: "Validate input",
+          text: "Users are guided if the phone number, file size or file format is wrong.",
+        },
+        {
+          label: "Step 03",
+          title: "Track status",
+          text: "Users can consult the request instead of starting a new one.",
+        },
+        {
+          label: "Step 04",
+          title: "Receive result",
+          text: "The app keeps users informed when the approval number is ready.",
+        },
+      ],
+    },
+  ];
+
+  const decisions = [
+    {
+      title: "Separate request and consult",
+      text: "The flow split new submissions from status checks to reduce repeated work.",
+    },
+    {
+      title: "Support family-group use",
+      text: "Members could request approvals for themselves or another person in their group.",
+    },
+    {
+      title: "Control document quality",
+      text: "The upload step handled camera, gallery and PDF files, with size and format checks.",
+    },
+  ];
+
+  return `
+    <section class="approval-flow" aria-labelledby="approval-flow-title">
+      <div class="approval-flow__intro">
+        <h2 id="approval-flow-title">Healthcare service approvals</h2>
+        <p>I treated this flow as a guided submission and follow-up process. Members needed to request an approval, upload the right documents, confirm their contact details, and check the status without calling support.</p>
+      </div>
+
+      <figure class="approval-flow__screen">
+        <img src="assets/images/projects/app-redesign-approval-flow/healthcare-service-approvals-mockup.png" alt="Healthcare service approvals mockup" loading="lazy" />
+      </figure>
+
+      <div class="approval-flow__map" aria-label="Healthcare service approvals flow map">
+        ${lanes
+          .map(
+            (lane) => `
+              <div class="approval-flow__lane">
+                <div class="approval-flow__lane-label">${lane.label}</div>
+                <div class="approval-flow__track">
+                  ${lane.steps
+                    .map(
+                      (step) => `
+                        <article class="approval-flow__node">
+                          <span>${step.label}</span>
+                          <h3>${step.title}</h3>
+                          <p>${step.text}</p>
+                        </article>
+                      `.trim()
+                    )
+                    .join("")}
+                </div>
+              </div>
+            `.trim()
+          )
+          .join("")}
+      </div>
+
+      <div class="approval-flow__logic-section">
+        <div class="approval-flow__logic-heading">
+          <span>Design decisions</span>
+        </div>
+        <div class="approval-flow__logic" aria-label="Design decisions">
+          ${decisions
+            .map(
+              (decision) => `
+                <article class="approval-flow__logic-card">
+                  <h3>${decision.title}</h3>
+                  <p>${decision.text}</p>
+                </article>
+              `.trim()
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `.trim();
+}
+
+function renderMedicalLeaveFlow() {
+  const screens = [
+    {
+      src: "assets/images/projects/app-redesign-medical-leave-flow/medical-leave-incapacities-hub.png",
+      alt: "Incapacities hub mockup",
+    },
+    {
+      src: "assets/images/projects/app-redesign-medical-leave-flow/medical-leave-recipient-email.png",
+      alt: "Recipient and email mockup",
+    },
+    {
+      src: "assets/images/projects/app-redesign-medical-leave-flow/medical-leave-upload-terms.png",
+      alt: "Upload and terms mockup",
+    },
+  ];
+
+  const lanes = [
+    {
+      label: "Entry path",
+      steps: [
+        {
+          label: "Step 01",
+          title: "Open certificates",
+          text: "Users enter Certificates and Incapacities from the bottom navigation.",
+        },
+        {
+          label: "Step 02",
+          title: "Choose Incapacities",
+          text: "The section groups certificate download, transcription and payment status.",
+        },
+        {
+          label: "Step 03",
+          title: "Pick the task",
+          text: "Users choose whether they want a certificate, a transcription or payment status.",
+        },
+        {
+          label: "Step 04",
+          title: "Follow route",
+          text: "Each route asks only for the information needed to complete that task.",
+        },
+      ],
+    },
+    {
+      label: "Certificate path",
+      steps: [
+        {
+          label: "Step 01",
+          title: "Define recipient",
+          text: "If there is a family group, users choose who the certificate is for.",
+        },
+        {
+          label: "Step 02",
+          title: "Add email",
+          text: "The app asks where to send a copy before showing available records.",
+        },
+        {
+          label: "Step 03",
+          title: "Select record",
+          text: "Users choose the medical leave record they want to download.",
+        },
+        {
+          label: "Step 04",
+          title: "Download",
+          text: "The PDF is downloaded to the device and also sent by email.",
+        },
+      ],
+    },
+    {
+      label: "Transcription path",
+      steps: [
+        {
+          label: "Step 01",
+          title: "Add contact and date",
+          text: "Users enter email or phone and select the medical leave start date.",
+        },
+        {
+          label: "Step 02",
+          title: "Upload documents",
+          text: "The app accepts camera, gallery or PDF uploads with format and size checks.",
+        },
+        {
+          label: "Step 03",
+          title: "Accept terms",
+          text: "Users review and accept the conditions before submitting the request.",
+        },
+        {
+          label: "Step 04",
+          title: "Receive case number",
+          text: "A confirmation message gives the request number and expected response time.",
+        },
+      ],
+    },
+    {
+      label: "Payment status path",
+      steps: [
+        {
+          label: "Step 01",
+          title: "Choose query",
+          text: "Users check all records or filter by a date range.",
+        },
+        {
+          label: "Step 02",
+          title: "Select incapacity",
+          text: "The app shows eligible medical leaves so users can open one record.",
+        },
+        {
+          label: "Step 03",
+          title: "Read status",
+          text: "The detail explains the payment state, amount, method and key dates.",
+        },
+        {
+          label: "Step 04",
+          title: "Next action",
+          text: "Depending on the status, users continue, contact support or reissue payment.",
+        },
+      ],
+    },
+  ];
+
+  const decisions = [
+    {
+      title: "Separate three jobs",
+      text: "The Incapacities hub keeps download, transcription and payment status from competing in one path.",
+    },
+    {
+      title: "Adapt to family groups",
+      text: "The certificate path changes when users need a document for someone linked to their account.",
+    },
+  ];
+
+  return `
+    <section class="medical-leave-flow" aria-labelledby="medical-leave-flow-title">
+      <div class="medical-leave-flow__intro">
+        <h2 id="medical-leave-flow-title">Medical leave services</h2>
+        <p>I treated Incapacities as a service hub with three different jobs: downloading an existing medical leave certificate, submitting a transcription request, and checking payment status. The flow had to separate those tasks while keeping each path short, clear and recoverable.</p>
+      </div>
+
+      <div class="medical-leave-flow__screens" aria-label="Selected Medical leave services screens">
+        ${screens
+          .map(
+            (screen) => `
+              <figure class="medical-leave-flow__screen">
+                <img src="${screen.src}" alt="${screen.alt}" loading="lazy" />
+              </figure>
+            `.trim()
+          )
+          .join("")}
+      </div>
+
+      <div class="medical-leave-flow__map" aria-label="Medical leave services flow map">
+        ${lanes
+          .map(
+            (lane) => `
+              <div class="medical-leave-flow__lane">
+                <div class="medical-leave-flow__lane-label">${lane.label}</div>
+                <div class="medical-leave-flow__track">
+                  ${lane.steps
+                    .map(
+                      (step) => `
+                        <article class="medical-leave-flow__node">
+                          <span>${step.label}</span>
+                          <h3>${step.title}</h3>
+                          <p>${step.text}</p>
+                        </article>
+                      `.trim()
+                    )
+                    .join("")}
+                </div>
+              </div>
+            `.trim()
+          )
+          .join("")}
+      </div>
+
+      <div class="medical-leave-flow__logic-section">
+        <div class="medical-leave-flow__logic-heading">
+          <span>Design decisions</span>
+        </div>
+        <div class="medical-leave-flow__logic" aria-label="Design decisions">
+          ${decisions
+            .map(
+              (decision) => `
+                <article class="medical-leave-flow__logic-card">
+                  <h3>${decision.title}</h3>
+                  <p>${decision.text}</p>
+                </article>
+              `.trim()
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `.trim();
+}
+
+function renderNetworkFlow() {
+  const screens = [
+    {
+      src: "assets/images/projects/app-redesign-network-flow/healthcare-network-service-menu.png",
+      alt: "Service menu mockup",
+    },
+    {
+      src: "assets/images/projects/app-redesign-network-flow/healthcare-network-location-filters.png",
+      alt: "Location filters mockup",
+    },
+    {
+      src: "assets/images/projects/app-redesign-network-flow/healthcare-network-provider-results.png",
+      alt: "Provider results mockup",
+    },
+  ];
+
+  const lanes = [
+    {
+      label: "Entry path",
+      variant: "three",
+      steps: [
+        {
+          label: "Step 01",
+          title: "Open network",
+          text: "Users enter Healthcare Network from the bottom navigation.",
+        },
+        {
+          label: "Step 02",
+          title: "Select plan",
+          text: "They choose contributive, subsidised or complementary care plan.",
+        },
+        {
+          label: "Step 03",
+          title: "Continue",
+          text: "The main service menu appears once the plan route is selected.",
+        },
+      ],
+    },
+    {
+      label: "Service path",
+      steps: [
+        {
+          label: "Step 01",
+          title: "Choose category",
+          text: "Users choose urgent care, primary care, pharmacies or offices.",
+        },
+        {
+          label: "Step 02",
+          title: "Choose urgency type",
+          text: "Urgent care is split into obstetric, pediatric, psychiatric, adult and dental.",
+        },
+        {
+          label: "Step 03",
+          title: "Use same pattern",
+          text: "Each category keeps the same department and municipality search structure.",
+        },
+        {
+          label: "Step 04",
+          title: "Reduce relearning",
+          text: "The same interaction model works across clinics, pharmacies and offices.",
+        },
+      ],
+    },
+    {
+      label: "Location path",
+      steps: [
+        {
+          label: "Step 01",
+          title: "Select department",
+          text: "The user opens the department field and chooses from the available list.",
+        },
+        {
+          label: "Step 02",
+          title: "Select municipality",
+          text: "The second field narrows the search to the selected municipality.",
+        },
+        {
+          label: "Step 03",
+          title: "Enable search",
+          text: "The next button activates only after both location fields are complete.",
+        },
+        {
+          label: "Step 04",
+          title: "Show results",
+          text: "The app then shows matching providers for the selected service and location.",
+        },
+      ],
+    },
+    {
+      label: "Results path",
+      steps: [
+        {
+          label: "Step 01",
+          title: "Browse list",
+          text: "Users review provider cards with address, phone, opening hours and details.",
+        },
+        {
+          label: "Step 02",
+          title: "Search within results",
+          text: "A search field helps users find a specific provider faster.",
+        },
+        {
+          label: "Step 03",
+          title: "Open map",
+          text: "The map view shows the selected provider and keeps contact information close.",
+        },
+        {
+          label: "Step 04",
+          title: "Call provider",
+          text: "Users can continue by calling the provider directly from the result detail.",
+        },
+      ],
+    },
+  ];
+
+  const decisions = [
+    {
+      title: "Standardise search",
+      text: "The same department and municipality pattern works across all network categories.",
+    },
+    {
+      title: "Separate service types",
+      text: "Urgencies, primary care, pharmacies, offices and Vive Digital points remain easy to scan.",
+    },
+    {
+      title: "Support decision making",
+      text: "List, map, contact details and call actions help users choose where to go next.",
+    },
+  ];
+
+  return `
+    <section class="network-flow" aria-labelledby="network-flow-title">
+      <div class="network-flow__intro">
+        <h2 id="network-flow-title">Healthcare network search</h2>
+        <p>I treated the healthcare network as a guided search flow. Members needed to choose their plan, select the type of care or service, filter by location, and compare providers through list and map views before deciding where to go or who to call.</p>
+      </div>
+
+      <div class="network-flow__screens" aria-label="Selected Healthcare network search screens">
+        ${screens
+          .map(
+            (screen) => `
+              <figure class="network-flow__screen">
+                <img src="${screen.src}" alt="${screen.alt}" loading="lazy" />
+              </figure>
+            `.trim()
+          )
+          .join("")}
+      </div>
+
+      <div class="network-flow__map" aria-label="Healthcare network search flow map">
+        ${lanes
+          .map(
+            (lane) => `
+              <div class="network-flow__lane">
+                <div class="network-flow__lane-label">${lane.label}</div>
+                <div class="network-flow__track${lane.variant === "three" ? " network-flow__track--three" : ""}">
+                  ${lane.steps
+                    .map(
+                      (step) => `
+                        <article class="network-flow__node">
+                          <span>${step.label}</span>
+                          <h3>${step.title}</h3>
+                          <p>${step.text}</p>
+                        </article>
+                      `.trim()
+                    )
+                    .join("")}
+                </div>
+              </div>
+            `.trim()
+          )
+          .join("")}
+      </div>
+
+      <div class="network-flow__logic-section">
+        <div class="network-flow__logic-heading">
+          <span>Design decisions</span>
+        </div>
+        <div class="network-flow__logic" aria-label="Design decisions">
+          ${decisions
+            .map(
+              (decision) => `
+                <article class="network-flow__logic-card">
+                  <h3>${decision.title}</h3>
+                  <p>${decision.text}</p>
+                </article>
+              `.trim()
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+  `.trim();
+}
+
 function renderArchitecture(columns = [], title = "", variant = "") {
   if (!columns.length) return "";
 
@@ -1317,8 +1915,13 @@ function renderSampleMessages(enabled = false) {
 function renderSection(section, isAfterPainPoints = false) {
   const blocks = (section.blocks || [])
     .map(
-      (block) =>
-        `<h3>${block.heading}</h3><p>${block.text}</p>${renderFullBleedMedia(block.fullBleedMedia)}`
+      (block) => {
+        if (block.homeFlow) return renderHomeFlow();
+        if (block.approvalFlow) return renderApprovalFlow();
+        if (block.medicalLeaveFlow) return renderMedicalLeaveFlow();
+        if (block.networkFlow) return renderNetworkFlow();
+        return `<h3>${block.heading}</h3><p>${block.text}</p>${renderFullBleedMedia(block.fullBleedMedia)}`;
+      }
     )
     .join("");
   const tree = section.tree
@@ -1337,6 +1940,9 @@ function renderSection(section, isAfterPainPoints = false) {
   }
   if (section.title === "Interaction Model") {
     sectionClasses.push("case-section--interaction-model");
+  }
+  if (section.title === "Key Flows") {
+    sectionClasses.push("case-section--key-flows");
   }
   if (section.offlineOutcome) {
     sectionClasses.push("case-section--offline-outcome");

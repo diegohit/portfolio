@@ -336,48 +336,377 @@
       
     </section>
   
-    <section class="case-section case-section--after-pain-points" data-section-title="Login and Access Flow">
-      <h2>Login and Access Flow</h2>
-      <div class="case-section-content rich-copy">
-        <p>One of the most important parts of the redesign was the login experience. In the previous app, the access screen tried to expose multiple actions at the same time, including login, registration, password recovery, and biometric access.</p><p>I tested alternative login flows to understand which version felt clearer and more comfortable. The redesigned approach reduced the number of elements on the screen and gave each action a more defined place.</p>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-      </div>
-      
-      
-      
-    </section>
-  
-    <section class="case-section case-section--after-pain-points" data-section-title="Key Flows">
+    <section class="case-section case-section--after-pain-points case-section--key-flows" data-section-title="Key Flows">
       <h2>Key Flows</h2>
       <div class="case-section-content rich-copy">
         
-        <h3>Home</h3><p>The redesigned home screen prioritised frequently used services and gave users quick access to recent items, notifications, and key healthcare actions.</p>
-    <figure class="case-full-bleed-media case-full-bleed-media--color" data-full-bleed-parallax>
-      <img src="/assets/images/projects/app-redesign-home-wireflow.png" alt="Home screen wireflow for the Nueva EPS app redesign" loading="lazy" />
-    </figure>
-  <h3>Healthcare Service Approvals</h3><p>This flow allowed users to submit, consult, and download documents related to healthcare service approvals, clearly explaining what users needed to provide and what would happen next.</p>
-    <figure class="case-full-bleed-media case-full-bleed-media--color" data-full-bleed-parallax>
-      <img src="/assets/images/projects/app-redesign-authorisations-flow.png" alt="Healthcare service approvals wireflow for the Nueva EPS app redesign" loading="lazy" />
-    </figure>
-  <h3>Medical leave certificates</h3><p>This flow allowed users to check whether their medical leave payment had been processed and track the status of the payment request.</p>
-    <figure class="case-full-bleed-media case-full-bleed-media--color" data-full-bleed-parallax>
-      <img src="/assets/images/projects/app-redesign-medical-leave-flow.png" alt="Medical leave certificates wireflow for the Nueva EPS app redesign" loading="lazy" />
-    </figure>
-  <h3>Healthcare Network Search</h3><p>Using form fields, filters, and result lists, the flow helped users find healthcare providers according to their health plan, location, and type of care.</p>
-    <figure class="case-full-bleed-media case-full-bleed-media--color" data-full-bleed-parallax>
-      <img src="/assets/images/projects/app-redesign-healthcare-network-flow.png" alt="Healthcare network search wireflow for the Nueva EPS app redesign" loading="lazy" />
-    </figure>
-  
+        <section class="home-flow" aria-labelledby="home-flow-title">
+      <div class="home-flow__intro">
+        <h2 id="home-flow-title">Home and access logic</h2>
+        <p>I treated Home as the app’s entry layer. With the redesign, biometric access was added for the first time. Home also helped members return to recent features, check notifications, and reach key services.</p>
+      </div>
+
+      <div class="home-flow__screens" aria-label="Selected Home flow screens">
+        <figure class="home-flow__screen">
+                <img src="/assets/images/projects/app-redesign-home-flow/home-access-screen.png" alt="Access screen mockup" loading="lazy" />
+              </figure><figure class="home-flow__screen">
+                <img src="/assets/images/projects/app-redesign-home-flow/home-biometric-setup.png" alt="Biometric setup mockup" loading="lazy" />
+              </figure><figure class="home-flow__screen">
+                <img src="/assets/images/projects/app-redesign-home-flow/home-hub.png" alt="Home hub mockup" loading="lazy" />
+              </figure>
+      </div>
+
+      <div class="home-flow__map" aria-label="Home flow logic map">
+        <div class="home-flow__lane">
+          <div class="home-flow__lane-label">Main path</div>
+          <div class="home-flow__track">
+            <article class="home-flow__node">
+                    <span>Step 01</span>
+                    <h3>Access check</h3>
+                    <p>Password, first-time biometrics, collaborator entry and account validation.</p>
+                  </article><article class="home-flow__node">
+                    <span>Step 02</span>
+                    <h3>First visit</h3>
+                    <p>Short onboarding explains the new app structure before Home.</p>
+                  </article><article class="home-flow__node">
+                    <span>Step 03</span>
+                    <h3>Home hub</h3>
+                    <p>Recent features, notifications and frequent healthcare tasks.</p>
+                  </article><article class="home-flow__node">
+                    <span>Step 04</span>
+                    <h3>Next route</h3>
+                    <p>Users continue to Health, Certificates, Support or Network.</p>
+                  </article>
+          </div>
+        </div>
+      </div>
+
+      <div class="home-flow__logic-section">
+        <div class="home-flow__logic-heading">
+          <span>Design decisions</span>
+        </div>
+        <div class="home-flow__logic" aria-label="Design decisions">
+          <article class="home-flow__logic-card">
+                  <h3>Reduce choices before login</h3>
+                  <p>The first screen focused on access. Secondary actions moved into clearer routes.</p>
+                </article><article class="home-flow__logic-card">
+                  <h3>Show recent interactions</h3>
+                  <p>Home let members see the latest features they had used, so they could return faster.</p>
+                </article><article class="home-flow__logic-card">
+                  <h3>Add useful notifications</h3>
+                  <p>Notifications included medical appointment reminders and confirmations for healthcare service approvals.</p>
+                </article>
+        </div>
+      </div>
+    </section><section class="approval-flow" aria-labelledby="approval-flow-title">
+      <div class="approval-flow__intro">
+        <h2 id="approval-flow-title">Healthcare service approvals</h2>
+        <p>I treated this flow as a guided submission and follow-up process. Members needed to request an approval, upload the right documents, confirm their contact details, and check the status without calling support.</p>
+      </div>
+
+      <figure class="approval-flow__screen">
+        <img src="/assets/images/projects/app-redesign-approval-flow/healthcare-service-approvals-mockup.png" alt="Healthcare service approvals mockup" loading="lazy" />
+      </figure>
+
+      <div class="approval-flow__map" aria-label="Healthcare service approvals flow map">
+        <div class="approval-flow__lane">
+                <div class="approval-flow__lane-label">Request path</div>
+                <div class="approval-flow__track">
+                  <article class="approval-flow__node">
+                          <span>Step 01</span>
+                          <h3>Choose action</h3>
+                          <p>Users enter Authorisations and choose between requesting or checking.</p>
+                        </article><article class="approval-flow__node">
+                          <span>Step 02</span>
+                          <h3>Select member</h3>
+                          <p>The request can be made for the user or someone in their family group.</p>
+                        </article><article class="approval-flow__node">
+                          <span>Step 03</span>
+                          <h3>Upload documents</h3>
+                          <p>Users add the medical order and supporting clinical history if needed.</p>
+                        </article><article class="approval-flow__node">
+                          <span>Step 04</span>
+                          <h3>Review and send</h3>
+                          <p>The final step lets users check documents and observations before submission.</p>
+                        </article>
+                </div>
+              </div><div class="approval-flow__lane">
+                <div class="approval-flow__lane-label">Follow-up path</div>
+                <div class="approval-flow__track">
+                  <article class="approval-flow__node">
+                          <span>Step 01</span>
+                          <h3>Confirm phone</h3>
+                          <p>The app checks the phone number used for status updates.</p>
+                        </article><article class="approval-flow__node">
+                          <span>Step 02</span>
+                          <h3>Validate input</h3>
+                          <p>Users are guided if the phone number, file size or file format is wrong.</p>
+                        </article><article class="approval-flow__node">
+                          <span>Step 03</span>
+                          <h3>Track status</h3>
+                          <p>Users can consult the request instead of starting a new one.</p>
+                        </article><article class="approval-flow__node">
+                          <span>Step 04</span>
+                          <h3>Receive result</h3>
+                          <p>The app keeps users informed when the approval number is ready.</p>
+                        </article>
+                </div>
+              </div>
+      </div>
+
+      <div class="approval-flow__logic-section">
+        <div class="approval-flow__logic-heading">
+          <span>Design decisions</span>
+        </div>
+        <div class="approval-flow__logic" aria-label="Design decisions">
+          <article class="approval-flow__logic-card">
+                  <h3>Separate request and consult</h3>
+                  <p>The flow split new submissions from status checks to reduce repeated work.</p>
+                </article><article class="approval-flow__logic-card">
+                  <h3>Support family-group use</h3>
+                  <p>Members could request approvals for themselves or another person in their group.</p>
+                </article><article class="approval-flow__logic-card">
+                  <h3>Control document quality</h3>
+                  <p>The upload step handled camera, gallery and PDF files, with size and format checks.</p>
+                </article>
+        </div>
+      </div>
+    </section><section class="medical-leave-flow" aria-labelledby="medical-leave-flow-title">
+      <div class="medical-leave-flow__intro">
+        <h2 id="medical-leave-flow-title">Medical leave services</h2>
+        <p>I treated Incapacities as a service hub with three different jobs: downloading an existing medical leave certificate, submitting a transcription request, and checking payment status. The flow had to separate those tasks while keeping each path short, clear and recoverable.</p>
+      </div>
+
+      <div class="medical-leave-flow__screens" aria-label="Selected Medical leave services screens">
+        <figure class="medical-leave-flow__screen">
+                <img src="/assets/images/projects/app-redesign-medical-leave-flow/medical-leave-incapacities-hub.png" alt="Incapacities hub mockup" loading="lazy" />
+              </figure><figure class="medical-leave-flow__screen">
+                <img src="/assets/images/projects/app-redesign-medical-leave-flow/medical-leave-recipient-email.png" alt="Recipient and email mockup" loading="lazy" />
+              </figure><figure class="medical-leave-flow__screen">
+                <img src="/assets/images/projects/app-redesign-medical-leave-flow/medical-leave-upload-terms.png" alt="Upload and terms mockup" loading="lazy" />
+              </figure>
+      </div>
+
+      <div class="medical-leave-flow__map" aria-label="Medical leave services flow map">
+        <div class="medical-leave-flow__lane">
+                <div class="medical-leave-flow__lane-label">Entry path</div>
+                <div class="medical-leave-flow__track">
+                  <article class="medical-leave-flow__node">
+                          <span>Step 01</span>
+                          <h3>Open certificates</h3>
+                          <p>Users enter Certificates and Incapacities from the bottom navigation.</p>
+                        </article><article class="medical-leave-flow__node">
+                          <span>Step 02</span>
+                          <h3>Choose Incapacities</h3>
+                          <p>The section groups certificate download, transcription and payment status.</p>
+                        </article><article class="medical-leave-flow__node">
+                          <span>Step 03</span>
+                          <h3>Pick the task</h3>
+                          <p>Users choose whether they want a certificate, a transcription or payment status.</p>
+                        </article><article class="medical-leave-flow__node">
+                          <span>Step 04</span>
+                          <h3>Follow route</h3>
+                          <p>Each route asks only for the information needed to complete that task.</p>
+                        </article>
+                </div>
+              </div><div class="medical-leave-flow__lane">
+                <div class="medical-leave-flow__lane-label">Certificate path</div>
+                <div class="medical-leave-flow__track">
+                  <article class="medical-leave-flow__node">
+                          <span>Step 01</span>
+                          <h3>Define recipient</h3>
+                          <p>If there is a family group, users choose who the certificate is for.</p>
+                        </article><article class="medical-leave-flow__node">
+                          <span>Step 02</span>
+                          <h3>Add email</h3>
+                          <p>The app asks where to send a copy before showing available records.</p>
+                        </article><article class="medical-leave-flow__node">
+                          <span>Step 03</span>
+                          <h3>Select record</h3>
+                          <p>Users choose the medical leave record they want to download.</p>
+                        </article><article class="medical-leave-flow__node">
+                          <span>Step 04</span>
+                          <h3>Download</h3>
+                          <p>The PDF is downloaded to the device and also sent by email.</p>
+                        </article>
+                </div>
+              </div><div class="medical-leave-flow__lane">
+                <div class="medical-leave-flow__lane-label">Transcription path</div>
+                <div class="medical-leave-flow__track">
+                  <article class="medical-leave-flow__node">
+                          <span>Step 01</span>
+                          <h3>Add contact and date</h3>
+                          <p>Users enter email or phone and select the medical leave start date.</p>
+                        </article><article class="medical-leave-flow__node">
+                          <span>Step 02</span>
+                          <h3>Upload documents</h3>
+                          <p>The app accepts camera, gallery or PDF uploads with format and size checks.</p>
+                        </article><article class="medical-leave-flow__node">
+                          <span>Step 03</span>
+                          <h3>Accept terms</h3>
+                          <p>Users review and accept the conditions before submitting the request.</p>
+                        </article><article class="medical-leave-flow__node">
+                          <span>Step 04</span>
+                          <h3>Receive case number</h3>
+                          <p>A confirmation message gives the request number and expected response time.</p>
+                        </article>
+                </div>
+              </div><div class="medical-leave-flow__lane">
+                <div class="medical-leave-flow__lane-label">Payment status path</div>
+                <div class="medical-leave-flow__track">
+                  <article class="medical-leave-flow__node">
+                          <span>Step 01</span>
+                          <h3>Choose query</h3>
+                          <p>Users check all records or filter by a date range.</p>
+                        </article><article class="medical-leave-flow__node">
+                          <span>Step 02</span>
+                          <h3>Select incapacity</h3>
+                          <p>The app shows eligible medical leaves so users can open one record.</p>
+                        </article><article class="medical-leave-flow__node">
+                          <span>Step 03</span>
+                          <h3>Read status</h3>
+                          <p>The detail explains the payment state, amount, method and key dates.</p>
+                        </article><article class="medical-leave-flow__node">
+                          <span>Step 04</span>
+                          <h3>Next action</h3>
+                          <p>Depending on the status, users continue, contact support or reissue payment.</p>
+                        </article>
+                </div>
+              </div>
+      </div>
+
+      <div class="medical-leave-flow__logic-section">
+        <div class="medical-leave-flow__logic-heading">
+          <span>Design decisions</span>
+        </div>
+        <div class="medical-leave-flow__logic" aria-label="Design decisions">
+          <article class="medical-leave-flow__logic-card">
+                  <h3>Separate three jobs</h3>
+                  <p>The Incapacities hub keeps download, transcription and payment status from competing in one path.</p>
+                </article><article class="medical-leave-flow__logic-card">
+                  <h3>Adapt to family groups</h3>
+                  <p>The certificate path changes when users need a document for someone linked to their account.</p>
+                </article>
+        </div>
+      </div>
+    </section><section class="network-flow" aria-labelledby="network-flow-title">
+      <div class="network-flow__intro">
+        <h2 id="network-flow-title">Healthcare network search</h2>
+        <p>I treated the healthcare network as a guided search flow. Members needed to choose their plan, select the type of care or service, filter by location, and compare providers through list and map views before deciding where to go or who to call.</p>
+      </div>
+
+      <div class="network-flow__screens" aria-label="Selected Healthcare network search screens">
+        <figure class="network-flow__screen">
+                <img src="/assets/images/projects/app-redesign-network-flow/healthcare-network-service-menu.png" alt="Service menu mockup" loading="lazy" />
+              </figure><figure class="network-flow__screen">
+                <img src="/assets/images/projects/app-redesign-network-flow/healthcare-network-location-filters.png" alt="Location filters mockup" loading="lazy" />
+              </figure><figure class="network-flow__screen">
+                <img src="/assets/images/projects/app-redesign-network-flow/healthcare-network-provider-results.png" alt="Provider results mockup" loading="lazy" />
+              </figure>
+      </div>
+
+      <div class="network-flow__map" aria-label="Healthcare network search flow map">
+        <div class="network-flow__lane">
+                <div class="network-flow__lane-label">Entry path</div>
+                <div class="network-flow__track network-flow__track--three">
+                  <article class="network-flow__node">
+                          <span>Step 01</span>
+                          <h3>Open network</h3>
+                          <p>Users enter Healthcare Network from the bottom navigation.</p>
+                        </article><article class="network-flow__node">
+                          <span>Step 02</span>
+                          <h3>Select plan</h3>
+                          <p>They choose contributive, subsidised or complementary care plan.</p>
+                        </article><article class="network-flow__node">
+                          <span>Step 03</span>
+                          <h3>Continue</h3>
+                          <p>The main service menu appears once the plan route is selected.</p>
+                        </article>
+                </div>
+              </div><div class="network-flow__lane">
+                <div class="network-flow__lane-label">Service path</div>
+                <div class="network-flow__track">
+                  <article class="network-flow__node">
+                          <span>Step 01</span>
+                          <h3>Choose category</h3>
+                          <p>Users choose urgent care, primary care, pharmacies or offices.</p>
+                        </article><article class="network-flow__node">
+                          <span>Step 02</span>
+                          <h3>Choose urgency type</h3>
+                          <p>Urgent care is split into obstetric, pediatric, psychiatric, adult and dental.</p>
+                        </article><article class="network-flow__node">
+                          <span>Step 03</span>
+                          <h3>Use same pattern</h3>
+                          <p>Each category keeps the same department and municipality search structure.</p>
+                        </article><article class="network-flow__node">
+                          <span>Step 04</span>
+                          <h3>Reduce relearning</h3>
+                          <p>The same interaction model works across clinics, pharmacies and offices.</p>
+                        </article>
+                </div>
+              </div><div class="network-flow__lane">
+                <div class="network-flow__lane-label">Location path</div>
+                <div class="network-flow__track">
+                  <article class="network-flow__node">
+                          <span>Step 01</span>
+                          <h3>Select department</h3>
+                          <p>The user opens the department field and chooses from the available list.</p>
+                        </article><article class="network-flow__node">
+                          <span>Step 02</span>
+                          <h3>Select municipality</h3>
+                          <p>The second field narrows the search to the selected municipality.</p>
+                        </article><article class="network-flow__node">
+                          <span>Step 03</span>
+                          <h3>Enable search</h3>
+                          <p>The next button activates only after both location fields are complete.</p>
+                        </article><article class="network-flow__node">
+                          <span>Step 04</span>
+                          <h3>Show results</h3>
+                          <p>The app then shows matching providers for the selected service and location.</p>
+                        </article>
+                </div>
+              </div><div class="network-flow__lane">
+                <div class="network-flow__lane-label">Results path</div>
+                <div class="network-flow__track">
+                  <article class="network-flow__node">
+                          <span>Step 01</span>
+                          <h3>Browse list</h3>
+                          <p>Users review provider cards with address, phone, opening hours and details.</p>
+                        </article><article class="network-flow__node">
+                          <span>Step 02</span>
+                          <h3>Search within results</h3>
+                          <p>A search field helps users find a specific provider faster.</p>
+                        </article><article class="network-flow__node">
+                          <span>Step 03</span>
+                          <h3>Open map</h3>
+                          <p>The map view shows the selected provider and keeps contact information close.</p>
+                        </article><article class="network-flow__node">
+                          <span>Step 04</span>
+                          <h3>Call provider</h3>
+                          <p>Users can continue by calling the provider directly from the result detail.</p>
+                        </article>
+                </div>
+              </div>
+      </div>
+
+      <div class="network-flow__logic-section">
+        <div class="network-flow__logic-heading">
+          <span>Design decisions</span>
+        </div>
+        <div class="network-flow__logic" aria-label="Design decisions">
+          <article class="network-flow__logic-card">
+                  <h3>Standardise search</h3>
+                  <p>The same department and municipality pattern works across all network categories.</p>
+                </article><article class="network-flow__logic-card">
+                  <h3>Separate service types</h3>
+                  <p>Urgencies, primary care, pharmacies, offices and Vive Digital points remain easy to scan.</p>
+                </article><article class="network-flow__logic-card">
+                  <h3>Support decision making</h3>
+                  <p>List, map, contact details and call actions help users choose where to go next.</p>
+                </article>
+        </div>
+      </div>
+    </section>
         
         
         
