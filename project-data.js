@@ -13,7 +13,7 @@ const projects = {
         "PIS are community health promoters who support members during field visits, helping them access insurer services and submit healthcare service approval requests.",
     },
     overview: [
-      "Nueva EPS has a large number of members living in rural areas of Colombia, where communities are dispersed and connectivity can be limited. In municipalities with fewer than 1,000 members, opening a physical service office is not cost-effective, so Promotores Integrales de Salud (PIS) play a key role in connecting members with the insurer’s services.",
+      "Nueva EPS has a large number of members living in rural areas of Colombia, where communities are dispersed and connectivity can be limited. In municipalities with fewer than 10,000 members, opening a physical service office is not cost-effective, so Promotores Integrales de Salud (PIS) play a key role in connecting members with the insurer’s services.",
       "PIS support members during field visits, including administrative tasks such as submitting healthcare service approval requests. However, the existing mobile and web app depended on internet connectivity, which created friction in rural areas with unstable or unavailable signal. When connectivity failed, PIS sometimes had to carry members’ medical documents until they could submit the request later, increasing the risk of document loss and exposure of sensitive health information.",
       "The project aimed to design a responsive, offline-first tool that allowed PIS to submit approval requests with or without internet connection, store pending requests locally, and synchronise them automatically once the service became available.",
     ],
@@ -51,20 +51,6 @@ const projects = {
           "When PIS had internet connection, the system needed to validate the member’s information in real time, confirm whether the member was active, update contact details if needed, and submit the healthcare service approval request immediately.",
           "When PIS did not have internet connection, the tool needed to collect only the essential information required to save the request safely: member details, contact information, supporting documents, and optional observations. The experience also needed to make clear what was being stored locally, what would happen when the connection returned, and how the PIS could track whether each request had been successfully synchronised.",
           "These requirements helped define the core structure of the tool: a simple home screen with two main actions, one for submitting approval requests and another for managing synchronisation.",
-        ],
-        imagePair: [
-          {
-            src: "assets/images/projects/rural-healthcare/requirements-sync-progress.png",
-            alt: "Synchronisation progress interface displayed on a tablet mockup",
-          },
-          {
-            src: "assets/images/projects/rural-healthcare/requirements-offline-submit.png",
-            alt: "Offline healthcare service approval request interface displayed on a tablet mockup",
-          },
-          {
-            src: "assets/images/projects/rural-healthcare/requirements-sync-error.png",
-            alt: "Non-synchronised requests interface displayed on a tablet mockup",
-          },
         ],
       },
       {
@@ -214,10 +200,7 @@ const projects = {
       },
       {
         title: "Outcome",
-        paragraphs: [
-          "The redesign has been used by more than 1 million members monthly. The project delivered a clearer information architecture and a redesigned access experience for key healthcare self-service journeys.",
-          "My work helped move the app away from an overloaded feature-based structure towards a more intuitive experience organised around users’ needs.",
-        ],
+        appOutcome: true,
       },
     ],
   },
@@ -325,12 +308,11 @@ const projects = {
         revealImagePair: true,
       },
       {
-        title: "Conversational Flow Design",
+        title: "Conversational flow design",
         paragraphs: [
-          "Because the chatbot was rule-based, every user action, system response, validation, error state, and exit point needed to be anticipated before implementation.",
-          "The chatbot handled scenarios based on health plan, provider, medical service, appointment modality, and real-time availability. Users could browse by earliest date or doctor while the system validated whether a selected appointment remained available.",
-          "I defined fallback paths for invalid phone numbers, failed identity verification, unavailable appointments, interruptions, non-integrated providers, and appointments that became unavailable after selection.",
+          "I mapped the WhatsApp experience as a rule-based conversation with shared checks and four appointment tasks: schedule, check, cancel and modify. The challenge was to keep the conversation simple while accounting for plan type, provider integration, identity verification, live appointment availability and recovery paths.",
         ],
+        conversationFlow: true,
       },
       {
         title: "Tone of Voice",
@@ -421,23 +403,11 @@ const projects = {
             metrics:
               "Task completion rate, average completion time, task abandonment rate, number of attempts, technical error rate, Wald Method success levels.",
           },
-          {
-            dimension: "Dead ends / failure points",
-            goal: "Identify where the experience could break or stop.",
-            signals:
-              "Points where users cannot continue or where the system cannot complete the request.",
-            metrics:
-              "No assigned provider, failed identity challenge questions, provider not included, web service failure, exceeded contact-number attempts, existing appointment conflict, no appointments available, selected appointment no longer available.",
-          },
         ],
       },
       {
         title: "Results",
-        paragraphs: [
-          "Within the first six months after launch, approximately 1.8 million people used the service monthly.",
-          "One in three users who started the scheduling flow successfully completed an appointment booking.",
-          "97% of users who completed the satisfaction survey reported being happy with the service.",
-        ],
+        whatsappResults: true,
       },
     ],
   },
@@ -668,8 +638,8 @@ function renderOfflineOutcome(shouldRender = false) {
     },
     {
       kicker: "Processing",
-      value: "Faster",
-      label: "Reduced the time required to process healthcare service approval requests.",
+      value: "4× faster",
+      label: "Reduced approval request processing time from around 20 minutes to 5 minutes.",
       modifier: "offline-outcome-card--system",
     },
     {
@@ -753,6 +723,248 @@ function renderOfflineOutcome(shouldRender = false) {
           Beyond improving an internal process, the project helped make healthcare access
           more reliable for members in dispersed rural communities.
         </p>
+      </div>
+    </div>
+  `;
+}
+
+function renderConversationFlow(shouldRender = false) {
+  if (!shouldRender) return "";
+
+  const summaryCards = [
+    {
+      className: "conversation-flow__summary-card--schedule",
+      kicker: "Task 01",
+      title: "Schedule",
+      text: "Users could find available appointments by earliest date or by doctor, then confirm a selected slot.",
+    },
+    {
+      className: "conversation-flow__summary-card--check",
+      kicker: "Task 02",
+      title: "Check",
+      text: "The bot retrieved future appointments and displayed the next action depending on whether users had one or several bookings.",
+    },
+    {
+      className: "conversation-flow__summary-card--cancel",
+      kicker: "Task 03",
+      title: "Cancel",
+      text: "Users selected a scheduled appointment, confirmed the cancellation and received a cancellation code.",
+    },
+    {
+      className: "conversation-flow__summary-card--modify",
+      kicker: "Task 04",
+      title: "Modify",
+      text: "Users selected an existing appointment, searched for a replacement slot and confirmed the new booking.",
+    },
+  ];
+
+  const lanes = [
+    {
+      label: "Shared entry",
+      className: "conversation-flow__lane--shared",
+      steps: [
+        {
+          step: "Step 01",
+          title: "Main menu",
+          text: "The user starts from the WhatsApp menu and selects Medical Appointments.",
+        },
+        {
+          step: "Step 02",
+          title: "Eligibility check",
+          text: "The system validates assigned provider, provider integration and plan type.",
+        },
+        {
+          step: "Step 03",
+          title: "Identity check",
+          text: "The bot protects medical information through challenge questions before continuing.",
+        },
+        {
+          step: "Step 04",
+          title: "Agenda menu",
+          text: "Users choose whether to schedule, check, cancel or modify an appointment.",
+        },
+      ],
+    },
+    {
+      label: "Schedule path",
+      className: "conversation-flow__lane--schedule",
+      steps: [
+        {
+          step: "Step 01",
+          title: "Confirm contact",
+          text: "The user confirms or updates the phone number used for appointment messages.",
+        },
+        {
+          step: "Step 02",
+          title: "Choose service",
+          text: "The bot asks for the type of medical appointment the user wants to book.",
+        },
+        {
+          step: "Step 03",
+          title: "Filter options",
+          text: "Users browse available slots by earliest date or by doctor.",
+        },
+        {
+          step: "Step 04",
+          title: "Confirm booking",
+          text: "The selected slot is confirmed only after the user reviews the appointment details.",
+        },
+      ],
+    },
+    {
+      label: "Check path",
+      className: "conversation-flow__lane--check",
+      trackClass: "conversation-flow__track--two",
+      steps: [
+        {
+          step: "Step 01",
+          title: "Query bookings",
+          text: "The system checks future appointments linked to the member.",
+        },
+        {
+          step: "Step 02",
+          title: "Show appointment",
+          text: "The bot displays date, time, specialty, doctor, provider, address and modality.",
+        },
+      ],
+    },
+    {
+      label: "Cancel path",
+      className: "conversation-flow__lane--cancel",
+      steps: [
+        {
+          step: "Step 01",
+          title: "List appointments",
+          text: "The bot shows cancellable appointments and reminds users about the time limit.",
+        },
+        {
+          step: "Step 02",
+          title: "Select appointment",
+          text: "The user writes the number of the appointment they want to cancel.",
+        },
+        {
+          step: "Step 03",
+          title: "Confirm cancellation",
+          text: "The bot asks for confirmation before executing the cancellation.",
+        },
+        {
+          step: "Step 04",
+          title: "Give reference",
+          text: "The user receives a cancellation confirmation or an already-cancelled notice with a code.",
+        },
+      ],
+    },
+    {
+      label: "Modify path",
+      className: "conversation-flow__lane--modify",
+      steps: [
+        {
+          step: "Step 01",
+          title: "Select current booking",
+          text: "The user chooses the appointment they want to change.",
+        },
+        {
+          step: "Step 02",
+          title: "Find new slot",
+          text: "The bot reuses the scheduling pattern to search by date or doctor.",
+        },
+        {
+          step: "Step 03",
+          title: "Confirm change",
+          text: "The user reviews the new appointment before confirming the modification.",
+        },
+        {
+          step: "Step 04",
+          title: "Close loop",
+          text: "The bot confirms the new appointment and provides the cancellation reference for the previous one.",
+        },
+      ],
+    },
+  ];
+
+  const logicCards = [
+    {
+      title: "Shared entry, separate tasks",
+      text: "All appointment actions start from the same agenda menu, but each task has its own decision path.",
+    },
+    {
+      title: "Reuse patterns",
+      text: "Scheduling and modification share the same doctor/date filtering pattern to reduce relearning.",
+    },
+    {
+      title: "Confirm before committing",
+      text: "Booking, cancellation and modification all include confirmation steps before changing an appointment.",
+    },
+    {
+      title: "Design for failure",
+      text: "Provider limitations, unavailable slots, failed services and privacy checks were handled as expected paths.",
+    },
+  ];
+
+  return `
+    <div class="conversation-flow" aria-label="Conversational flow design">
+      <div class="conversation-flow__summary" aria-label="Appointment task overview">
+        ${summaryCards
+          .map(
+            (card) => `
+              <article class="conversation-flow__summary-card ${card.className}">
+                <div>
+                  <span>${card.kicker}</span>
+                  <h3>${card.title}</h3>
+                </div>
+                <p>${card.text}</p>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+
+      <div class="conversation-flow__map" aria-label="WhatsApp appointment conversational flow map">
+        ${lanes
+          .map(
+            (lane) => `
+              <div class="conversation-flow__lane ${lane.className}">
+                <div class="conversation-flow__lane-label">${lane.label}</div>
+                <div class="conversation-flow__track ${lane.trackClass || ""}">
+                  ${lane.steps
+                    .map(
+                      (step) => `
+                        <article class="conversation-flow__node">
+                          <span>${step.step}</span>
+                          <h3>${step.title}</h3>
+                          <p>${step.text}</p>
+                        </article>
+                      `
+                    )
+                    .join("")}
+                </div>
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+
+      <article class="conversation-flow__recovery">
+        <h3>Recovery and edge cases</h3>
+        <p>The flow needed to avoid dead ends. If the provider was not integrated, the bot redirected users to the IPS or medical directory. If the web service failed, it showed a contingency message. If a selected appointment was no longer available, the bot returned users to the closest available options. If identity verification failed, the conversation stopped for privacy and safety.</p>
+      </article>
+
+      <div class="conversation-flow__logic-section">
+        <div class="conversation-flow__logic-heading">
+          <span>Design decisions</span>
+        </div>
+        <div class="conversation-flow__logic" aria-label="Conversational flow design decisions">
+          ${logicCards
+            .map(
+              (card) => `
+                <article class="conversation-flow__logic-card">
+                  <h3>${card.title}</h3>
+                  <p>${card.text}</p>
+                </article>
+              `
+            )
+            .join("")}
+        </div>
       </div>
     </div>
   `;
@@ -1682,6 +1894,36 @@ function renderOfflineFirstFlowModel(type = "") {
             </div>
           </div>
         </div>
+
+        <div class="interaction-model__mockups" aria-label="Selected tablet mockups">
+          <figure class="interaction-model__mockup-card">
+            <span class="interaction-model__mockup-label">Online request</span>
+            <div class="interaction-model__mockup-frame">
+              <img src="/assets/images/projects/rural-healthcare/radicar-online.png" alt="Online request tablet mockup" loading="lazy" />
+            </div>
+          </figure>
+
+          <figure class="interaction-model__mockup-card">
+            <span class="interaction-model__mockup-label">Offline request</span>
+            <div class="interaction-model__mockup-frame">
+              <img src="/assets/images/projects/rural-healthcare/radicar-offline.png" alt="Offline request tablet mockup" loading="lazy" />
+            </div>
+          </figure>
+
+          <figure class="interaction-model__mockup-card">
+            <span class="interaction-model__mockup-label">Sync in progress</span>
+            <div class="interaction-model__mockup-frame">
+              <img src="/assets/images/projects/rural-healthcare/sincronizar.png" alt="Synchronisation in progress tablet mockup" loading="lazy" />
+            </div>
+          </figure>
+
+          <figure class="interaction-model__mockup-card">
+            <span class="interaction-model__mockup-label">Failed sync recovery</span>
+            <div class="interaction-model__mockup-frame">
+              <img src="/assets/images/projects/rural-healthcare/sincronizar-no-sincronizadas.png" alt="Failed synchronisation recovery tablet mockup" loading="lazy" />
+            </div>
+          </figure>
+        </div>
       </section>
 
       <section aria-labelledby="offline-flow-scenarios-title">
@@ -1848,6 +2090,155 @@ function renderOfflineFirstFlowModel(type = "") {
   `;
 }
 
+function renderAppOutcome(shouldRender = false) {
+  if (!shouldRender) return "";
+
+  return `
+    <section class="app-outcome" aria-label="App Redesign outcome">
+      <div class="app-outcome-heading">
+        <h3>Outcome</h3>
+      </div>
+
+      <div class="app-outcome-grid" aria-label="App redesign impact metrics">
+        <article class="app-outcome-card app-outcome-card--primary">
+          <div>
+            <p class="app-outcome-card-kicker">Reach</p>
+            <p class="app-outcome-card-value">1M+</p>
+          </div>
+          <p class="app-outcome-card-label">Members used the redesigned app each month.</p>
+        </article>
+
+        <article class="app-outcome-card app-outcome-card--ia">
+          <div>
+            <p class="app-outcome-card-kicker">Navigation</p>
+            <p class="app-outcome-card-value app-outcome-card-value--text">Clearer IA</p>
+          </div>
+          <p class="app-outcome-card-label">Grouped services around healthcare tasks instead of internal feature labels.</p>
+        </article>
+
+        <article class="app-outcome-card app-outcome-card--access">
+          <div>
+            <p class="app-outcome-card-kicker">Access</p>
+            <p class="app-outcome-card-value app-outcome-card-value--text">Less friction</p>
+          </div>
+          <p class="app-outcome-card-label">Gave login, registration, password recovery and biometric access clearer places in the flow.</p>
+        </article>
+      </div>
+
+      <div class="app-outcome-story">
+        <article class="app-outcome-story-panel">
+          <h4>From feature overload to task-based navigation</h4>
+          <p>
+            Instead of exposing services as a long list of disconnected features, the redesign
+            organised the app around the actions members were trying to complete: accessing
+            the app, checking healthcare services, downloading documents and finding care.
+          </p>
+        </article>
+
+        <article class="app-outcome-story-panel">
+          <h4>Design impact</h4>
+
+          <ul class="app-outcome-impact-list">
+            <li>
+              <span>01</span>
+              <p>Reduced ambiguity by giving each core task a clearer entry point.</p>
+            </li>
+
+            <li>
+              <span>02</span>
+              <p>Made repeated interaction patterns easier to recognise across services.</p>
+            </li>
+
+            <li>
+              <span>03</span>
+              <p>Created a stronger foundation for future healthcare self-service journeys.</p>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  `;
+}
+
+function renderWhatsappResults(shouldRender = false) {
+  if (!shouldRender) return "";
+
+  return `
+    <section class="whatsapp-results" aria-label="WhatsApp Medical Appointments results">
+      <div class="whatsapp-results-heading">
+        <h3>Results</h3>
+        <p>
+          The WhatsApp appointment service turned a complex set of healthcare tasks into
+          a familiar self-service flow. Members could schedule, check, cancel and modify
+          appointments from a channel they already used every day.
+        </p>
+      </div>
+
+      <div class="whatsapp-results-grid" aria-label="WhatsApp appointment service results">
+        <article class="whatsapp-results-card whatsapp-results-card--primary">
+          <div>
+            <p class="whatsapp-results-card-kicker">Reach</p>
+            <p class="whatsapp-results-card-value">1.8M</p>
+          </div>
+
+          <p class="whatsapp-results-card-label">People used the service monthly within the first six months after launch.</p>
+        </article>
+
+        <article class="whatsapp-results-card whatsapp-results-card--completion">
+          <div>
+            <p class="whatsapp-results-card-kicker">Completion</p>
+            <p class="whatsapp-results-card-value whatsapp-results-card-value--text">1 in 3</p>
+          </div>
+
+          <p class="whatsapp-results-card-label">Users who started the scheduling flow successfully completed an appointment booking.</p>
+        </article>
+
+        <article class="whatsapp-results-card whatsapp-results-card--satisfaction">
+          <div>
+            <p class="whatsapp-results-card-kicker">Satisfaction</p>
+            <p class="whatsapp-results-card-value">97%</p>
+          </div>
+
+          <p class="whatsapp-results-card-label">Users who completed the satisfaction survey reported being happy with the service.</p>
+        </article>
+      </div>
+
+      <div class="whatsapp-results-story">
+        <article class="whatsapp-results-story-panel">
+          <h4>From service complexity to guided self-service</h4>
+          <p>
+            The final flow helped members complete appointment-related tasks without learning
+            a new app or relying only on assisted channels. The rule-based structure gave each
+            task a clear path while keeping privacy checks, provider limitations and recovery
+            states inside the conversation.
+          </p>
+        </article>
+
+        <article class="whatsapp-results-story-panel">
+          <h4>Experience impact</h4>
+
+          <ul class="whatsapp-results-impact-list">
+            <li>
+              <span>01</span>
+              <p>Used WhatsApp as a familiar access point for healthcare appointment self-service.</p>
+            </li>
+
+            <li>
+              <span>02</span>
+              <p>Supported the full appointment cycle: schedule, check, cancel and modify.</p>
+            </li>
+
+            <li>
+              <span>03</span>
+              <p>Combined clear prompts, confirmation steps and recovery paths to build trust.</p>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  `;
+}
+
 function renderUserGroups(groups = [], stacked = false) {
   if (!groups.length) return "";
 
@@ -1944,15 +2335,30 @@ function renderSection(section, isAfterPainPoints = false) {
   if (section.title === "Key Flows") {
     sectionClasses.push("case-section--key-flows");
   }
-  if (section.offlineOutcome) {
+  const hasSplitHeading =
+    section.title === "Conversational flow design" ||
+    section.title === "Tone of Voice" ||
+    section.title === "Experience Measurement";
+
+  if (hasSplitHeading) {
+    sectionClasses.push("case-section--split-heading");
+  }
+  if (section.offlineOutcome || section.appOutcome || section.whatsappResults) {
     sectionClasses.push("case-section--offline-outcome");
   }
 
-  return `
+  const sectionParagraphs = renderSectionParagraphs(section);
+
+  if (hasSplitHeading) {
+    return `
     <section class="${sectionClasses.join(" ")}" data-section-title="${section.title}">
-      <h2>${section.title}</h2>
+      <div class="case-section-split-heading">
+        <h2>${section.title}</h2>
+        <div class="case-section-split-copy rich-copy">
+          ${sectionParagraphs}
+        </div>
+      </div>
       <div class="case-section-content rich-copy">
-        ${renderSectionParagraphs(section)}
         ${blocks}
         ${renderStaticImagePair(section.imagePair, section.revealImagePair)}
         ${trailing}
@@ -1966,6 +2372,41 @@ function renderSection(section, isAfterPainPoints = false) {
         )}
         ${renderOfflineFirstFlowModel(section.flowModel)}
         ${renderOfflineOutcome(section.offlineOutcome)}
+        ${renderAppOutcome(section.appOutcome)}
+        ${renderWhatsappResults(section.whatsappResults)}
+        ${renderConversationFlow(section.conversationFlow)}
+        ${renderUserGroups(section.userGroups, section.stackUserGroups)}
+        ${renderToneVoice(section.toneVoice)}
+        ${renderSampleMessages(section.sampleMessages)}
+      </div>
+      ${renderPainPoints(section.painPoints)}
+      ${renderInlineMedia(section.media)}
+      ${renderFullBleedMedia(section.fullBleedMedia)}
+    </section>
+  `;
+  }
+
+  return `
+    <section class="${sectionClasses.join(" ")}" data-section-title="${section.title}">
+      <h2>${section.title}</h2>
+      <div class="case-section-content rich-copy">
+        ${sectionParagraphs}
+        ${blocks}
+        ${renderStaticImagePair(section.imagePair, section.revealImagePair)}
+        ${trailing}
+        ${tree}
+        ${renderHeartTable(section.heartTable)}
+        ${renderArchitecture(
+          section.architecture,
+          section.architectureTitle,
+          section.architectureVariant ||
+            (section.title === "Interaction Model" ? "interaction-model" : "")
+        )}
+        ${renderOfflineFirstFlowModel(section.flowModel)}
+        ${renderOfflineOutcome(section.offlineOutcome)}
+        ${renderAppOutcome(section.appOutcome)}
+        ${renderWhatsappResults(section.whatsappResults)}
+        ${renderConversationFlow(section.conversationFlow)}
         ${renderUserGroups(section.userGroups, section.stackUserGroups)}
         ${renderToneVoice(section.toneVoice)}
         ${renderSampleMessages(section.sampleMessages)}
@@ -2021,6 +2462,10 @@ function getCaseSectionIndicatorThreshold() {
   return document.querySelector(".case-header")?.offsetHeight || 52;
 }
 
+function getCaseSectionActiveThreshold() {
+  return getCaseSectionIndicatorThreshold() + window.innerHeight * 0.24;
+}
+
 function initialiseSectionIndicator() {
   const indicator = document.querySelector("#case-section-indicator");
   const projectTitle = document.querySelector("#indicator-project-title");
@@ -2064,11 +2509,11 @@ function initialiseSectionIndicator() {
   };
 
   const update = () => {
-    const headerHeight = getCaseSectionIndicatorThreshold();
+    const activationLine = getCaseSectionActiveThreshold();
     let activeSection = null;
 
     sections.forEach((item) => {
-      if (item.section.getBoundingClientRect().top <= headerHeight) {
+      if (item.section.getBoundingClientRect().top <= activationLine) {
         activeSection = item;
       }
     });
@@ -2671,6 +3116,47 @@ function initialiseStackedUserGroups() {
   });
 }
 
+function initialiseCaseLogoScrollRotation() {
+  const logo = document.querySelector(".case-logo img");
+
+  if (!logo) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let ticking = false;
+
+  const update = () => {
+    if (reducedMotion.matches) {
+      logo.style.setProperty("--case-logo-scroll-rotation", "0deg");
+      ticking = false;
+      return;
+    }
+
+    const maxScroll = Math.max(
+      1,
+      document.documentElement.scrollHeight - window.innerHeight
+    );
+    const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll));
+
+    logo.style.setProperty(
+      "--case-logo-scroll-rotation",
+      `${(progress * 360).toFixed(2)}deg`
+    );
+    ticking = false;
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+
+    ticking = true;
+    window.requestAnimationFrame(update);
+  };
+
+  update();
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  reducedMotion.addEventListener("change", update);
+}
+
 if (!isPrerenderedProject) {
   renderProjectDom();
 }
@@ -2685,6 +3171,7 @@ initialiseHeartTable();
 initialiseToneVoice();
 initialiseArchitectureDiagram();
 initialiseStackedUserGroups();
+initialiseCaseLogoScrollRotation();
 
 document.querySelector("#next-project").href = projectUrls[nextId];
 document.querySelector("#next-project-title").textContent = nextProject.title;

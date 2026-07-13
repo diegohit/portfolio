@@ -4,6 +4,32 @@ if (year) {
   year.textContent = new Date().getFullYear();
 }
 
+const homeTitle = document.querySelector(".home-title");
+const homeIcon = document.querySelector(".home-icon");
+const homeHeading = document.querySelector(".home-title h1");
+const siteName = document.querySelector(".site-name");
+const touchPointer = window.matchMedia("(hover: none)");
+
+homeIcon?.addEventListener("click", (event) => {
+  if (!touchPointer.matches) return;
+
+  event.preventDefault();
+  homeTitle?.classList.toggle("is-knocking");
+});
+
+homeHeading?.addEventListener("click", () => {
+  if (!touchPointer.matches) return;
+
+  homeTitle?.classList.remove("is-knocking");
+});
+
+siteName?.addEventListener("click", (event) => {
+  if (!touchPointer.matches) return;
+
+  event.preventDefault();
+  siteName.classList.toggle("is-greeting");
+});
+
 document.querySelectorAll('.project-card a[href="#"]').forEach((link) => {
   link.addEventListener("click", (event) => {
     event.preventDefault();

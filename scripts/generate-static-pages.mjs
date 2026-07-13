@@ -86,6 +86,10 @@ function renderJsonLd(data) {
     .replaceAll("<", "\\u003c");
 }
 
+function stripTrailingWhitespace(value = "") {
+  return value.replace(/[ \t]+$/gm, "");
+}
+
 function renderMedia(project, projectId) {
   if (project.media?.type === "video") {
     return `
@@ -275,6 +279,26 @@ function renderProjectPage(projectId) {
           <img src="/assets/arrow-up-right.svg" alt="" />
         </a>
       </nav>
+
+      <section class="case-contact-cta" data-section-title="Want to work together?" aria-labelledby="case-contact-title">
+        <h2 id="case-contact-title">Want to work<br />together?</h2>
+        <a class="case-contact-link" href="mailto:diegohit@gmail.com">
+          <span>diegohit@gmail.com</span>
+          <img src="/assets/contact-arrow.svg" alt="" />
+        </a>
+        <a
+          class="case-contact-link"
+          href="https://www.linkedin.com/in/diego-cardenasm"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>LinkedIn</span>
+          <img src="/assets/contact-arrow.svg" alt="" />
+        </a>
+        <footer class="case-contact-footer">
+          <p>© 2026 Diego Cárdenas Mora</p>
+        </footer>
+      </section>
     </main>
 
     <a class="case-back" href="/#projects">
@@ -289,7 +313,10 @@ function renderProjectPage(projectId) {
 for (const projectId of projectOrder) {
   const dir = path.join(root, "projects", projectId);
   fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, "index.html"), renderProjectPage(projectId));
+  fs.writeFileSync(
+    path.join(dir, "index.html"),
+    stripTrailingWhitespace(renderProjectPage(projectId))
+  );
 }
 
 const sitemapUrls = ["", ...projectOrder.map((id) => projectUrls[id])];

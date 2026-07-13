@@ -73,59 +73,65 @@
         <div class="case-overview">
           <h2>Project Overview</h2>
           <div class="rich-copy" id="project-overview">
-            <p>Nueva EPS has a large number of members living in rural areas of Colombia, where communities are dispersed and connectivity can be limited. In municipalities with fewer than 1,000 members, opening a physical service office is not cost-effective, so Promotores Integrales de Salud (PIS) play a key role in connecting members with the insurer’s services.</p><p>PIS support members during field visits, including administrative tasks such as submitting healthcare service approval requests. However, the existing mobile and web app depended on internet connectivity, which created friction in rural areas with unstable or unavailable signal. When connectivity failed, PIS sometimes had to carry members’ medical documents until they could submit the request later, increasing the risk of document loss and exposure of sensitive health information.</p><p>The project aimed to design a responsive, offline-first tool that allowed PIS to submit approval requests with or without internet connection, store pending requests locally, and synchronise them automatically once the service became available.</p>
+            <p>Nueva EPS has a large number of members living in rural areas of Colombia, where communities are dispersed and connectivity can be limited. In municipalities with fewer than 10,000 members, opening a physical service office is not cost-effective, so Promotores Integrales de Salud (PIS) play a key role in connecting members with the insurer’s services.</p><p>PIS support members during field visits, including administrative tasks such as submitting healthcare service approval requests. However, the existing mobile and web app depended on internet connectivity, which created friction in rural areas with unstable or unavailable signal. When connectivity failed, PIS sometimes had to carry members’ medical documents until they could submit the request later, increasing the risk of document loss and exposure of sensitive health information.</p><p>The project aimed to design a responsive, offline-first tool that allowed PIS to submit approval requests with or without internet connection, store pending requests locally, and synchronise them automatically once the service became available.</p>
           </div>
         </div>
       </section>
 
-      
+
       <figure class="case-media has-image case-media--closer-to-overview" id="project-media">
         <div class="case-image case-image--scroll-reveal" id="project-media-content">
           <img src="/assets/images/projects/rural-healthcare/home.png" alt="Nueva EPS field healthcare worker with two children in a rural community">
         </div>
         <figcaption id="project-media-caption">PIS are community health promoters who support members during field visits, helping them access insurer services and submit healthcare service approval requests.</figcaption>
       </figure>
-    
+
 
       <div id="project-sections">
     <section class="case-section" data-section-title="My Role">
       <h2>My Role</h2>
       <div class="case-section-content rich-copy">
         <p>My role was to lead the UX and service experience definition for a new offline-first tool designed to support healthcare field operations in rural areas.</p><p>I worked closely with healthcare professionals, project managers, developers, and business stakeholders from the areas involved in the process to translate an initial idea into a feasible digital solution. This required understanding the operational needs of PIS, aligning business requirements, negotiating decisions with multiple stakeholders, and defining how the tool should work across online and offline scenarios.</p><p>I was responsible for structuring the experience, mapping the user flows, defining interaction rules, documenting screen states, and writing the UX copy for key moments such as authentication, offline submission, file upload, synchronisation, errors, and confirmation messages.</p><p>I worked on making a complex administrative process easier to complete in the field, while supporting the organisation’s need to protect sensitive health information and improve service delivery in low-connectivity territories.</p>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
-      
-      
-      
+
+
+
     </section>
-  
+
     <section class="case-section" data-section-title="The Problem">
       <h2>The Problem</h2>
       <div class="case-section-content rich-copy">
         <p>PIS were responsible for supporting members with healthcare service approval requests during field visits. These requests could involve medical orders, clinical history documents, member identification, contact information, and administrative validation.</p><p>The existing process was difficult because the tools available to PIS depended on internet connection. When connectivity was unavailable during field visits, PIS could not always submit approval requests at the point of service. Instead, they sometimes had to carry members’ medical documents until they reached a place with connectivity or until their regional route allowed them to return the documents to the members.</p><p>This could take days, as PIS travelled across dispersed rural communities. During that time, sensitive health documents remained in their custody, increasing the risk of loss, data exposure, and reputational damage for the organisation.</p><p>Some PIS also had to make photocopies of members’ documents using their own money. Given the volume of requests they handled and the fact that many PIS earned close to the minimum wage in Colombia, this represented a meaningful personal expense and added further friction to their work.</p><p>The design challenge was to create a tool that worked in the reality of rural field work: unstable internet, sensitive documents, administrative complexity, and a need for fast, reliable service.</p>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
-      
+
     <div class="pain-points-scroll" data-horizontal-scroll>
       <div class="pain-points-sticky">
         <div class="pain-points-track">
@@ -134,99 +140,86 @@
             <h3>Pain points</h3>
             <img src="/assets/pain-points-arrow.svg" alt="" aria-hidden="true" />
           </article>
-          
+
         <article class="pain-point-card">
           <div class="pain-point-letter" aria-hidden="true">
             A
           </div>
           <p>Unstable connectivity prevented PIS from submitting requests during field visits.</p>
         </article>
-      
+
         <article class="pain-point-card">
           <div class="pain-point-letter" aria-hidden="true">
             B
           </div>
           <p>PIS had to carry sensitive medical documents until they could reconnect.</p>
         </article>
-      
+
         <article class="pain-point-card">
           <div class="pain-point-letter" aria-hidden="true">
             C
           </div>
           <p>Medical documents could be lost or expose sensitive health information.</p>
         </article>
-      
+
         <article class="pain-point-card">
           <div class="pain-point-letter" aria-hidden="true">
             D
           </div>
           <p>Returning documents could take days due to long rural routes.</p>
         </article>
-      
+
         <article class="pain-point-card">
           <div class="pain-point-letter" aria-hidden="true">
             E
           </div>
           <p>Some PIS paid for photocopies with their own money, which could be costly.</p>
         </article>
-      
+
           <article class="pain-points-end" aria-hidden="true">!</article>
         </div>
       </div>
     </div>
-  
-      
-      
+
+
+
     </section>
-  
+
     <section class="case-section case-section--after-pain-points" data-section-title="Requirements Gathering">
       <h2>Requirements Gathering</h2>
       <div class="case-section-content rich-copy">
         <p>After several meetings with business stakeholders, healthcare professionals, project managers, developers, and PIS working in the field, we identified that the tool needed to support two operating conditions: online work and offline work.</p><p>When PIS had internet connection, the system needed to validate the member’s information in real time, confirm whether the member was active, update contact details if needed, and submit the healthcare service approval request immediately.</p><p>When PIS did not have internet connection, the tool needed to collect only the essential information required to save the request safely: member details, contact information, supporting documents, and optional observations. The experience also needed to make clear what was being stored locally, what would happen when the connection returned, and how the PIS could track whether each request had been successfully synchronised.</p><p>These requirements helped define the core structure of the tool: a simple home screen with two main actions, one for submitting approval requests and another for managing synchronisation.</p>
-        
-        
-    <div class="card-sorting-matrices card-sorting-matrices--three" aria-label="Offline-first field tool interfaces">
-      
-            <figure>
-              <img src="/assets/images/projects/rural-healthcare/requirements-sync-progress.png" alt="Synchronisation progress interface displayed on a tablet mockup" loading="lazy" />
-            </figure>
-          
-            <figure>
-              <img src="/assets/images/projects/rural-healthcare/requirements-offline-submit.png" alt="Offline healthcare service approval request interface displayed on a tablet mockup" loading="lazy" />
-            </figure>
-          
-            <figure>
-              <img src="/assets/images/projects/rural-healthcare/requirements-sync-error.png" alt="Non-synchronised requests interface displayed on a tablet mockup" loading="lazy" />
-            </figure>
-          
-    </div>
-  
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
-      
-      
-      
+
+
+
     </section>
-  
+
     <section class="case-section case-section--after-pain-points case-section--interaction-model" data-section-title="Interaction Model">
       <h2>Interaction Model</h2>
       <div class="case-section-content rich-copy">
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
     <div class="offline-flow" aria-label="Offline-first authorisation interaction model">
       <section aria-labelledby="offline-flow-overview-title">
         <div class="offline-flow-heading">
@@ -345,6 +338,36 @@
               </article>
             </div>
           </div>
+        </div>
+
+        <div class="interaction-model__mockups" aria-label="Selected tablet mockups">
+          <figure class="interaction-model__mockup-card">
+            <span class="interaction-model__mockup-label">Online request</span>
+            <div class="interaction-model__mockup-frame">
+              <img src="/assets/images/projects/rural-healthcare/radicar-online.png" alt="Online request tablet mockup" loading="lazy" />
+            </div>
+          </figure>
+
+          <figure class="interaction-model__mockup-card">
+            <span class="interaction-model__mockup-label">Offline request</span>
+            <div class="interaction-model__mockup-frame">
+              <img src="/assets/images/projects/rural-healthcare/radicar-offline.png" alt="Offline request tablet mockup" loading="lazy" />
+            </div>
+          </figure>
+
+          <figure class="interaction-model__mockup-card">
+            <span class="interaction-model__mockup-label">Sync in progress</span>
+            <div class="interaction-model__mockup-frame">
+              <img src="/assets/images/projects/rural-healthcare/sincronizar.png" alt="Synchronisation in progress tablet mockup" loading="lazy" />
+            </div>
+          </figure>
+
+          <figure class="interaction-model__mockup-card">
+            <span class="interaction-model__mockup-label">Failed sync recovery</span>
+            <div class="interaction-model__mockup-frame">
+              <img src="/assets/images/projects/rural-healthcare/sincronizar-no-sincronizadas.png" alt="Failed synchronisation recovery tablet mockup" loading="lazy" />
+            </div>
+          </figure>
         </div>
       </section>
 
@@ -509,29 +532,32 @@
         </div>
       </section>
     </div>
-  
-        
-        
-        
-        
+
+
+
+
+
+
+
+
       </div>
-      
-      
-      
+
+
+
     </section>
-  
+
     <section class="case-section case-section--after-pain-points case-section--offline-outcome" data-section-title="Outcome">
       <h2>Outcome</h2>
       <div class="case-section-content rich-copy">
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
     <div class="offline-outcome" aria-label="Offline-first field tool outcome">
       <div class="offline-outcome-heading">
         <h3>Outcome</h3>
@@ -543,7 +569,7 @@
       </div>
 
       <div class="offline-outcome-grid" aria-label="Project impact metrics">
-        
+
               <article class="offline-outcome-card offline-outcome-card--primary">
                 <div>
                   <p class="offline-outcome-card-kicker">Reach</p>
@@ -552,16 +578,16 @@
 
                 <p class="offline-outcome-card-label">People in rural areas supported during 2025–2026.</p>
               </article>
-            
+
               <article class="offline-outcome-card offline-outcome-card--system">
                 <div>
                   <p class="offline-outcome-card-kicker">Processing</p>
-                  <p class="offline-outcome-card-value">Faster</p>
+                  <p class="offline-outcome-card-value">4× faster</p>
                 </div>
 
-                <p class="offline-outcome-card-label">Reduced the time required to process healthcare service approval requests.</p>
+                <p class="offline-outcome-card-label">Reduced approval request processing time from around 20 minutes to 5 minutes.</p>
               </article>
-            
+
               <article class="offline-outcome-card offline-outcome-card--offline">
                 <div>
                   <p class="offline-outcome-card-kicker">Continuity</p>
@@ -570,7 +596,7 @@
 
                 <p class="offline-outcome-card-label">Allowed PIS to capture, store and synchronise requests when connection returned.</p>
               </article>
-            
+
               <article class="offline-outcome-card offline-outcome-card--online">
                 <div>
                   <p class="offline-outcome-card-kicker">Data handling</p>
@@ -579,7 +605,7 @@
 
                 <p class="offline-outcome-card-label">Reduced the need to carry or photocopy physical medical documents.</p>
               </article>
-            
+
       </div>
 
       <div class="offline-outcome-story">
@@ -623,14 +649,17 @@
         </p>
       </div>
     </div>
-  
-        
-        
-        
+
+
+
+
+
+
+
       </div>
-      
-      
-      
+
+
+
     </section>
   </div>
 
@@ -641,6 +670,26 @@
           <img src="/assets/arrow-up-right.svg" alt="" />
         </a>
       </nav>
+
+      <section class="case-contact-cta" data-section-title="Want to work together?" aria-labelledby="case-contact-title">
+        <h2 id="case-contact-title">Want to work<br />together?</h2>
+        <a class="case-contact-link" href="mailto:diegohit@gmail.com">
+          <span>diegohit@gmail.com</span>
+          <img src="/assets/contact-arrow.svg" alt="" />
+        </a>
+        <a
+          class="case-contact-link"
+          href="https://www.linkedin.com/in/diego-cardenasm"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>LinkedIn</span>
+          <img src="/assets/contact-arrow.svg" alt="" />
+        </a>
+        <footer class="case-contact-footer">
+          <p>© 2026 Diego Cárdenas Mora</p>
+        </footer>
+      </section>
     </main>
 
     <a class="case-back" href="/#projects">
