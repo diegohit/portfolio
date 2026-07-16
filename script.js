@@ -7,7 +7,7 @@ if (year) {
 const homeTitle = document.querySelector(".home-title");
 const homeIcon = document.querySelector(".home-icon");
 const homeHeading = document.querySelector(".home-title h1");
-const siteName = document.querySelector(".site-name");
+const greetingNames = document.querySelectorAll(".site-name");
 const touchPointer = window.matchMedia("(hover: none)");
 
 homeIcon?.addEventListener("click", (event) => {
@@ -23,11 +23,13 @@ homeHeading?.addEventListener("click", () => {
   homeTitle?.classList.remove("is-knocking");
 });
 
-siteName?.addEventListener("click", (event) => {
-  if (!touchPointer.matches) return;
+greetingNames.forEach((name) => {
+  name.addEventListener("click", (event) => {
+    if (!touchPointer.matches) return;
 
-  event.preventDefault();
-  siteName.classList.toggle("is-greeting");
+    event.preventDefault();
+    name.classList.toggle("is-greeting");
+  });
 });
 
 document.querySelectorAll('.project-card a[href="#"]').forEach((link) => {

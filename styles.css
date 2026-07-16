@@ -117,7 +117,7 @@ figure {
 .site-name-greet {
   position: absolute;
   top: 50%;
-  left: calc(100% + 32px);
+  left: calc(100% + 24px);
   z-index: 4;
   display: block;
   width: 32px;

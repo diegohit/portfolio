@@ -29,7 +29,12 @@
   </head>
   <body data-static-project="true">
     <header class="case-header">
-      <a class="case-name" href="/">Diego Cárdenas Mora</a>
+      <a class="case-name" href="/">
+        <span>Diego Cárdenas Mora</span>
+        <span class="site-name-greet" aria-hidden="true">
+          <img src="/assets/greet.svg" alt="" />
+        </span>
+      </a>
       <nav aria-label="Main navigation">
         <a href="/">Home</a>
         <a class="is-active" href="/#projects">Projects</a>
@@ -55,7 +60,6 @@
 
     <main id="case-study" data-prerendered="true">
       <section class="case-hero">
-        <p class="case-number" id="project-number">01</p>
         <h1 id="project-title">Field Tool for Rural Healthcare Access</h1>
       </section>
 
@@ -106,6 +110,8 @@
 
 
 
+
+
       </div>
 
 
@@ -116,6 +122,8 @@
       <h2>The Problem</h2>
       <div class="case-section-content rich-copy">
         <p>PIS were responsible for supporting members with healthcare service approval requests during field visits. These requests could involve medical orders, clinical history documents, member identification, contact information, and administrative validation.</p><p>The existing process was difficult because the tools available to PIS depended on internet connection. When connectivity was unavailable during field visits, PIS could not always submit approval requests at the point of service. Instead, they sometimes had to carry members’ medical documents until they reached a place with connectivity or until their regional route allowed them to return the documents to the members.</p><p>This could take days, as PIS travelled across dispersed rural communities. During that time, sensitive health documents remained in their custody, increasing the risk of loss, data exposure, and reputational damage for the organisation.</p><p>Some PIS also had to make photocopies of members’ documents using their own money. Given the volume of requests they handled and the fact that many PIS earned close to the minimum wage in Colombia, this represented a meaningful personal expense and added further friction to their work.</p><p>The design challenge was to create a tool that worked in the reality of rural field work: unstable internet, sensitive documents, administrative complexity, and a need for fast, reliable service.</p>
+
+
 
 
 
@@ -189,6 +197,8 @@
       <h2>Requirements Gathering</h2>
       <div class="case-section-content rich-copy">
         <p>After several meetings with business stakeholders, healthcare professionals, project managers, developers, and PIS working in the field, we identified that the tool needed to support two operating conditions: online work and offline work.</p><p>When PIS had internet connection, the system needed to validate the member’s information in real time, confirm whether the member was active, update contact details if needed, and submit the healthcare service approval request immediately.</p><p>When PIS did not have internet connection, the tool needed to collect only the essential information required to save the request safely: member details, contact information, supporting documents, and optional observations. The experience also needed to make clear what was being stored locally, what would happen when the connection returned, and how the PIS could track whether each request had been successfully synchronised.</p><p>These requirements helped define the core structure of the tool: a simple home screen with two main actions, one for submitting approval requests and another for managing synchronisation.</p>
+
+
 
 
 
@@ -540,6 +550,8 @@
 
 
 
+
+
       </div>
 
 
@@ -649,6 +661,8 @@
         </p>
       </div>
     </div>
+
+
 
 
 

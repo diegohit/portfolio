@@ -219,7 +219,12 @@ function renderProjectPage(projectId) {
   </head>
   <body data-static-project="true">
     <header class="case-header">
-      <a class="case-name" href="/">Diego Cárdenas Mora</a>
+      <a class="case-name" href="/">
+        <span>Diego Cárdenas Mora</span>
+        <span class="site-name-greet" aria-hidden="true">
+          <img src="/assets/greet.svg" alt="" />
+        </span>
+      </a>
       <nav aria-label="Main navigation">
         <a href="/">Home</a>
         <a class="is-active" href="/#projects">Projects</a>
@@ -245,7 +250,6 @@ function renderProjectPage(projectId) {
 
     <main id="case-study" data-prerendered="true">
       <section class="case-hero">
-        <p class="case-number" id="project-number">${escapeHtml(project.number)}</p>
         <h1 id="project-title">${escapeHtml(project.title)}</h1>
       </section>
 

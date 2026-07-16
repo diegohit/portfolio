@@ -29,7 +29,12 @@
   </head>
   <body data-static-project="true">
     <header class="case-header">
-      <a class="case-name" href="/">Diego Cárdenas Mora</a>
+      <a class="case-name" href="/">
+        <span>Diego Cárdenas Mora</span>
+        <span class="site-name-greet" aria-hidden="true">
+          <img src="/assets/greet.svg" alt="" />
+        </span>
+      </a>
       <nav aria-label="Main navigation">
         <a href="/">Home</a>
         <a class="is-active" href="/#projects">Projects</a>
@@ -55,7 +60,6 @@
 
     <main id="case-study" data-prerendered="true">
       <section class="case-hero">
-        <p class="case-number" id="project-number">04</p>
         <h1 id="project-title">Maternal Health Support</h1>
       </section>
 
@@ -106,6 +110,8 @@
 
 
 
+
+
       </div>
 
 
@@ -116,6 +122,8 @@
       <h2>The Problem</h2>
       <div class="case-section-content rich-copy">
         <p>The main challenge was to structure a rule-based chatbot for a sensitive healthcare context. Users needed to understand where to go depending on their situation, while the healthcare team needed the flow to identify when a user required guidance, follow-up, or urgent care.</p><p>Some users could be reporting symptoms such as vaginal bleeding, contractions, pain, loss of fluid, or reduced baby movement. The chatbot had to avoid bureaucratic language and guide users towards the right next step without creating confusion or alarm.</p>
+
+
 
 
 
@@ -194,6 +202,8 @@
 
 
 
+
+
     <div class="user-groups-diagram user-groups-diagram--stacked" aria-label="Main user groups">
 
             <article class="user-group-row" style="--user-group-index: 0">
@@ -222,117 +232,396 @@
 
     </section>
 
-    <section class="case-section case-section--after-pain-points case-section--has-architecture" data-section-title="Information Architecture">
-      <h2>Information Architecture</h2>
+    <section class="case-section case-section--after-pain-points case-section--has-architecture case-section--flow-overview-heading" data-section-title="Information Architecture">
+      <div class="case-section-flow-overview-heading">
+        <h2>Information Architecture</h2>
+        <div class="case-section-flow-overview-copy rich-copy">
+          <p>I conducted a content audit to review how information was organised, identify unclear labels, and detect categories that were too administrative or grouped together unrelated needs.</p><p>The pregnancy follow-up flow used a needs-based menu. The maternal morbidity flow required a guided triage structure, asking how the user was feeling and whether she was experiencing specific symptoms before recommending urgent care or follow-up.</p>
+        </div>
+      </div>
       <div class="case-section-content rich-copy">
-        <p>I conducted a content audit to review how information was organised, identify unclear labels, and detect categories that were too administrative or grouped together unrelated needs.</p><p>The pregnancy follow-up flow used a needs-based menu. The maternal morbidity flow required a guided triage structure, asking how the user was feeling and whether she was experiencing specific symptoms before recommending urgent care or follow-up.</p>
+
+
+
+
+
+        <div
+        class="architecture-diagram maternal-ia architecture-diagram--maternal-information-architecture"
+        aria-label="Information architecture diagram"
+      >
+        <div class="maternal-ia__columns">
+          <section class="maternal-ia__tree" style="--architecture-index: 0">
+                  <article class="maternal-ia__root">
+                    <h3>Pregnancy Follow-up</h3>
+                  </article>
+                  <div class="maternal-ia__branch">
+                    <article class="maternal-ia__node">
+                <h4>Symptoms or discomfort</h4>
+              </article><article class="maternal-ia__node maternal-ia__node--parent">
+              <h4>Access to health services</h4>
+              <div class="maternal-ia__subnodes">
+                <div class="maternal-ia__subnode">Medical appointments</div><div class="maternal-ia__subnode">Medications</div><div class="maternal-ia__subnode">Authorisations</div><div class="maternal-ia__subnode">Referrals</div><div class="maternal-ia__subnode">Lab tests</div>
+              </div>
+            </article><article class="maternal-ia__node">
+                <h4>Pregnancy-related guidance</h4>
+              </article><article class="maternal-ia__node">
+                <h4>Family planning guidance</h4>
+              </article><article class="maternal-ia__node">
+                <h4>Send documents</h4>
+              </article><article class="maternal-ia__node">
+                <h4>Other services</h4>
+              </article>
+                  </div>
+                </section><section class="maternal-ia__tree" style="--architecture-index: 1">
+                  <article class="maternal-ia__root">
+                    <h3>Maternal Morbidity</h3>
+                  </article>
+                  <div class="maternal-ia__branch">
+                    <article class="maternal-ia__node">
+                <h4>Initial check-in</h4>
+              </article><article class="maternal-ia__node">
+                <h4>Need for support</h4>
+              </article><article class="maternal-ia__node maternal-ia__node--parent">
+              <h4>Symptom screening</h4>
+              <div class="maternal-ia__subnodes">
+                <div class="maternal-ia__subnode">High-priority symptoms</div><div class="maternal-ia__subnode">Additional warning symptoms</div><div class="maternal-ia__subnode">Lower-priority symptoms</div>
+              </div>
+            </article><article class="maternal-ia__node maternal-ia__node--parent">
+              <h4>Response paths</h4>
+              <div class="maternal-ia__subnodes">
+                <div class="maternal-ia__subnode">Recommend urgent care</div><div class="maternal-ia__subnode">Healthcare team contacts user</div><div class="maternal-ia__subnode">User describes symptoms</div><div class="maternal-ia__subnode">End interaction with guidance</div>
+              </div>
+            </article>
+                  </div>
+                </section>
+        </div>
+      </div>
 
 
 
 
 
 
-    <div
-      class="architecture-diagram architecture-diagram--maternal-information-architecture"
-      style="--architecture-columns: 2"
-      aria-label="Information architecture diagram"
-    >
 
-      <div class="architecture-line" aria-hidden="true"></div>
 
-            <section class="architecture-column" style="--architecture-index: 0">
-              <h3>Pregnancy Follow-up</h3>
 
-    <ul>
-      <li>Symptoms or discomfort</li>
-            <li>
-              Access to health services
 
-    <ul>
-      <li>Medical appointments</li><li>Medications</li><li>Authorisations</li><li>Referrals</li><li>Lab tests</li>
-    </ul>
+      </div>
 
-            </li>
-          <li>Pregnancy-related guidance</li><li>Family planning guidance</li><li>Send documents</li><li>Other services</li>
-    </ul>
 
-            </section>
 
-            <section class="architecture-column" style="--architecture-index: 1">
-              <h3>Maternal Morbidity</h3>
+    </section>
 
-    <ul>
-      <li>Initial check-in</li><li>Need for support</li>
-            <li>
-              Symptom screening
+    <section class="case-section case-section--after-pain-points" data-section-title="WhatsApp navigation flow">
 
-    <ul>
-      <li>High-priority symptoms</li><li>Additional warning symptoms</li><li>Lower-priority symptoms</li>
-    </ul>
+      <div class="case-section-content rich-copy">
 
-            </li>
 
-            <li>
-              Response paths
 
-    <ul>
-      <li>Recommend urgent care</li><li>Healthcare team contacts user</li><li>User describes symptoms</li><li>End interaction with guidance</li>
-    </ul>
 
-            </li>
 
-    </ul>
 
-            </section>
 
+
+
+
+
+
+
+
+    <div class="maternas-flow" aria-label="Maternal WhatsApp navigation flow">
+      <div class="maternas-flow__intro">
+        <h2>WhatsApp navigation flow overview</h2>
+        <p>I structured the maternal WhatsApp experience as two connected navigation systems: a general pregnancy follow-up path for common needs, and a maternal morbidity path for check-ins, symptom screening and escalation.</p>
+      </div>
+
+      <div class="maternas-flow__summary" aria-label="Flow overview">
+        <article class="maternas-flow__summary-card">
+          <span>Flow 01</span>
+          <div>
+            <h2>Pregnancy Follow-up</h2>
+            <p>A menu-based path routes users to symptoms, healthcare services, pregnancy guidance, family planning guidance, document upload or other support requests.</p>
+          </div>
+        </article>
+
+        <article class="maternas-flow__summary-card">
+          <span>Flow 02</span>
+          <div>
+            <h2>Maternal Morbidity</h2>
+            <p>A check-in path asks how the user feels, screens symptoms by priority and routes the interaction to urgent care, team follow-up or guidance.</p>
+          </div>
+        </article>
+      </div>
+
+      <section class="maternas-flow__section" aria-labelledby="pregnancy-follow-up-title">
+        <div class="maternas-flow__section-heading">
+          <h2 id="pregnancy-follow-up-title">Pregnancy Follow-up flow</h2>
+          <p>This flow starts with a broad menu and separates user intent before asking for details. The structure keeps service requests, symptoms, guidance and document submission in different paths.</p>
+        </div>
+
+        <div class="maternas-flow__map" aria-label="Pregnancy Follow-up flow map">
+
+    <div class="maternas-flow__lane">
+      <div class="maternas-flow__lane-label">Shared entry</div>
+      <div class="maternas-flow__track">
+
+              <article class="maternas-flow__node">
+                <span>Step 01</span>
+                <h3>Welcome message</h3>
+                <p>The bot greets the user and asks for the type and number of identification document.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 02</span>
+                <h3>Main menu</h3>
+                <p>Users choose between reporting symptoms, accessing services, receiving guidance, sending documents, or describing another request.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 03</span>
+                <h3>Route selection</h3>
+                <p>The selected option sends the user into a specific support path, reducing ambiguity before collecting more information.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 04</span>
+                <h3>Close loop</h3>
+                <p>Each path closes with guidance, a confirmation message, or a clear handoff to the healthcare team.</p>
+              </article>
+
+      </div>
+    </div>
+
+    <div class="maternas-flow__lane">
+      <div class="maternas-flow__lane-label">Symptoms path</div>
+      <div class="maternas-flow__track">
+
+              <article class="maternas-flow__node">
+                <span>Step 01</span>
+                <h3>Report discomfort</h3>
+                <p>Users enter the symptoms or discomfort they are experiencing in their own words.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 02</span>
+                <h3>Confirm context</h3>
+                <p>The bot asks for key information to understand whether the situation needs immediate attention.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 03</span>
+                <h3>Validate contact</h3>
+                <p>The user provides or confirms a phone number so the healthcare team can follow up.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 04</span>
+                <h3>Route response</h3>
+                <p>The user receives urgent care guidance, team follow-up, or a request for more detail.</p>
+              </article>
+
+      </div>
+    </div>
+
+    <div class="maternas-flow__lane">
+      <div class="maternas-flow__lane-label">Health services path</div>
+      <div class="maternas-flow__track">
+
+              <article class="maternas-flow__node">
+                <span>Step 01</span>
+                <h3>Access service</h3>
+                <p>Users choose whether they need appointments, medications, authorisations, referrals, or lab tests.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 02</span>
+                <h3>Select category</h3>
+                <p>The bot separates common healthcare requests before asking for documents or additional details.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 03</span>
+                <h3>Capture request</h3>
+                <p>The interaction gathers the minimum information needed for the team to understand the case.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 04</span>
+                <h3>Confirm follow-up</h3>
+                <p>The system confirms that the request was received and explains what will happen next.</p>
+              </article>
+
+      </div>
+    </div>
+
+    <div class="maternas-flow__lane">
+      <div class="maternas-flow__lane-label">Support paths</div>
+      <div class="maternas-flow__track">
+
+              <article class="maternas-flow__node">
+                <span>Step 01</span>
+                <h3>Guidance</h3>
+                <p>Users can request pregnancy-related guidance or family planning guidance without entering a clinical flow first.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 02</span>
+                <h3>Documents</h3>
+                <p>If the user needs to send documents, the bot opens a dedicated upload path.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 03</span>
+                <h3>Other services</h3>
+                <p>The user can describe a request that does not fit the predefined options.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 04</span>
+                <h3>Human follow-up</h3>
+                <p>The flow closes by setting expectations and routing the request to the healthcare team.</p>
+              </article>
+
+      </div>
+    </div>
+
+        </div>
+      </section>
+
+      <section class="maternas-flow__section" aria-labelledby="maternal-morbidity-title">
+        <div class="maternas-flow__section-heading">
+          <h2 id="maternal-morbidity-title">Maternal Morbidity flow</h2>
+          <p>This flow works as a triage-oriented conversation. It starts with a wellbeing check, identifies whether the user needs support, and screens symptoms before deciding the response path.</p>
+        </div>
+
+        <div class="maternas-flow__map" aria-label="Maternal Morbidity flow map">
+
+    <div class="maternas-flow__lane">
+      <div class="maternas-flow__lane-label">Initial check-in</div>
+      <div class="maternas-flow__track">
+
+              <article class="maternas-flow__node">
+                <span>Step 01</span>
+                <h3>Ask wellbeing</h3>
+                <p>The bot asks whether the user currently needs support or feels well enough to continue.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 02</span>
+                <h3>Identify need</h3>
+                <p>If the user needs help, the flow asks what kind of support is required before screening symptoms.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 03</span>
+                <h3>Choose support</h3>
+                <p>The user can request urgent help, describe symptoms, or receive guidance from the care team.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 04</span>
+                <h3>Exit safely</h3>
+                <p>When the user does not need help, the interaction closes with a clear support message.</p>
+              </article>
+
+      </div>
+    </div>
+
+    <div class="maternas-flow__lane">
+      <div class="maternas-flow__lane-label">Symptom screening</div>
+      <div class="maternas-flow__track maternas-flow__track--three">
+
+              <article class="maternas-flow__node">
+                <span>Step 01</span>
+                <h3>High-priority symptoms</h3>
+                <p>The flow checks for symptoms that require immediate attention, such as bleeding or severe pain.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 02</span>
+                <h3>Additional symptoms</h3>
+                <p>The bot asks about warning signs that may still require timely follow-up from the healthcare team.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Step 03</span>
+                <h3>Lower-priority symptoms</h3>
+                <p>If no urgent signs are present, the user can describe what they are feeling in more detail.</p>
+              </article>
+
+      </div>
+    </div>
+
+    <div class="maternas-flow__lane">
+      <div class="maternas-flow__lane-label">Response paths</div>
+      <div class="maternas-flow__track">
+
+              <article class="maternas-flow__node">
+                <span>Path 01</span>
+                <h3>Recommend urgent care</h3>
+                <p>High-priority symptoms trigger a message encouraging the user to seek urgent care.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Path 02</span>
+                <h3>Healthcare team contacts user</h3>
+                <p>When follow-up is needed, the flow explains that the care team will contact the user.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Path 03</span>
+                <h3>User describes symptoms</h3>
+                <p>If the case is less urgent, the user can provide more information for review.</p>
+              </article>
+
+              <article class="maternas-flow__node">
+                <span>Path 04</span>
+                <h3>End with guidance</h3>
+                <p>The interaction ends with clear expectations and avoids alarming or bureaucratic language.</p>
+              </article>
+
+      </div>
+    </div>
+
+        </div>
+      </section>
+
+      <div class="maternas-flow__logic-section">
+        <div class="maternas-flow__logic-heading">
+          <span>Design decisions</span>
+        </div>
+
+        <div class="maternas-flow__logic" aria-label="Design decisions">
+          <article class="maternas-flow__logic-card">
+            <h3>Separate intent first</h3>
+            <p>The main menu avoids mixing routine service requests with symptom reporting, making the conversation easier to follow.</p>
+          </article>
+
+          <article class="maternas-flow__logic-card">
+            <h3>Escalate by severity</h3>
+            <p>The morbidity flow checks for warning signs before asking for open-ended descriptions, supporting faster triage.</p>
+          </article>
+
+          <article class="maternas-flow__logic-card">
+            <h3>Keep follow-up visible</h3>
+            <p>Most non-immediate paths close by explaining that the healthcare team will contact the user, reducing uncertainty.</p>
+          </article>
+        </div>
+      </div>
     </div>
 
 
 
 
-
-
-
-
-
       </div>
 
 
 
     </section>
 
-    <section class="case-section case-section--after-pain-points" data-section-title="Conversational Flow Design">
-      <h2>Conversational Flow Design</h2>
-      <div class="case-section-content rich-copy">
-        <p>After defining the information architecture, I translated it into two rule-based conversational flows with different interaction models.</p><p>The pregnancy follow-up flow worked as a guided support menu, helping users choose between reporting symptoms, accessing health services, requesting guidance, sending documents, or describing another request.</p><p>The maternal morbidity flow worked as a guided screening experience. Based on users’ answers, the chatbot could recommend urgent care, request more information, or explain that the healthcare team would contact them.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      </div>
-
-
-
-    <figure class="case-full-bleed-media" data-full-bleed-parallax>
-      <img src="/assets/images/projects/maternal-conversational-flow.png" alt="Maternal health WhatsApp conversational flow diagram" loading="lazy" />
-    </figure>
-
-    </section>
-
-    <section class="case-section case-section--after-pain-points" data-section-title="Outcome">
+    <section class="case-section case-section--after-pain-points case-section--offline-outcome" data-section-title="Outcome">
       <h2>Outcome</h2>
       <div class="case-section-content rich-copy">
-        <p>The final flow was implemented as part of the telemedicine programme, supporting approximately 500 women affiliated with Nueva EPS in Antioquia.</p><p>Aligned with LivingLab Telesalud’s broader use of telemedicine to expand access to healthcare, the experience brought maternal health guidance into WhatsApp, a practical and familiar channel.</p>
 
 
 
@@ -341,6 +630,68 @@
 
 
 
+
+
+
+
+    <div class="maternal-outcome" aria-label="Maternal Health Support outcome">
+      <div class="maternal-outcome-heading">
+        <h3>Outcome</h3>
+      </div>
+
+      <div class="maternal-outcome-grid" aria-label="Maternal Health Support outcome highlights">
+
+              <article class="maternal-outcome-card maternal-outcome-card--primary">
+                <div>
+                  <p class="maternal-outcome-card-kicker">Reach</p>
+                  <p class="maternal-outcome-card-value">500</p>
+                </div>
+
+                <p class="maternal-outcome-card-label">Women affiliated with Nueva EPS in Antioquia supported through the final flow.</p>
+              </article>
+
+              <article class="maternal-outcome-card maternal-outcome-card--programme">
+                <div>
+                  <p class="maternal-outcome-card-kicker">Programme</p>
+                  <p class="maternal-outcome-card-value maternal-outcome-card-value--text">Telemedicine</p>
+                </div>
+
+                <p class="maternal-outcome-card-label">Implemented as part of a broader programme using telemedicine to expand access to healthcare.</p>
+              </article>
+
+              <article class="maternal-outcome-card maternal-outcome-card--channel">
+                <div>
+                  <p class="maternal-outcome-card-kicker">Access</p>
+                  <p class="maternal-outcome-card-value maternal-outcome-card-value--text">WhatsApp</p>
+                </div>
+
+                <p class="maternal-outcome-card-label">Brought maternal health guidance into a practical and familiar channel for users.</p>
+              </article>
+
+      </div>
+
+      <div class="maternal-outcome-story">
+        <article class="maternal-outcome-story-panel">
+          <h4>Experience impact</h4>
+          <ul class="maternal-outcome-impact-list">
+            <li>
+              <span>01</span>
+              <p>Supported maternal health guidance through a familiar messaging channel.</p>
+            </li>
+
+            <li>
+              <span>02</span>
+              <p>Connected pregnancy follow-up, symptom support and healthcare access in one flow.</p>
+            </li>
+
+            <li>
+              <span>03</span>
+              <p>Helped extend telemedicine support to women affiliated with Nueva EPS in Antioquia.</p>
+            </li>
+          </ul>
+        </article>
+      </div>
+    </div>
 
 
 

@@ -468,6 +468,7 @@ const projects = {
       },
       {
         title: "Information Architecture",
+        headingLayout: "flow-overview",
         architectureVariant: "maternal-information-architecture",
         paragraphs: [
           "I conducted a content audit to review how information was organised, identify unclear labels, and detect categories that were too administrative or grouped together unrelated needs.",
@@ -522,22 +523,13 @@ const projects = {
       },
       {
         title: "Conversational Flow Design",
-        paragraphs: [
-          "After defining the information architecture, I translated it into two rule-based conversational flows with different interaction models.",
-          "The pregnancy follow-up flow worked as a guided support menu, helping users choose between reporting symptoms, accessing health services, requesting guidance, sending documents, or describing another request.",
-          "The maternal morbidity flow worked as a guided screening experience. Based on users’ answers, the chatbot could recommend urgent care, request more information, or explain that the healthcare team would contact them.",
-        ],
-        fullBleedMedia: {
-          src: "assets/images/projects/maternal-conversational-flow.png",
-          alt: "Maternal health WhatsApp conversational flow diagram",
-        },
+        indicatorTitle: "WhatsApp navigation flow",
+        hideTitle: true,
+        maternalWhatsappFlow: true,
       },
       {
         title: "Outcome",
-        paragraphs: [
-          "The final flow was implemented as part of the telemedicine programme, supporting approximately 500 women affiliated with Nueva EPS in Antioquia.",
-          "Aligned with LivingLab Telesalud’s broader use of telemedicine to expand access to healthcare, the experience brought maternal health guidance into WhatsApp, a practical and familiar channel.",
-        ],
+        maternalOutcome: true,
       },
     ],
   },
@@ -723,6 +715,83 @@ function renderOfflineOutcome(shouldRender = false) {
           Beyond improving an internal process, the project helped make healthcare access
           more reliable for members in dispersed rural communities.
         </p>
+      </div>
+    </div>
+  `;
+}
+
+function renderMaternalOutcome(shouldRender = false) {
+  if (!shouldRender) return "";
+
+  const metrics = [
+    {
+      kicker: "Reach",
+      value: "500",
+      label:
+        "Women affiliated with Nueva EPS in Antioquia supported through the final flow.",
+      modifier: "maternal-outcome-card--primary",
+    },
+    {
+      kicker: "Programme",
+      value: "Telemedicine",
+      label:
+        "Implemented as part of a broader programme using telemedicine to expand access to healthcare.",
+      modifier: "maternal-outcome-card--programme",
+      textValue: true,
+    },
+    {
+      kicker: "Access",
+      value: "WhatsApp",
+      label:
+        "Brought maternal health guidance into a practical and familiar channel for users.",
+      modifier: "maternal-outcome-card--channel",
+      textValue: true,
+    },
+  ];
+
+  return `
+    <div class="maternal-outcome" aria-label="Maternal Health Support outcome">
+      <div class="maternal-outcome-heading">
+        <h3>Outcome</h3>
+      </div>
+
+      <div class="maternal-outcome-grid" aria-label="Maternal Health Support outcome highlights">
+        ${metrics
+          .map(
+            (metric) => `
+              <article class="maternal-outcome-card ${metric.modifier}">
+                <div>
+                  <p class="maternal-outcome-card-kicker">${metric.kicker}</p>
+                  <p class="maternal-outcome-card-value${metric.textValue ? " maternal-outcome-card-value--text" : ""}">${metric.value}</p>
+                </div>
+
+                <p class="maternal-outcome-card-label">${metric.label}</p>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+
+      <div class="maternal-outcome-story">
+        <article class="maternal-outcome-story-panel">
+          <h4>Experience impact</h4>
+          <ul class="maternal-outcome-impact-list">
+            <li>
+              <span>01</span>
+              <p>Supported maternal health guidance through a familiar messaging channel.</p>
+            </li>
+
+            <li>
+              <span>02</span>
+              <p>Connected pregnancy follow-up, symptom support and healthcare access in one flow.</p>
+            </li>
+
+            <li>
+              <span>03</span>
+              <p>Helped extend telemedicine support to women affiliated with Nueva EPS in Antioquia.</p>
+            </li>
+          </ul>
+        </article>
       </div>
     </div>
   `;
@@ -1710,6 +1779,60 @@ function renderNetworkFlow() {
 function renderArchitecture(columns = [], title = "", variant = "") {
   if (!columns.length) return "";
 
+  if (variant === "maternal-information-architecture") {
+    const renderMaternalItems = (items = []) =>
+      items
+        .map((item) => {
+          if (typeof item === "string") {
+            return `
+              <article class="maternal-ia__node">
+                <h4>${item}</h4>
+              </article>
+            `.trim();
+          }
+
+          return `
+            <article class="maternal-ia__node maternal-ia__node--parent">
+              <h4>${item.label}</h4>
+              <div class="maternal-ia__subnodes">
+                ${item.items
+                  .map(
+                    (child) => `
+                      <div class="maternal-ia__subnode">${child}</div>
+                    `.trim()
+                  )
+                  .join("")}
+              </div>
+            </article>
+          `.trim();
+        })
+        .join("");
+
+    return `
+      <div
+        class="architecture-diagram maternal-ia architecture-diagram--maternal-information-architecture"
+        aria-label="Information architecture diagram"
+      >
+        <div class="maternal-ia__columns">
+          ${columns
+            .map(
+              (column, index) => `
+                <section class="maternal-ia__tree" style="--architecture-index: ${index}">
+                  <article class="maternal-ia__root">
+                    <h3>${column.heading}</h3>
+                  </article>
+                  <div class="maternal-ia__branch">
+                    ${renderMaternalItems(column.items)}
+                  </div>
+                </section>
+              `.trim()
+            )
+            .join("")}
+        </div>
+      </div>
+    `.trim();
+  }
+
   if (variant === "app-information-architecture") {
     const cards = columns
       .map(
@@ -2303,6 +2426,278 @@ function renderSampleMessages(enabled = false) {
   `;
 }
 
+function renderMaternalWhatsappFlow(enabled = false) {
+  if (!enabled) return "";
+
+  const pregnancyLanes = [
+    {
+      label: "Shared entry",
+      nodes: [
+        {
+          step: "Step 01",
+          title: "Welcome message",
+          text: "The bot greets the user and asks for the type and number of identification document.",
+        },
+        {
+          step: "Step 02",
+          title: "Main menu",
+          text: "Users choose between reporting symptoms, accessing services, receiving guidance, sending documents, or describing another request.",
+        },
+        {
+          step: "Step 03",
+          title: "Route selection",
+          text: "The selected option sends the user into a specific support path, reducing ambiguity before collecting more information.",
+        },
+        {
+          step: "Step 04",
+          title: "Close loop",
+          text: "Each path closes with guidance, a confirmation message, or a clear handoff to the healthcare team.",
+        },
+      ],
+    },
+    {
+      label: "Symptoms path",
+      nodes: [
+        {
+          step: "Step 01",
+          title: "Report discomfort",
+          text: "Users enter the symptoms or discomfort they are experiencing in their own words.",
+        },
+        {
+          step: "Step 02",
+          title: "Confirm context",
+          text: "The bot asks for key information to understand whether the situation needs immediate attention.",
+        },
+        {
+          step: "Step 03",
+          title: "Validate contact",
+          text: "The user provides or confirms a phone number so the healthcare team can follow up.",
+        },
+        {
+          step: "Step 04",
+          title: "Route response",
+          text: "The user receives urgent care guidance, team follow-up, or a request for more detail.",
+        },
+      ],
+    },
+    {
+      label: "Health services path",
+      nodes: [
+        {
+          step: "Step 01",
+          title: "Access service",
+          text: "Users choose whether they need appointments, medications, authorisations, referrals, or lab tests.",
+        },
+        {
+          step: "Step 02",
+          title: "Select category",
+          text: "The bot separates common healthcare requests before asking for documents or additional details.",
+        },
+        {
+          step: "Step 03",
+          title: "Capture request",
+          text: "The interaction gathers the minimum information needed for the team to understand the case.",
+        },
+        {
+          step: "Step 04",
+          title: "Confirm follow-up",
+          text: "The system confirms that the request was received and explains what will happen next.",
+        },
+      ],
+    },
+    {
+      label: "Support paths",
+      nodes: [
+        {
+          step: "Step 01",
+          title: "Guidance",
+          text: "Users can request pregnancy-related guidance or family planning guidance without entering a clinical flow first.",
+        },
+        {
+          step: "Step 02",
+          title: "Documents",
+          text: "If the user needs to send documents, the bot opens a dedicated upload path.",
+        },
+        {
+          step: "Step 03",
+          title: "Other services",
+          text: "The user can describe a request that does not fit the predefined options.",
+        },
+        {
+          step: "Step 04",
+          title: "Human follow-up",
+          text: "The flow closes by setting expectations and routing the request to the healthcare team.",
+        },
+      ],
+    },
+  ];
+
+  const morbidityLanes = [
+    {
+      label: "Initial check-in",
+      nodes: [
+        {
+          step: "Step 01",
+          title: "Ask wellbeing",
+          text: "The bot asks whether the user currently needs support or feels well enough to continue.",
+        },
+        {
+          step: "Step 02",
+          title: "Identify need",
+          text: "If the user needs help, the flow asks what kind of support is required before screening symptoms.",
+        },
+        {
+          step: "Step 03",
+          title: "Choose support",
+          text: "The user can request urgent help, describe symptoms, or receive guidance from the care team.",
+        },
+        {
+          step: "Step 04",
+          title: "Exit safely",
+          text: "When the user does not need help, the interaction closes with a clear support message.",
+        },
+      ],
+    },
+    {
+      label: "Symptom screening",
+      variant: "three",
+      nodes: [
+        {
+          step: "Step 01",
+          title: "High-priority symptoms",
+          text: "The flow checks for symptoms that require immediate attention, such as bleeding or severe pain.",
+        },
+        {
+          step: "Step 02",
+          title: "Additional symptoms",
+          text: "The bot asks about warning signs that may still require timely follow-up from the healthcare team.",
+        },
+        {
+          step: "Step 03",
+          title: "Lower-priority symptoms",
+          text: "If no urgent signs are present, the user can describe what they are feeling in more detail.",
+        },
+      ],
+    },
+    {
+      label: "Response paths",
+      nodes: [
+        {
+          step: "Path 01",
+          title: "Recommend urgent care",
+          text: "High-priority symptoms trigger a message encouraging the user to seek urgent care.",
+        },
+        {
+          step: "Path 02",
+          title: "Healthcare team contacts user",
+          text: "When follow-up is needed, the flow explains that the care team will contact the user.",
+        },
+        {
+          step: "Path 03",
+          title: "User describes symptoms",
+          text: "If the case is less urgent, the user can provide more information for review.",
+        },
+        {
+          step: "Path 04",
+          title: "End with guidance",
+          text: "The interaction ends with clear expectations and avoids alarming or bureaucratic language.",
+        },
+      ],
+    },
+  ];
+
+  const renderLane = (lane) => `
+    <div class="maternas-flow__lane">
+      <div class="maternas-flow__lane-label">${lane.label}</div>
+      <div class="maternas-flow__track${lane.variant === "three" ? " maternas-flow__track--three" : ""}">
+        ${lane.nodes
+          .map(
+            (node) => `
+              <article class="maternas-flow__node">
+                <span>${node.step}</span>
+                <h3>${node.title}</h3>
+                <p>${node.text}</p>
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+    </div>
+  `;
+
+  return `
+    <div class="maternas-flow" aria-label="Maternal WhatsApp navigation flow">
+      <div class="maternas-flow__intro">
+        <h2>WhatsApp navigation flow overview</h2>
+        <p>I structured the maternal WhatsApp experience as two connected navigation systems: a general pregnancy follow-up path for common needs, and a maternal morbidity path for check-ins, symptom screening and escalation.</p>
+      </div>
+
+      <div class="maternas-flow__summary" aria-label="Flow overview">
+        <article class="maternas-flow__summary-card">
+          <span>Flow 01</span>
+          <div>
+            <h2>Pregnancy Follow-up</h2>
+            <p>A menu-based path routes users to symptoms, healthcare services, pregnancy guidance, family planning guidance, document upload or other support requests.</p>
+          </div>
+        </article>
+
+        <article class="maternas-flow__summary-card">
+          <span>Flow 02</span>
+          <div>
+            <h2>Maternal Morbidity</h2>
+            <p>A check-in path asks how the user feels, screens symptoms by priority and routes the interaction to urgent care, team follow-up or guidance.</p>
+          </div>
+        </article>
+      </div>
+
+      <section class="maternas-flow__section" aria-labelledby="pregnancy-follow-up-title">
+        <div class="maternas-flow__section-heading">
+          <h2 id="pregnancy-follow-up-title">Pregnancy Follow-up flow</h2>
+          <p>This flow starts with a broad menu and separates user intent before asking for details. The structure keeps service requests, symptoms, guidance and document submission in different paths.</p>
+        </div>
+
+        <div class="maternas-flow__map" aria-label="Pregnancy Follow-up flow map">
+          ${pregnancyLanes.map(renderLane).join("")}
+        </div>
+      </section>
+
+      <section class="maternas-flow__section" aria-labelledby="maternal-morbidity-title">
+        <div class="maternas-flow__section-heading">
+          <h2 id="maternal-morbidity-title">Maternal Morbidity flow</h2>
+          <p>This flow works as a triage-oriented conversation. It starts with a wellbeing check, identifies whether the user needs support, and screens symptoms before deciding the response path.</p>
+        </div>
+
+        <div class="maternas-flow__map" aria-label="Maternal Morbidity flow map">
+          ${morbidityLanes.map(renderLane).join("")}
+        </div>
+      </section>
+
+      <div class="maternas-flow__logic-section">
+        <div class="maternas-flow__logic-heading">
+          <span>Design decisions</span>
+        </div>
+
+        <div class="maternas-flow__logic" aria-label="Design decisions">
+          <article class="maternas-flow__logic-card">
+            <h3>Separate intent first</h3>
+            <p>The main menu avoids mixing routine service requests with symptom reporting, making the conversation easier to follow.</p>
+          </article>
+
+          <article class="maternas-flow__logic-card">
+            <h3>Escalate by severity</h3>
+            <p>The morbidity flow checks for warning signs before asking for open-ended descriptions, supporting faster triage.</p>
+          </article>
+
+          <article class="maternas-flow__logic-card">
+            <h3>Keep follow-up visible</h3>
+            <p>Most non-immediate paths close by explaining that the healthcare team will contact the user, reducing uncertainty.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function renderSection(section, isAfterPainPoints = false) {
   const blocks = (section.blocks || [])
     .map(
@@ -2335,6 +2730,10 @@ function renderSection(section, isAfterPainPoints = false) {
   if (section.title === "Key Flows") {
     sectionClasses.push("case-section--key-flows");
   }
+  const hasFlowOverviewHeading = section.headingLayout === "flow-overview";
+  if (hasFlowOverviewHeading) {
+    sectionClasses.push("case-section--flow-overview-heading");
+  }
   const hasSplitHeading =
     section.title === "Conversational flow design" ||
     section.title === "Tone of Voice" ||
@@ -2343,17 +2742,63 @@ function renderSection(section, isAfterPainPoints = false) {
   if (hasSplitHeading) {
     sectionClasses.push("case-section--split-heading");
   }
-  if (section.offlineOutcome || section.appOutcome || section.whatsappResults) {
+  if (
+    section.offlineOutcome ||
+    section.appOutcome ||
+    section.whatsappResults ||
+    section.maternalOutcome
+  ) {
     sectionClasses.push("case-section--offline-outcome");
   }
 
   const sectionParagraphs = renderSectionParagraphs(section);
+  const sectionIndicatorTitle = section.indicatorTitle || section.title;
+  const sectionHeading = section.hideTitle ? "" : `<h2>${section.title}</h2>`;
+
+  if (hasFlowOverviewHeading) {
+    return `
+    <section class="${sectionClasses.join(" ")}" data-section-title="${sectionIndicatorTitle}">
+      <div class="case-section-flow-overview-heading">
+        ${sectionHeading}
+        <div class="case-section-flow-overview-copy rich-copy">
+          ${sectionParagraphs}
+        </div>
+      </div>
+      <div class="case-section-content rich-copy">
+        ${blocks}
+        ${renderStaticImagePair(section.imagePair, section.revealImagePair)}
+        ${trailing}
+        ${tree}
+        ${renderHeartTable(section.heartTable)}
+        ${renderArchitecture(
+          section.architecture,
+          section.architectureTitle,
+          section.architectureVariant ||
+            (section.title === "Interaction Model" ? "interaction-model" : "")
+        )}
+        ${renderOfflineFirstFlowModel(section.flowModel)}
+        ${renderOfflineOutcome(section.offlineOutcome)}
+        ${renderAppOutcome(section.appOutcome)}
+        ${renderWhatsappResults(section.whatsappResults)}
+        ${renderMaternalOutcome(section.maternalOutcome)}
+        ${renderConversationFlow(section.conversationFlow)}
+        ${renderMaternalWhatsappFlow(section.maternalWhatsappFlow)}
+        ${renderUserGroups(section.userGroups, section.stackUserGroups)}
+        ${renderToneVoice(section.toneVoice)}
+        ${renderSampleMessages(section.sampleMessages)}
+      </div>
+      ${renderPainPoints(section.painPoints)}
+      ${renderInlineMedia(section.media)}
+      ${renderFullBleedMedia(section.fullBleedMedia)}
+    </section>
+  `;
+  }
 
   if (hasSplitHeading) {
     return `
-    <section class="${sectionClasses.join(" ")}" data-section-title="${section.title}">
+    <section class="${sectionClasses.join(" ")}" data-section-title="${sectionIndicatorTitle}">
       <div class="case-section-split-heading">
-        <h2>${section.title}</h2>
+        ${sectionHeading}
         <div class="case-section-split-copy rich-copy">
           ${sectionParagraphs}
         </div>
@@ -2374,7 +2819,9 @@ function renderSection(section, isAfterPainPoints = false) {
         ${renderOfflineOutcome(section.offlineOutcome)}
         ${renderAppOutcome(section.appOutcome)}
         ${renderWhatsappResults(section.whatsappResults)}
+        ${renderMaternalOutcome(section.maternalOutcome)}
         ${renderConversationFlow(section.conversationFlow)}
+        ${renderMaternalWhatsappFlow(section.maternalWhatsappFlow)}
         ${renderUserGroups(section.userGroups, section.stackUserGroups)}
         ${renderToneVoice(section.toneVoice)}
         ${renderSampleMessages(section.sampleMessages)}
@@ -2387,8 +2834,8 @@ function renderSection(section, isAfterPainPoints = false) {
   }
 
   return `
-    <section class="${sectionClasses.join(" ")}" data-section-title="${section.title}">
-      <h2>${section.title}</h2>
+    <section class="${sectionClasses.join(" ")}" data-section-title="${sectionIndicatorTitle}">
+      ${sectionHeading}
       <div class="case-section-content rich-copy">
         ${sectionParagraphs}
         ${blocks}
@@ -2406,7 +2853,9 @@ function renderSection(section, isAfterPainPoints = false) {
         ${renderOfflineOutcome(section.offlineOutcome)}
         ${renderAppOutcome(section.appOutcome)}
         ${renderWhatsappResults(section.whatsappResults)}
+        ${renderMaternalOutcome(section.maternalOutcome)}
         ${renderConversationFlow(section.conversationFlow)}
+        ${renderMaternalWhatsappFlow(section.maternalWhatsappFlow)}
         ${renderUserGroups(section.userGroups, section.stackUserGroups)}
         ${renderToneVoice(section.toneVoice)}
         ${renderSampleMessages(section.sampleMessages)}
@@ -2697,7 +3146,6 @@ const isPrerenderedProject =
 
 function renderProjectDom() {
   document.title = `${project.title} — Diego Cárdenas Mora`;
-  document.querySelector("#project-number").textContent = project.number;
   document.querySelector("#project-title").textContent = project.title;
   document.querySelector("#project-skills").textContent = project.skills;
   document.querySelector("#project-tools").textContent = project.tools;
@@ -3157,6 +3605,21 @@ function initialiseCaseLogoScrollRotation() {
   reducedMotion.addEventListener("change", update);
 }
 
+function initialiseCaseNameGreeting() {
+  const caseName = document.querySelector(".case-name");
+
+  if (!caseName?.querySelector(".site-name-greet")) return;
+
+  const touchPointer = window.matchMedia("(hover: none)");
+
+  caseName.addEventListener("click", (event) => {
+    if (!touchPointer.matches) return;
+
+    event.preventDefault();
+    caseName.classList.toggle("is-greeting");
+  });
+}
+
 if (!isPrerenderedProject) {
   renderProjectDom();
 }
@@ -3172,6 +3635,7 @@ initialiseToneVoice();
 initialiseArchitectureDiagram();
 initialiseStackedUserGroups();
 initialiseCaseLogoScrollRotation();
+initialiseCaseNameGreeting();
 
 document.querySelector("#next-project").href = projectUrls[nextId];
 document.querySelector("#next-project-title").textContent = nextProject.title;
