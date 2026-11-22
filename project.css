@@ -5840,7 +5840,8 @@ body[data-static-project="true"] main {
 }
 
 .case-study--signals-of-smartphone-addiction .signals-article-section[data-section-title="Visualisation Strategy"] .signals-article-media img {
-  width: 90%;
+  width: min(100%, 680px);
+  height: auto;
   margin-inline: auto;
 }
 
