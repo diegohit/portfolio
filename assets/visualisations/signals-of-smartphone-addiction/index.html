@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Exploring Smartphone Usage and Potentially Addictive Behaviour</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="style_HeatMap.css?v=radar-padding">
+  <link rel="stylesheet" href="style_ScatterPlot.css?v=radar-padding">
+  <link rel="stylesheet" href="index.css?v=motion-polish">
+</head>
+<body>
+  <header id="page-intro">
+    <h1>Exploring Smartphone Usage and Potentially Addictive Behaviour</h1>
+    <p class="subtitle">
+      This dashboard explores the question: what patterns of smartphone usage indicate potentially
+      addictive behaviour when considering multiple indicators such as usage habits, sleep duration,
+      and stress levels?
+    </p>
+  </header>
+
+  <div id="dashboard">
+    <section id="scatterPlot">
+      <div class="scatter-panel">
+        <div class="viz-header scatter-header">
+          <div class="viz-copy">
+            <h4 id="scatter-title">Risk Score Index by Addiction Level</h4>
+
+            <p class="chart-description">
+              This visualisation shows how the calculated smartphone addiction risk score changes
+              across the addiction levels in the dataset. Each point represents a user, and when you
+              move the cursor over a point, more behavioural details appear.
+            </p>
+          </div>
+        </div>
+
+        <div class="chart-box scatter-chart-box">
+          <div class="chart-box-inner">
+            <div class="chart-box-controls filters-row">
+              <div class="controls-group">
+                <span class="filter-label">Filter by gender:</span>
+
+                <div class="custom-select" id="genderFilter">
+                  <button type="button" class="select-button" id="genderButton">
+                    <span id="genderSelected">All</span>
+                    <span class="select-arrow">▾</span>
+                  </button>
+
+                  <div class="select-menu" id="genderMenu">
+                    <div class="select-option selected" data-value="All">
+                      <span class="option-radio"></span>
+                      <span class="option-label">All</span>
+                    </div>
+
+                    <div class="select-option" data-value="Male">
+                      <span class="option-radio"></span>
+                      <span class="option-label">Male</span>
+                    </div>
+
+                    <div class="select-option" data-value="Female">
+                      <span class="option-radio"></span>
+                      <span class="option-label">Female</span>
+                    </div>
+
+                    <div class="select-option" data-value="Other">
+                      <span class="option-radio"></span>
+                      <span class="option-label">Other</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="controls-group">
+                <span class="filter-label">Filter by age:</span>
+
+                <div class="age-slider-wrapper">
+                  <div class="age-values">
+                    <span id="ageMinLabel">18</span>
+                    <span id="ageMaxLabel">35</span>
+                  </div>
+
+                  <div class="range-slider">
+                    <div class="slider-track" id="sliderTrack"></div>
+                    <input type="range" id="ageMin" min="18" max="35" value="18" step="1">
+                    <input type="range" id="ageMax" min="18" max="35" value="35" step="1">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="chart_scatterplot"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tooltip_scatterplot" class="tooltip"></div>
+    </section>
+
+    <section id="heatmap">
+      <div class="viz-header">
+        <div class="viz-copy">
+          <h4 id="heatmap-title">Addiction Patterns Across Screen Time and Sleep Hours</h4>
+
+          <p class="chart-description">
+            This heatmap compares daily screen time with another indicator. Each cell groups users within
+            that range, and colour shows the average addiction level in that group.
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-box heatmap-chart-box">
+        <div class="chart-box-inner">
+          <div class="chart-box-controls compact-filters">
+            <div class="controls-group">
+              <span class="filter-label">Compare screen time with:</span>
+
+              <div class="custom-select" id="heatmapVariableFilter">
+                <button type="button" class="select-button" id="heatmapVariableButton">
+                  <span id="heatmapVariableSelected">Sleep Hours</span>
+                  <span class="select-arrow">▾</span>
+                </button>
+
+                <div class="select-menu" id="heatmapVariableMenu">
+                  <div class="select-option selected" data-value="sleep">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Sleep Hours</span>
+                  </div>
+
+                  <div class="select-option" data-value="stress">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Stress Level</span>
+                  </div>
+
+                  <div class="select-option" data-value="workStudy">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Work/Study Hours</span>
+                  </div>
+
+                  <div class="select-option" data-value="notifications">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Notifications per Day</span>
+                  </div>
+
+                  <div class="select-option" data-value="apps">
+                    <span class="option-radio"></span>
+                    <span class="option-label">App Opens per Day</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="chart_heatmap"></div>
+
+          <p class="heatmap-note">Colour shows the average addiction level, from lower-risk peach tones to higher-risk teal tones.</p>
+        </div>
+      </div>
+
+      <div id="tooltip_heatmap" class="tooltip"></div>
+    </section>
+
+    <section id="radarChart">
+      <div class="viz-header">
+        <div class="viz-copy">
+          <h4>Addiction Patterns Across Usage Behaviours</h4>
+
+          <p class="chart-description">
+            This radar chart compares the average behaviour of addicted and non-addicted users across
+            five indicators: social media time, sleep time, work-study time, gaming hours, and daily
+            screen time. The dark teal solid shape represents addicted users, and the pink dashed shape
+            represents non-addicted users.
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-box radar-chart-box">
+        <div class="chart-box-inner">
+          <div class="chart-box-controls radar-controls">
+            <div class="controls-group">
+              <span class="filter-label">Stress level</span>
+
+              <div class="custom-select" id="stressLevelFilter">
+                <button type="button" class="select-button" id="stressLevelButton">
+                  <span id="stressLevelSelected">All</span>
+                  <span class="select-arrow">▾</span>
+                </button>
+
+                <div class="select-menu" id="stressLevelMenu">
+                  <div class="select-option selected" data-value="All">
+                    <span class="option-radio"></span>
+                    <span class="option-label">All</span>
+                  </div>
+                  <div class="select-option" data-value="Low">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Low</span>
+                  </div>
+                  <div class="select-option" data-value="Medium">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Medium</span>
+                  </div>
+                  <div class="select-option" data-value="High">
+                    <span class="option-radio"></span>
+                    <span class="option-label">High</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="controls-group">
+              <span class="filter-label">Addiction level</span>
+
+              <div class="custom-select" id="addictionLevelFilter">
+                <button type="button" class="select-button" id="addictionLevelButton">
+                  <span id="addictionLevelSelected">All</span>
+                  <span class="select-arrow">▾</span>
+                </button>
+
+                <div class="select-menu" id="addictionLevelMenu">
+                  <div class="select-option selected" data-value="All">
+                    <span class="option-radio"></span>
+                    <span class="option-label">All</span>
+                  </div>
+                  <div class="select-option" data-value="None">
+                    <span class="option-radio"></span>
+                    <span class="option-label">None</span>
+                  </div>
+                  <div class="select-option" data-value="Mild">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Mild</span>
+                  </div>
+                  <div class="select-option" data-value="Moderate">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Moderate</span>
+                  </div>
+                  <div class="select-option" data-value="Severe">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Severe</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="chart_radarchart"></div>
+        </div>
+      </div>
+
+      <div id="message"></div>
+    </section>
+  </div>
+
+  <script src="customSelect.js"></script>
+  <script src="animations.js?v=timed-entry"></script>
+  <script src="heatmap.js?v=graph-visible-95"></script>
+  <script src="scatterPlot.js?v=static-risk-score"></script>
+  <script src="radarChartDesign.js?v=timed-entry"></script>
+  <script src="radarChart.js?v=graph-visible-95"></script>
+
+  <footer id="page-footer">
+  <p>
+    <strong>Data source:</strong>
+    <a href="https://www.kaggle.com/datasets/zahranusratt/smartphone-usage-and-addiction-analysis-dataset" target="_blank">
+      Smartphone Usage and Addiction Analysis Dataset (Kaggle)
+    </a>
+  </p>
+  </footer>
+
+</body>
+</html>

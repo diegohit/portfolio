@@ -117,8 +117,8 @@
           <p>My skills</p>
           <div class="marquee-window">
             <div class="marquee-track">
-              <span>UX Design · UX Research · Service Design · Interaction Design · UX Writing · Information Architecture · Interaction Design · Usability Testing · Conversational Design · Content Audit · Experience Measurement ·</span>
-              <span aria-hidden="true">UX Design · UX Research · Service Design · Interaction Design · UX Writing · Information Architecture · Interaction Design · Usability Testing · Conversational Design · Content Audit · Experience Measurement ·</span>
+              <span>UX Design · UX Research · Service Design · Interaction Design · Data Visualization · UX Writing · Information Architecture · Interaction Design · Usability Testing · Conversational Design · Content Audit · Experience Measurement ·</span>
+              <span aria-hidden="true">UX Design · UX Research · Service Design · Interaction Design · Data Visualization · UX Writing · Information Architecture · Interaction Design · Usability Testing · Conversational Design · Content Audit · Experience Measurement ·</span>
             </div>
           </div>
         </div>
@@ -128,10 +128,34 @@
         <div class="section-heading">
           <p>01 / My work</p>
           <h2>Projects</h2>
+          <div class="project-view-control" aria-label="Project category selector">
+            <div class="project-switch" role="tablist" aria-label="Project category">
+              <button
+                class="project-switch-button is-active"
+                type="button"
+                data-project-category="professional"
+                role="tab"
+                aria-selected="true"
+              >
+                <span class="project-switch-text">Professional</span>
+                <span class="project-switch-count">4</span>
+              </button>
+              <button
+                class="project-switch-button"
+                type="button"
+                data-project-category="personal"
+                role="tab"
+                aria-selected="false"
+              >
+                <span class="project-switch-text">Personal</span>
+                <span class="project-switch-count">1</span>
+              </button>
+            </div>
+          </div>
         </div>
 
         <div class="project-list">
-          <article class="project-card">
+          <article class="project-card" data-project-category="professional">
             <a class="project-card-link" href="/projects/rural-healthcare/" aria-label="View Field Tool for Rural Healthcare Access">
               <div class="project-card-face project-card-front">
                 <span class="project-number">01</span>
@@ -163,7 +187,7 @@
             </a>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-project-category="professional">
             <a class="project-card-link" href="/projects/app-redesign/" aria-label="View App Redesign for Nueva EPS">
               <div class="project-card-face project-card-front">
                 <span class="project-number">02</span>
@@ -196,7 +220,7 @@
             </a>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-project-category="professional">
             <a class="project-card-link" href="/projects/whatsapp-appointments/" aria-label="View WhatsApp Medical Appointments">
               <div class="project-card-face project-card-front">
                 <span class="project-number">03</span>
@@ -229,7 +253,7 @@
             </a>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" data-project-category="professional">
             <a class="project-card-link" href="/projects/maternal-health/" aria-label="View Maternal Health Support">
               <div class="project-card-face project-card-front">
                 <span class="project-number">04</span>
@@ -250,6 +274,41 @@
                   <strong>Outcomes</strong>
                   <div class="project-outcome-rotator">
                     <p class="is-active">Supported approximately 500 pregnant women in Antioquia through WhatsApp-based guidance</p>
+                  </div>
+                </div>
+                <div class="project-card-action">
+                  <span>See More</span>
+                  <i aria-hidden="true"></i>
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <article class="project-card project-card--d3" data-project-category="personal" data-project-id="signals-of-smartphone-addiction" hidden>
+            <a class="project-card-link" href="/projects/signals-of-smartphone-addiction/" aria-label="View Signals of Smartphone Addiction">
+              <div class="project-card-face project-card-front">
+                <span class="project-number">01</span>
+                <div class="project-image project-image-cover">
+                  <img
+                    src="assets/images/projects/d3-visualisation/d3-card.jpg"
+                    alt="Hand holding a phone for the D3 visualisation project"
+                  />
+                </div>
+                <div class="project-info">
+                  <i aria-hidden="true"></i>
+                  <h3>Signals of Smartphone Addiction</h3>
+                </div>
+              </div>
+              <div class="project-card-face project-card-back">
+                <span class="project-number">01</span>
+                <div class="project-outcomes project-outcomes--skills-tools">
+                  <div class="project-hover-detail">
+                    <strong>Skills</strong>
+                    <p>Data Visualisation · Interaction Design · D3.js · Front-end Development</p>
+                  </div>
+                  <div class="project-hover-detail">
+                    <strong>Tools</strong>
+                    <p>D3.js · JavaScript · HTML · CSS</p>
                   </div>
                 </div>
                 <div class="project-card-action">

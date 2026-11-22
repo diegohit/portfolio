@@ -533,6 +533,100 @@ const projects = {
       },
     ],
   },
+  "signals-of-smartphone-addiction": {
+    number: "01",
+    title: "Signals of Smartphone Addiction",
+    skills:
+      "Data Visualisation · Interaction Design · D3.js · Front-end Development",
+    tools: "D3.js · JavaScript · HTML · CSS",
+    media: {
+      type: "image",
+      src: "assets/images/projects/d3-visualisation/signals-smartphone-hero.png",
+      alt: "Close-up of a person holding a pink iPhone against a pink sweater",
+    },
+    meta: [
+      {
+        label: "Team",
+        value: "Nia Ivanova and Cecilia Chen",
+      },
+    ],
+    overview: [
+      "This project explored how smartphone usage patterns can indicate potentially addictive behaviour. Working with a dataset on screen time, sleep, stress, notifications, app opens, social media use and addiction level, we designed an interactive D3 dashboard around one main question: what patterns of smartphone usage indicate potentially addictive behaviour when considering multiple indicators such as usage habits, sleep duration, and stress levels?",
+      "The final dashboard combined three views. A heatmap showed how average addiction level changed across screen time and a second selected variable. A scatterplot showed individual users by addiction level and a custom Risk Score Index. A radar chart compared behavioural profiles between addicted and non-addicted users. The goal was to make the dataset easier to explore without reducing it to a single chart or one fixed interpretation. This project was done in the Data Visualization module at the University of St Andrews.",
+    ],
+    sections: [
+      {
+        title: "The Challenge",
+        paragraphs: [
+          "The main challenge was turning a dataset with several behavioural indicators into a visualisation that was clear enough to read, but still detailed enough to explore. Early sketches tested different directions, including density views, correlation matrices, ridgeline plots, bubble charts and a risk score index. Some ideas were useful, but they also made the dashboard harder to follow or placed too much emphasis on one variable.",
+          "We had to balance overview and detail. The heatmap made broad patterns visible, but grouped individual users into bins. The scatterplot showed variation within addiction categories, but needed jitter and filtering to reduce overlap. The radar chart helped compare behavioural profiles, but was less precise for exact values. The final design used these limits as part of the structure: each chart answered a different part of the question instead of trying to explain everything at once.",
+        ],
+      },
+      {
+        title: "My Role",
+        paragraphs: [
+          "My main responsibility was designing and implementing the scatterplot: Risk Score Index by Addiction Level. I created a custom risk score to combine several behavioural variables into one comparable measure, including daily screen time, social media use, notifications, app opens, stress, academic or work impact and sleep. I used min-max normalisation to bring those variables onto the same scale and convert them into a score from 0 to 100.",
+          "I also worked on the interaction and usability of the view. This included the gender filter, age range slider, tooltips, jitter, layout adjustments and styling refinements. During the build, I had to keep testing small design decisions because changes in spacing, filtering or encoding could affect the readability of the full dashboard. The process helped me understand D3 as both a coding tool and a design material: every visual choice had to work in the data, the interface and the browser.",
+        ],
+      },
+      {
+        type: "signalsArticleFlow",
+        title: "Design Process",
+        hideTitle: true,
+        items: [
+          {
+            title: "Design Exploration",
+            body: "Before building the dashboard, we explored different ways of making smartphone usage patterns visible. The early sketches tested density-based views, subgroup comparisons, risk score approaches, correlation views and charts that combined screen time, sleep and stress. Some directions were useful but too visually dense. Others focused too strongly on one relationship, such as screen time and sleep, and left other behavioural indicators in the background. This helped us move towards a dashboard structure where each view had a specific role and avoid trying to make one chart explain the whole dataset.",
+            mediaLayout: "horizontal-scroll",
+            media: [
+              {
+                src: "assets/images/projects/d3-visualisation/sketch-1.png",
+                alt: "Early sketch exploring a hexbin plot, filters, distributions and box plots for smartphone addiction signals",
+              },
+              {
+                src: "assets/images/projects/d3-visualisation/sketch-2.png",
+                alt: "Early sketch exploring a risk score index, filters, correlation matrix and ridgeline plots",
+              },
+              {
+                src: "assets/images/projects/d3-visualisation/sketch-3.png",
+                alt: "Early sketch exploring screen time versus sleep hours with filters and correlation views",
+              },
+              {
+                src: "assets/images/projects/d3-visualisation/sketch-4.png",
+                alt: "Early sketch exploring stress level, filters, distributions and box plots by gender",
+              },
+            ],
+          },
+          {
+            title: "Visualisation Strategy",
+            body: "The final dashboard was organised around three complementary views. The heatmap provided a broad overview of how average addiction level changed across screen time and another selected variable. The scatterplot made individual users visible through addiction level and the Risk Score Index. The radar chart compared behavioural profiles between addicted and non-addicted users. This structure gave each chart a clear purpose. The heatmap was useful for spotting broader patterns, the scatterplot helped reveal variation within addiction categories, and the radar chart made behavioural profiles easier to compare.",
+            media: [
+              {
+                src: "assets/images/projects/d3-visualisation/visualisation-strategy.png",
+                alt: "Final dashboard layout showing the risk score index, filters, and supporting visualisation ideas for smartphone addiction signals",
+              },
+            ],
+          },
+          {
+            title: "Building the Risk Score Index",
+            body: "For the scatterplot, I created a Risk Score Index to compare users across several behavioural indicators. Instead of relying on one variable, the score combined daily screen time, social media use, notifications, app opens, stress, academic or work impact and sleep. To make these variables comparable, I normalised them and converted the result into a 0–100 score. This made it possible to position individual users on a shared scale while still keeping addiction level visible as a category.",
+          },
+          {
+            title: "Key Insights",
+            body: "The final dashboard made several patterns easier to see. In the scatterplot, users in the severe addiction category tended to appear at higher Risk Score values, while non-addicted and mild users were more concentrated at lower values. The radar chart showed stronger differences in daily screen time and social media use between addicted and non-addicted users. The heatmap also showed a consistent pattern: as screen time increased, average addiction level tended to rise, especially when higher screen time appeared together with lower sleep duration.",
+          },
+          {
+            title: "What I Learned",
+            body: "This project helped me understand how closely design and implementation are connected in data visualisation. A chart could look clear in a sketch, but become harder to read once real data, filters and browser behaviour were involved. It also helped me become more comfortable with D3.js as a design tool. I had to think about visual encoding, interaction, layout and data processing at the same time, and make trade-offs when an idea was too complex for the time and scope of the project.",
+          },
+        ],
+      },
+      {
+        type: "signalsD3Visualisation",
+        title: "Experience the visualisation",
+      },
+    ],
+  },
 };
 
 const projectOrder = [
@@ -540,10 +634,27 @@ const projectOrder = [
   "app-redesign",
   "whatsapp-appointments",
   "maternal-health",
+  "signals-of-smartphone-addiction",
 ];
 
 function renderParagraphs(paragraphs = []) {
   return paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("");
+}
+
+function renderCountUpAttributes(count) {
+  if (!count) return "";
+
+  return [
+    "data-count-up",
+    `data-count-start="${count.start}"`,
+    `data-count-end="${count.end}"`,
+    count.suffix ? `data-count-suffix="${count.suffix}"` : "",
+    count.format ? `data-count-format="${count.format}"` : "",
+    `data-count-duration="${count.duration}"`,
+    `data-count-final="${count.final}"`,
+  ]
+    .filter(Boolean)
+    .join(" ");
 }
 
 function renderGallery(images = []) {
@@ -564,6 +675,438 @@ function renderGallery(images = []) {
         .join("")}
     </div>
   `;
+}
+
+function renderScrollCrossfade(section) {
+  const items = section.items || [];
+
+  if (section.type !== "scrollCrossfade" || !items.length) return "";
+
+  const stepHeight = section.stepHeight || "62vh";
+  const itemWeights = items.map((item) => Number(item.scrollWeight) || 1);
+  const totalWeight = itemWeights.reduce((sum, weight) => sum + weight, 0);
+  let markerOffset = 0;
+
+  return `
+    <div class="scroll-crossfade" data-scroll-crossfade style="--scroll-crossfade-count: ${items.length}; --scroll-crossfade-total-weight: ${totalWeight}; --scroll-crossfade-step-height: ${stepHeight};">
+      <div class="scroll-crossfade__sticky">
+        ${items
+          .map(
+            (item, index) => `
+              <article class="scroll-crossfade__item${
+                index === 0 ? " is-active" : ""
+              }" data-scroll-crossfade-item data-scroll-weight="${
+                itemWeights[index]
+              }">
+                <h2>${item.title}</h2>
+                <p>${item.body}</p>
+                ${renderScrollCrossfadeMedia(item.media)}
+              </article>
+            `
+          )
+          .join("")}
+      </div>
+      <div class="scroll-crossfade__progress-markers" aria-hidden="true">
+        ${items
+          .map((item, index) => {
+            const top = totalWeight ? (markerOffset * 100) / totalWeight : 0;
+            markerOffset += itemWeights[index];
+
+            return `
+              <span
+                class="crossfade-progress-marker"
+                id="${item.id || slugifyLabel(item.title)}"
+                data-section-title="${item.title}"
+                style="top: ${top}%;"
+              ></span>
+            `;
+          })
+          .join("")}
+      </div>
+    </div>
+  `;
+}
+
+function renderScrollCrossfadeMedia(images = []) {
+  if (!images.length) return "";
+
+  return `
+    <div class="scroll-crossfade__media card-sorting-matrices" aria-label="Design exploration sketches">
+      ${images
+        .map(
+          (image) => `
+            <figure>
+              <img src="${image.src}" alt="${image.alt}" loading="lazy" />
+            </figure>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderSignalsArticleMedia(images = [], layout = "") {
+  if (!images.length) return "";
+
+  if (layout === "horizontal-scroll") {
+    return `
+      <div class="signals-article-media signals-article-media--horizontal-scroll" aria-label="Case study supporting media">
+        <div class="signals-sketch-track">
+          ${images
+            .map(
+              (image, index) => `
+                <figure>
+                  <img src="${image.src}" alt="${image.alt}" loading="lazy" />
+                  <button class="signals-sketch-expand" type="button" aria-label="Enlarge sketch ${index + 1}" aria-haspopup="dialog" data-signals-sketch-expand>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6" /></svg>
+                  </button>
+                </figure>
+              `
+            )
+            .join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  const mediaClass =
+    images.length === 1
+      ? "signals-article-media signals-article-media--single"
+      : "signals-article-media";
+
+  return `
+    <div class="${mediaClass}" aria-label="Case study supporting media">
+      ${images
+        .map(
+          (image) => `
+            <figure>
+              <img src="${image.src}" alt="${image.alt}" loading="lazy" />
+            </figure>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderSignalsArticleFlow(section) {
+  const items = section.items || [];
+
+  if (section.type !== "signalsArticleFlow" || !items.length) return "";
+
+  return `
+    <div class="signals-article-flow">
+      ${items
+        .map(
+          (item) =>
+            item.mediaLayout === "horizontal-scroll"
+              ? `
+                <section class="signals-article-section signals-article-section--design-exploration" data-section-title="${item.title}">
+                  <div class="signals-design-exploration-scroll" data-signals-sketch-scroll>
+                    <div class="signals-design-exploration-sticky">
+                      <div class="signals-design-exploration-copy">
+                        <h2>${item.title}</h2>
+                        <p>${item.body}</p>
+                      </div>
+                      ${renderSignalsArticleMedia(item.media, item.mediaLayout)}
+                    </div>
+                  </div>
+                </section>
+              `
+              : `
+                <section class="signals-article-section" data-section-title="${item.title}">
+                  <h2>${item.title}</h2>
+                  <p>${item.body}</p>
+                  ${renderSignalsArticleMedia(item.media, item.mediaLayout)}
+                </section>
+              `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+const signalsD3VisualisationMarkup = String.raw`<header id="page-intro">
+    <h1>Exploring Smartphone Usage and Potentially Addictive Behaviour</h1>
+    <p class="subtitle">
+      This dashboard explores the question: what patterns of smartphone usage indicate potentially
+      addictive behaviour when considering multiple indicators such as usage habits, sleep duration,
+      and stress levels?
+    </p>
+  </header>
+
+  <div id="dashboard">
+    <section id="scatterPlot">
+      <div class="scatter-panel">
+        <div class="viz-header scatter-header">
+          <div class="viz-copy">
+            <h4 id="scatter-title">Risk Score Index by Addiction Level</h4>
+
+            <p class="chart-description">
+              This visualisation shows how the calculated smartphone addiction risk score changes
+              across the addiction levels in the dataset. Each point represents a user, and when you
+              move the cursor over a point, more behavioural details appear.
+            </p>
+          </div>
+        </div>
+
+        <div class="chart-box scatter-chart-box">
+          <div class="chart-box-inner">
+            <div class="chart-box-controls filters-row">
+              <div class="controls-group">
+                <span class="filter-label">Filter by gender:</span>
+
+                <div class="custom-select" id="genderFilter">
+                  <button type="button" class="select-button" id="genderButton">
+                    <span id="genderSelected">All</span>
+                    <span class="select-arrow">▾</span>
+                  </button>
+
+                  <div class="select-menu" id="genderMenu">
+                    <div class="select-option selected" data-value="All">
+                      <span class="option-radio"></span>
+                      <span class="option-label">All</span>
+                    </div>
+
+                    <div class="select-option" data-value="Male">
+                      <span class="option-radio"></span>
+                      <span class="option-label">Male</span>
+                    </div>
+
+                    <div class="select-option" data-value="Female">
+                      <span class="option-radio"></span>
+                      <span class="option-label">Female</span>
+                    </div>
+
+                    <div class="select-option" data-value="Other">
+                      <span class="option-radio"></span>
+                      <span class="option-label">Other</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="controls-group">
+                <span class="filter-label">Filter by age:</span>
+
+                <div class="age-slider-wrapper">
+                  <div class="age-values">
+                    <span id="ageMinLabel">18</span>
+                    <span id="ageMaxLabel">35</span>
+                  </div>
+
+                  <div class="range-slider">
+                    <div class="slider-track" id="sliderTrack"></div>
+                    <input type="range" id="ageMin" min="18" max="35" value="18" step="1">
+                    <input type="range" id="ageMax" min="18" max="35" value="35" step="1">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="chart_scatterplot"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tooltip_scatterplot" class="tooltip"></div>
+    </section>
+
+    <section id="heatmap">
+      <div class="viz-header">
+        <div class="viz-copy">
+          <h4 id="heatmap-title">Addiction Patterns Across Screen Time and Sleep Hours</h4>
+
+          <p class="chart-description">
+            This heatmap compares daily screen time with another indicator. Each cell groups users within
+            that range, and colour shows the average addiction level in that group.
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-box heatmap-chart-box">
+        <div class="chart-box-inner">
+          <div class="chart-box-controls compact-filters">
+            <div class="controls-group">
+              <span class="filter-label">Compare screen time with:</span>
+
+              <div class="custom-select" id="heatmapVariableFilter">
+                <button type="button" class="select-button" id="heatmapVariableButton">
+                  <span id="heatmapVariableSelected">Sleep Hours</span>
+                  <span class="select-arrow">▾</span>
+                </button>
+
+                <div class="select-menu" id="heatmapVariableMenu">
+                  <div class="select-option selected" data-value="sleep">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Sleep Hours</span>
+                  </div>
+
+                  <div class="select-option" data-value="stress">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Stress Level</span>
+                  </div>
+
+                  <div class="select-option" data-value="workStudy">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Work/Study Hours</span>
+                  </div>
+
+                  <div class="select-option" data-value="notifications">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Notifications per Day</span>
+                  </div>
+
+                  <div class="select-option" data-value="apps">
+                    <span class="option-radio"></span>
+                    <span class="option-label">App Opens per Day</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="chart_heatmap"></div>
+
+          <p class="heatmap-note">Colour shows the average addiction level, from lower-risk peach tones to higher-risk teal tones.</p>
+        </div>
+      </div>
+
+      <div id="tooltip_heatmap" class="tooltip"></div>
+    </section>
+
+    <section id="radarChart">
+      <div class="viz-header">
+        <div class="viz-copy">
+          <h4>Addiction Patterns Across Usage Behaviours</h4>
+
+          <p class="chart-description">
+            This radar chart compares the average behaviour of addicted and non-addicted users across
+            five indicators: social media time, sleep time, work-study time, gaming hours, and daily
+            screen time. The dark teal solid shape represents addicted users, and the pink dashed shape
+            represents non-addicted users.
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-box radar-chart-box">
+        <div class="chart-box-inner">
+          <div class="chart-box-controls radar-controls">
+            <div class="controls-group">
+              <span class="filter-label">Stress level</span>
+
+              <div class="custom-select" id="stressLevelFilter">
+                <button type="button" class="select-button" id="stressLevelButton">
+                  <span id="stressLevelSelected">All</span>
+                  <span class="select-arrow">▾</span>
+                </button>
+
+                <div class="select-menu" id="stressLevelMenu">
+                  <div class="select-option selected" data-value="All">
+                    <span class="option-radio"></span>
+                    <span class="option-label">All</span>
+                  </div>
+                  <div class="select-option" data-value="Low">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Low</span>
+                  </div>
+                  <div class="select-option" data-value="Medium">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Medium</span>
+                  </div>
+                  <div class="select-option" data-value="High">
+                    <span class="option-radio"></span>
+                    <span class="option-label">High</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="controls-group">
+              <span class="filter-label">Addiction level</span>
+
+              <div class="custom-select" id="addictionLevelFilter">
+                <button type="button" class="select-button" id="addictionLevelButton">
+                  <span id="addictionLevelSelected">All</span>
+                  <span class="select-arrow">▾</span>
+                </button>
+
+                <div class="select-menu" id="addictionLevelMenu">
+                  <div class="select-option selected" data-value="All">
+                    <span class="option-radio"></span>
+                    <span class="option-label">All</span>
+                  </div>
+                  <div class="select-option" data-value="None">
+                    <span class="option-radio"></span>
+                    <span class="option-label">None</span>
+                  </div>
+                  <div class="select-option" data-value="Mild">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Mild</span>
+                  </div>
+                  <div class="select-option" data-value="Moderate">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Moderate</span>
+                  </div>
+                  <div class="select-option" data-value="Severe">
+                    <span class="option-radio"></span>
+                    <span class="option-label">Severe</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="chart_radarchart"></div>
+        </div>
+      </div>
+
+      <div id="message"></div>
+    </section>
+  </div>
+
+
+
+
+
+<footer id="page-footer">
+  <p>
+    <strong>Data source:</strong>
+    <a href="https://www.kaggle.com/datasets/zahranusratt/smartphone-usage-and-addiction-analysis-dataset" target="_blank">
+      Smartphone Usage and Addiction Analysis Dataset (Kaggle)
+    </a>
+  </p>
+  </footer>`;
+
+function renderSignalsD3Visualisation(section) {
+  if (section.type !== "signalsD3Visualisation") return "";
+
+  return `
+    <link rel="stylesheet" href="/assets/visualisations/signals-of-smartphone-addiction/signals-d3-scoped.css" />
+    <div class="signals-d3-embed" data-signals-d3-visualisation aria-label="Signals of Smartphone Addiction interactive visualisation">
+      ${signalsD3VisualisationMarkup}
+    </div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="/assets/visualisations/signals-of-smartphone-addiction/customSelect.js"></script>
+    <script src="/assets/visualisations/signals-of-smartphone-addiction/animations.js"></script>
+    <script src="/assets/visualisations/signals-of-smartphone-addiction/heatmap.js"></script>
+    <script src="/assets/visualisations/signals-of-smartphone-addiction/scatterPlot.js"></script>
+    <script src="/assets/visualisations/signals-of-smartphone-addiction/radarChartDesign.js"></script>
+    <script src="/assets/visualisations/signals-of-smartphone-addiction/radarChart.js"></script>
+  `.trim();
+}
+
+function slugifyLabel(value = "") {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function getProjectPageClass(projectId) {
+  return projectId ? `case-study--${projectId}` : "";
 }
 
 function renderMatrices(images = []) {
@@ -627,12 +1170,26 @@ function renderOfflineOutcome(shouldRender = false) {
       value: "70K+",
       label: "People in rural areas supported during 2025–2026.",
       modifier: "offline-outcome-card--primary",
+      count: {
+        start: 1,
+        end: 70,
+        suffix: "K+",
+        duration: 1500,
+        final: "70K+",
+      },
     },
     {
       kicker: "Processing",
       value: "4× faster",
       label: "Reduced approval request processing time from around 20 minutes to 5 minutes.",
       modifier: "offline-outcome-card--system",
+      count: {
+        start: 1,
+        end: 4,
+        suffix: "×",
+        duration: 1300,
+        final: "4× faster",
+      },
     },
     {
       kicker: "Continuity",
@@ -662,16 +1219,20 @@ function renderOfflineOutcome(shouldRender = false) {
       <div class="offline-outcome-grid" aria-label="Project impact metrics">
         ${metrics
           .map(
-            (metric) => `
+            (metric) => {
+              const countAttributes = renderCountUpAttributes(metric.count);
+
+              return `
               <article class="offline-outcome-card ${metric.modifier}">
                 <div>
                   <p class="offline-outcome-card-kicker">${metric.kicker}</p>
-                  <p class="offline-outcome-card-value">${metric.value}</p>
+                  <p class="offline-outcome-card-value${countAttributes ? `" ${countAttributes}` : '"'}>${metric.value}</p>
                 </div>
 
                 <p class="offline-outcome-card-label">${metric.label}</p>
               </article>
-            `
+            `;
+            }
           )
           .join("")}
       </div>
@@ -730,6 +1291,12 @@ function renderMaternalOutcome(shouldRender = false) {
       label:
         "Women affiliated with Nueva EPS in Antioquia supported through the final flow.",
       modifier: "maternal-outcome-card--primary",
+      count: {
+        start: 1,
+        end: 500,
+        duration: 1300,
+        final: "500",
+      },
     },
     {
       kicker: "Programme",
@@ -758,16 +1325,20 @@ function renderMaternalOutcome(shouldRender = false) {
       <div class="maternal-outcome-grid" aria-label="Maternal Health Support outcome highlights">
         ${metrics
           .map(
-            (metric) => `
+            (metric) => {
+              const countAttributes = renderCountUpAttributes(metric.count);
+
+              return `
               <article class="maternal-outcome-card ${metric.modifier}">
                 <div>
                   <p class="maternal-outcome-card-kicker">${metric.kicker}</p>
-                  <p class="maternal-outcome-card-value${metric.textValue ? " maternal-outcome-card-value--text" : ""}">${metric.value}</p>
+                  <p class="maternal-outcome-card-value${metric.textValue ? " maternal-outcome-card-value--text" : ""}${countAttributes ? `" ${countAttributes}` : '"'}>${metric.value}</p>
                 </div>
 
                 <p class="maternal-outcome-card-label">${metric.label}</p>
               </article>
-            `
+            `;
+            }
           )
           .join("")}
       </div>
@@ -2216,6 +2787,14 @@ function renderOfflineFirstFlowModel(type = "") {
 function renderAppOutcome(shouldRender = false) {
   if (!shouldRender) return "";
 
+  const reachCountAttributes = renderCountUpAttributes({
+    start: 100,
+    end: 1000,
+    format: "compact-k-m",
+    duration: 1400,
+    final: "1M+",
+  });
+
   return `
     <section class="app-outcome" aria-label="App Redesign outcome">
       <div class="app-outcome-heading">
@@ -2226,7 +2805,7 @@ function renderAppOutcome(shouldRender = false) {
         <article class="app-outcome-card app-outcome-card--primary">
           <div>
             <p class="app-outcome-card-kicker">Reach</p>
-            <p class="app-outcome-card-value">1M+</p>
+            <p class="app-outcome-card-value" ${reachCountAttributes}>1M+</p>
           </div>
           <p class="app-outcome-card-label">Members used the redesigned app each month.</p>
         </article>
@@ -2286,6 +2865,21 @@ function renderAppOutcome(shouldRender = false) {
 function renderWhatsappResults(shouldRender = false) {
   if (!shouldRender) return "";
 
+  const reachCountAttributes = renderCountUpAttributes({
+    start: 100,
+    end: 1800,
+    format: "compact-k-m",
+    duration: 1500,
+    final: "1.8M",
+  });
+  const satisfactionCountAttributes = renderCountUpAttributes({
+    start: 1,
+    end: 97,
+    suffix: "%",
+    duration: 1300,
+    final: "97%",
+  });
+
   return `
     <section class="whatsapp-results" aria-label="WhatsApp Medical Appointments results">
       <div class="whatsapp-results-heading">
@@ -2301,7 +2895,7 @@ function renderWhatsappResults(shouldRender = false) {
         <article class="whatsapp-results-card whatsapp-results-card--primary">
           <div>
             <p class="whatsapp-results-card-kicker">Reach</p>
-            <p class="whatsapp-results-card-value">1.8M</p>
+            <p class="whatsapp-results-card-value" ${reachCountAttributes}>1.8M</p>
           </div>
 
           <p class="whatsapp-results-card-label">People used the service monthly within the first six months after launch.</p>
@@ -2319,7 +2913,7 @@ function renderWhatsappResults(shouldRender = false) {
         <article class="whatsapp-results-card whatsapp-results-card--satisfaction">
           <div>
             <p class="whatsapp-results-card-kicker">Satisfaction</p>
-            <p class="whatsapp-results-card-value">97%</p>
+            <p class="whatsapp-results-card-value" ${satisfactionCountAttributes}>97%</p>
           </div>
 
           <p class="whatsapp-results-card-label">Users who completed the satisfaction survey reported being happy with the service.</p>
@@ -2699,6 +3293,18 @@ function renderMaternalWhatsappFlow(enabled = false) {
 }
 
 function renderSection(section, isAfterPainPoints = false) {
+  if (section.type === "signalsD3Visualisation") {
+    const sectionIndicatorTitle =
+      section.indicatorTitle || "Interactive visualisation";
+
+    return `
+      <section class="case-section case-section--after-pain-points case-section--signals-d3-visualisation" data-section-title="${sectionIndicatorTitle}">
+        <div class="case-section-content rich-copy">
+          ${renderSignalsD3Visualisation(section)}
+        </div>
+      </section>
+    `.trim();
+  }
   const blocks = (section.blocks || [])
     .map(
       (block) => {
@@ -2715,8 +3321,26 @@ function renderSection(section, isAfterPainPoints = false) {
     : "";
   const trailing = section.trailing ? `<p>${section.trailing}</p>` : "";
   const sectionClasses = ["case-section"];
-  if (isAfterPainPoints) {
+  const useAfterPainPointsLayout =
+    isAfterPainPoints ||
+    section.type === "scrollCrossfade" ||
+    section.type === "signalsArticleFlow" ||
+    section.type === "signalsD3Visualisation";
+
+  if (useAfterPainPointsLayout) {
     sectionClasses.push("case-section--after-pain-points");
+  }
+  if (
+    section.type === "scrollCrossfade" ||
+    section.type === "signalsArticleFlow"
+  ) {
+    sectionClasses.push("case-section--scroll-crossfade");
+  }
+  if (section.type === "signalsArticleFlow") {
+    sectionClasses.push("case-section--signals-article-flow");
+  }
+  if (section.type === "signalsD3Visualisation") {
+    sectionClasses.push("case-section--signals-d3-visualisation");
   }
   if (section.stackUserGroups) {
     sectionClasses.push("case-section--stacked-user-groups");
@@ -2726,6 +3350,9 @@ function renderSection(section, isAfterPainPoints = false) {
   }
   if (section.title === "Interaction Model") {
     sectionClasses.push("case-section--interaction-model");
+  }
+  if (section.title === "Requirements Gathering") {
+    sectionClasses.push("case-section--requirements-gathering");
   }
   if (section.title === "Key Flows") {
     sectionClasses.push("case-section--key-flows");
@@ -2753,11 +3380,16 @@ function renderSection(section, isAfterPainPoints = false) {
 
   const sectionParagraphs = renderSectionParagraphs(section);
   const sectionIndicatorTitle = section.indicatorTitle || section.title;
+  const sectionTitleAttribute =
+    section.type === "scrollCrossfade" ||
+    section.type === "signalsArticleFlow"
+      ? `data-crossfade-section-title="${sectionIndicatorTitle}"`
+      : `data-section-title="${sectionIndicatorTitle}"`;
   const sectionHeading = section.hideTitle ? "" : `<h2>${section.title}</h2>`;
 
   if (hasFlowOverviewHeading) {
     return `
-    <section class="${sectionClasses.join(" ")}" data-section-title="${sectionIndicatorTitle}">
+    <section class="${sectionClasses.join(" ")}" ${sectionTitleAttribute}>
       <div class="case-section-flow-overview-heading">
         ${sectionHeading}
         <div class="case-section-flow-overview-copy rich-copy">
@@ -2786,6 +3418,9 @@ function renderSection(section, isAfterPainPoints = false) {
         ${renderUserGroups(section.userGroups, section.stackUserGroups)}
         ${renderToneVoice(section.toneVoice)}
         ${renderSampleMessages(section.sampleMessages)}
+        ${renderScrollCrossfade(section)}
+        ${renderSignalsArticleFlow(section)}
+        ${renderSignalsD3Visualisation(section)}
       </div>
       ${renderPainPoints(section.painPoints)}
       ${renderInlineMedia(section.media)}
@@ -2796,7 +3431,7 @@ function renderSection(section, isAfterPainPoints = false) {
 
   if (hasSplitHeading) {
     return `
-    <section class="${sectionClasses.join(" ")}" data-section-title="${sectionIndicatorTitle}">
+    <section class="${sectionClasses.join(" ")}" ${sectionTitleAttribute}>
       <div class="case-section-split-heading">
         ${sectionHeading}
         <div class="case-section-split-copy rich-copy">
@@ -2825,6 +3460,9 @@ function renderSection(section, isAfterPainPoints = false) {
         ${renderUserGroups(section.userGroups, section.stackUserGroups)}
         ${renderToneVoice(section.toneVoice)}
         ${renderSampleMessages(section.sampleMessages)}
+        ${renderScrollCrossfade(section)}
+        ${renderSignalsArticleFlow(section)}
+        ${renderSignalsD3Visualisation(section)}
       </div>
       ${renderPainPoints(section.painPoints)}
       ${renderInlineMedia(section.media)}
@@ -2834,7 +3472,7 @@ function renderSection(section, isAfterPainPoints = false) {
   }
 
   return `
-    <section class="${sectionClasses.join(" ")}" data-section-title="${sectionIndicatorTitle}">
+    <section class="${sectionClasses.join(" ")}" ${sectionTitleAttribute}>
       ${sectionHeading}
       <div class="case-section-content rich-copy">
         ${sectionParagraphs}
@@ -2859,6 +3497,9 @@ function renderSection(section, isAfterPainPoints = false) {
         ${renderUserGroups(section.userGroups, section.stackUserGroups)}
         ${renderToneVoice(section.toneVoice)}
         ${renderSampleMessages(section.sampleMessages)}
+        ${renderScrollCrossfade(section)}
+        ${renderSignalsArticleFlow(section)}
+        ${renderSignalsD3Visualisation(section)}
       </div>
       ${renderPainPoints(section.painPoints)}
       ${renderInlineMedia(section.media)}
@@ -2876,6 +3517,11 @@ function initialiseHorizontalScroll() {
   scenes.forEach((scene) => {
     const sticky = scene.querySelector(".pain-points-sticky");
     const track = scene.querySelector(".pain-points-track");
+    const requirementsSection = document.body.classList.contains(
+      "case-study--rural-healthcare"
+    )
+      ? scene.closest(".case-section")?.nextElementSibling
+      : null;
     let travel = 0;
     let ticking = false;
 
@@ -2892,6 +3538,25 @@ function initialiseHorizontalScroll() {
       const available = Math.max(1, scene.offsetHeight - window.innerHeight);
       const progress = Math.min(1, Math.max(0, -rect.top / available));
       track.style.transform = `translate3d(${-travel * progress}px, 0, 0)`;
+
+      if (
+        requirementsSection?.classList.contains(
+          "case-section--requirements-gathering"
+        )
+      ) {
+        const revealProgress = Math.min(
+          1,
+          Math.max(0, (progress - 0.72) / 0.28)
+        );
+        const easedReveal =
+          revealProgress * revealProgress * (3 - 2 * revealProgress);
+
+        requirementsSection.style.setProperty(
+          "--pain-to-requirements-opacity",
+          `${easedReveal}`
+        );
+      }
+
       ticking = false;
     };
 
@@ -2927,6 +3592,17 @@ function initialiseSectionIndicator() {
       title: section.dataset.sectionTitle,
     })
   );
+  const crossfadeScenes = [
+    ...document.querySelectorAll("[data-scroll-crossfade]"),
+  ].map((scene) => ({
+    scene,
+    items: [...scene.querySelectorAll("[data-scroll-crossfade-item]")].map(
+      (item) => ({
+        title: item.querySelector("h2")?.textContent.trim() || "",
+        weight: Number(item.dataset.scrollWeight) || 1,
+      })
+    ),
+  }));
   let activeTitle = "";
   let ticking = false;
   let transitionTimer;
@@ -2967,6 +3643,20 @@ function initialiseSectionIndicator() {
       }
     });
 
+    crossfadeScenes.forEach(({ scene, items }) => {
+      const rect = scene.getBoundingClientRect();
+      const isActiveScene = rect.top <= activationLine && rect.bottom > 0;
+
+      if (!isActiveScene || !items.length) return;
+
+      const travel = Math.max(1, rect.height - window.innerHeight);
+      const progress = Math.min(1, Math.max(0, -rect.top / travel));
+      const activeIndex = getWeightedCrossfadeIndex(items, progress);
+      const title = items[activeIndex]?.title;
+
+      if (title) activeSection = { title };
+    });
+
     const isVisible = Boolean(activeSection);
     indicator.classList.toggle("is-visible", isVisible);
     indicator.setAttribute("aria-hidden", String(!isVisible));
@@ -2985,6 +3675,20 @@ function initialiseSectionIndicator() {
   update();
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", requestUpdate);
+}
+
+function getWeightedCrossfadeIndex(items, progress) {
+  const totalWeight = items.reduce((sum, item) => sum + item.weight, 0);
+  const progressWeight = Math.min(1, Math.max(0, progress)) * totalWeight;
+  let offset = 0;
+
+  for (let index = 0; index < items.length; index += 1) {
+    offset += items[index].weight;
+
+    if (progressWeight < offset) return index;
+  }
+
+  return Math.max(0, items.length - 1);
 }
 
 function initialiseReadingProgress() {
@@ -3028,14 +3732,20 @@ function initialiseStickyMeta() {
   const media = document.querySelector("#project-media");
   const originalParent = meta?.parentElement;
   const originalNextSibling = meta?.nextElementSibling;
-  const problemSection = document.querySelector(
-    '[data-section-title="The Problem"]'
+  const isSignalsCaseStudy = document.body.classList.contains(
+    "case-study--signals-of-smartphone-addiction"
   );
+  const stickyBoundarySection =
+    (isSignalsCaseStudy &&
+      document.querySelector('[data-section-title="My Role"]')) ||
+    document.querySelector('[data-section-title="The Problem"]') ||
+    document.querySelector('[data-section-title="My Role"]') ||
+    document.querySelector("#project-sections .case-section:last-of-type");
   const mobileQuery = window.matchMedia("(max-width: 760px)");
   let rail = null;
   let updateFrame = 0;
 
-  if (!meta || !problemSection) return;
+  if (!meta || !stickyBoundarySection) return;
 
   const restoreMeta = () => {
     const currentRail = meta.parentElement?.classList.contains("case-meta-rail")
@@ -3057,13 +3767,13 @@ function initialiseStickyMeta() {
 
     const mainTop = main.getBoundingClientRect().top + window.scrollY;
     const railTop = mainTop + Number.parseFloat(rail.style.top || "0");
-    const problemDividerTop =
-      problemSection.getBoundingClientRect().top + window.scrollY;
+    const boundaryDividerTop =
+      stickyBoundarySection.getBoundingClientRect().top + window.scrollY;
     const metaHeight = meta.getBoundingClientRect().height;
 
     rail.style.height = `${Math.max(
       metaHeight,
-      problemDividerTop - railTop + metaHeight
+      boundaryDividerTop - railTop + metaHeight
     )}px`;
   };
 
@@ -3116,6 +3826,9 @@ function initialiseStickyMeta() {
 const projectUrls = Object.fromEntries(
   projectOrder.map((id) => [id, `/projects/${id}/`])
 );
+const legacyProjectUrls = {
+  "d3-visualisation": projectUrls["signals-of-smartphone-addiction"],
+};
 
 function getProjectIdFromPath(pathname) {
   const match = pathname.match(/\/projects\/([^/]+)\/?$/);
@@ -3125,6 +3838,16 @@ function getProjectIdFromPath(pathname) {
 const params = new URLSearchParams(window.location.search);
 const requestedId = params.get("id");
 const pathProjectId = getProjectIdFromPath(window.location.pathname);
+
+if (
+  requestedId &&
+  legacyProjectUrls[requestedId] &&
+  window.location.pathname.endsWith("/project.html")
+) {
+  window.location.replace(
+    `${legacyProjectUrls[requestedId]}${window.location.hash}`
+  );
+}
 
 if (
   requestedId &&
@@ -3140,6 +3863,7 @@ const nextId =
   projectOrder[(projectOrder.indexOf(projectId) + 1) % projectOrder.length];
 const nextProject = projects[nextId];
 const caseStudy = document.querySelector("#case-study");
+document.body?.classList.add(getProjectPageClass(projectId));
 const isPrerenderedProject =
   document.body?.dataset.staticProject === "true" ||
   caseStudy?.dataset.prerendered === "true";
@@ -3149,6 +3873,22 @@ function renderProjectDom() {
   document.querySelector("#project-title").textContent = project.title;
   document.querySelector("#project-skills").textContent = project.skills;
   document.querySelector("#project-tools").textContent = project.tools;
+  const caseMeta = document.querySelector(".case-meta");
+  caseMeta.querySelectorAll("[data-extra-meta]").forEach((row) => row.remove());
+  if (Array.isArray(project.meta)) {
+    project.meta.forEach((item) => {
+      const row = document.createElement("div");
+      row.dataset.extraMeta = "true";
+      const label = document.createElement("h2");
+      label.textContent = item.label;
+      const value = document.createElement("p");
+      value.textContent = Array.isArray(item.value)
+        ? item.value.join(" · ")
+        : item.value;
+      row.append(label, value);
+      caseMeta.append(row);
+    });
+  }
   document.querySelector("#project-overview").className = "rich-copy";
   document.querySelector("#project-overview").innerHTML = renderParagraphs(
     project.overview
@@ -3239,6 +3979,93 @@ function initialiseMediaReveals() {
   );
 
   mediaReveals.forEach((media) => observer.observe(media));
+}
+
+function initialiseOutcomeCountUps() {
+  const countUpElements = document.querySelectorAll("[data-count-up]");
+  if (!countUpElements.length) return;
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  const setFinalValue = (element) => {
+    element.textContent = element.dataset.countFinal || element.textContent;
+    element.dataset.countAnimated = "true";
+  };
+
+  if (reducedMotion || !("IntersectionObserver" in window)) {
+    countUpElements.forEach(setFinalValue);
+    return;
+  }
+
+  const easeOutCubic = (progress) => 1 - Math.pow(1 - progress, 3);
+
+  const formatCompactThousands = (value) => {
+    if (value >= 1000) {
+      const millions = value / 1000;
+      const formattedMillions = Number.isInteger(millions)
+        ? millions.toFixed(0)
+        : millions.toFixed(1);
+
+      return `${formattedMillions}M`;
+    }
+
+    return `${Math.round(value)}K`;
+  };
+
+  const animateValue = (element) => {
+    if (element.dataset.countAnimated === "true") return;
+
+    const start = Number(element.dataset.countStart);
+    const end = Number(element.dataset.countEnd);
+    const suffix = element.dataset.countSuffix || "";
+    const format = element.dataset.countFormat || "";
+    const duration = Number(element.dataset.countDuration) || 1400;
+    const finalValue = element.dataset.countFinal || `${end}${suffix}`;
+
+    if (!Number.isFinite(start) || !Number.isFinite(end)) {
+      setFinalValue(element);
+      return;
+    }
+
+    const startTime = performance.now();
+    element.dataset.countAnimated = "true";
+
+    const step = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const value = Math.round(start + (end - start) * easeOutCubic(progress));
+      const formattedValue =
+        format === "compact-k-m"
+          ? formatCompactThousands(value)
+          : `${value}${suffix}`;
+
+      element.textContent = progress < 1 ? formattedValue : finalValue;
+
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        animateValue(entry.target);
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      rootMargin: "0px 0px -16% 0px",
+      threshold: 0.45,
+    }
+  );
+
+  countUpElements.forEach((element) => observer.observe(element));
 }
 
 function initialiseFullBleedParallax() {
@@ -3564,6 +4391,263 @@ function initialiseStackedUserGroups() {
   });
 }
 
+function initialiseScrollCrossfades() {
+  const scenes = [...document.querySelectorAll("[data-scroll-crossfade]")];
+
+  if (!scenes.length) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const singleColumnLayout = window.matchMedia("(max-width: 760px)");
+
+  scenes.forEach((scene) => {
+    const items = [...scene.querySelectorAll("[data-scroll-crossfade-item]")];
+    const weightedItems = items.map((item) => ({
+      weight: Number(item.dataset.scrollWeight) || 1,
+    }));
+    const totalWeight = weightedItems.reduce(
+      (sum, item) => sum + item.weight,
+      0
+    );
+
+    if (!items.length) return;
+
+    let ticking = false;
+
+    scene.style.setProperty("--scroll-crossfade-count", String(items.length));
+    scene.style.setProperty("--scroll-crossfade-total-weight", String(totalWeight));
+
+    const setActiveItem = (activeIndex) => {
+      items.forEach((item, index) => {
+        item.classList.toggle("is-active", index === activeIndex);
+      });
+    };
+
+    const reset = () => {
+      scene.style.height = "";
+      items.forEach((item) => item.classList.add("is-active"));
+    };
+
+    const update = () => {
+      if (reducedMotion.matches || singleColumnLayout.matches) {
+        ticking = false;
+        return;
+      }
+
+      const rect = scene.getBoundingClientRect();
+      const travel = Math.max(1, rect.height - window.innerHeight);
+      const progress = Math.min(1, Math.max(0, -rect.top / travel));
+      const activeIndex = getWeightedCrossfadeIndex(weightedItems, progress);
+
+      setActiveItem(activeIndex);
+      ticking = false;
+    };
+
+    const measure = () => {
+      if (reducedMotion.matches || singleColumnLayout.matches) {
+        reset();
+        return;
+      }
+
+      scene.style.height = `calc(var(--scroll-crossfade-total-weight, ${items.length}) * var(--scroll-crossfade-step-height, 62vh))`;
+      setActiveItem(0);
+      update();
+    };
+
+    const requestUpdate = () => {
+      if (ticking) return;
+
+      ticking = true;
+      window.requestAnimationFrame(update);
+    };
+
+    window.requestAnimationFrame(measure);
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", measure);
+    reducedMotion.addEventListener("change", measure);
+    singleColumnLayout.addEventListener("change", measure);
+  });
+}
+
+function initialiseIntroToCrossfadeTransition(options = {}) {
+  const designSection = options.target || document.querySelector(
+    '.case-section--scroll-crossfade[data-crossfade-section-title="Design Process"]'
+  );
+  const myRoleSection = document.querySelector(
+    '.case-section[data-section-title="My Role"]'
+  );
+  const meta = document.querySelector(".case-meta");
+
+  if (!designSection || !myRoleSection || !meta) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const singleColumnLayout = window.matchMedia("(max-width: 760px)");
+  const fadeTargets = options.sources || [myRoleSection, meta];
+  let ticking = false;
+
+  designSection.classList.add("is-intro-crossfade-target");
+  fadeTargets.forEach((target) =>
+    target.classList.add("is-intro-crossfade-source")
+  );
+
+  const clear = () => {
+    designSection.style.removeProperty("--intro-crossfade-design-opacity");
+    designSection.style.removeProperty("--intro-crossfade-design-offset");
+    fadeTargets.forEach((target) => {
+      target.style.removeProperty("--intro-crossfade-source-opacity");
+      target.style.removeProperty("--intro-crossfade-source-offset");
+    });
+  };
+
+  const update = () => {
+    if (reducedMotion.matches || singleColumnLayout.matches) {
+      clear();
+      ticking = false;
+      return;
+    }
+
+    const rect = designSection.getBoundingClientRect();
+    const start = window.innerHeight * 0.58;
+    const distance = Math.max(180, window.innerHeight * 0.26);
+    let targetTop = rect.top;
+    if (options.sketchScene) {
+      // Measure the unanimated target so its entrance cannot feed back into progress.
+      const transform = getComputedStyle(designSection).transform;
+      if (transform !== "none") targetTop -= new DOMMatrixReadOnly(transform).m42;
+    }
+    let progress = Math.min(1, Math.max(0, (start - targetTop) / distance));
+    if (options.sketchScene) {
+      const scene = options.sketchScene;
+      const sceneTop = scene.getBoundingClientRect().top + window.scrollY;
+      const sketchEnd = sceneTop + Math.max(1, scene.offsetHeight - window.innerHeight);
+      const transitionStart = Math.max(sketchEnd, window.scrollY + targetTop - start);
+      progress = Math.min(1, Math.max(0, (window.scrollY - transitionStart) / distance));
+    }
+    const sourceProgress = Math.min(1, progress / 0.5);
+    const designProgress =
+      progress <= 0.5 ? 0 : Math.min(1, (progress - 0.5) / 0.5);
+
+    fadeTargets.forEach((target) => {
+      target.style.setProperty(
+        "--intro-crossfade-source-opacity",
+        `${1 - sourceProgress}`
+      );
+      target.style.setProperty(
+        "--intro-crossfade-source-offset",
+        `${-12 * sourceProgress}px`
+      );
+    });
+    designSection.style.setProperty(
+      "--intro-crossfade-design-opacity",
+      `${designProgress}`
+    );
+    designSection.style.setProperty(
+      "--intro-crossfade-design-offset",
+      `${18 * (1 - designProgress)}px`
+    );
+    ticking = false;
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  };
+
+  update();
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  reducedMotion.addEventListener("change", requestUpdate);
+  singleColumnLayout.addEventListener("change", requestUpdate);
+}
+
+function initialiseRuralRequirementsInteractionTransition() {
+  if (!document.body.classList.contains("case-study--rural-healthcare")) return;
+
+  const requirementsSection = document.querySelector(
+    '.case-section--requirements-gathering[data-section-title="Requirements Gathering"]'
+  );
+  const interactionSection = document.querySelector(
+    '.case-section--interaction-model[data-section-title="Interaction Model"]'
+  );
+
+  if (!requirementsSection || !interactionSection) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const singleColumnLayout = window.matchMedia("(max-width: 760px)");
+  let ticking = false;
+
+  requirementsSection.classList.add("is-requirements-crossfade-source");
+  interactionSection.classList.add("is-requirements-crossfade-target");
+
+  const clear = () => {
+    requirementsSection.style.removeProperty("--pain-to-requirements-opacity");
+    requirementsSection.style.removeProperty(
+      "--requirements-transition-source-opacity"
+    );
+    requirementsSection.style.removeProperty(
+      "--requirements-transition-source-offset"
+    );
+    interactionSection.style.removeProperty(
+      "--requirements-transition-target-opacity"
+    );
+    interactionSection.style.removeProperty(
+      "--requirements-transition-target-offset"
+    );
+  };
+
+  const update = () => {
+    if (reducedMotion.matches || singleColumnLayout.matches) {
+      clear();
+      ticking = false;
+      return;
+    }
+
+    const rect = interactionSection.getBoundingClientRect();
+    const start = window.innerHeight * 0.7;
+    const distance = Math.max(220, window.innerHeight * 0.32);
+    const progress = Math.min(1, Math.max(0, (start - rect.top) / distance));
+    const sourceProgress = Math.min(1, progress / 0.55);
+    const targetProgress =
+      progress <= 0.35 ? 0 : Math.min(1, (progress - 0.35) / 0.65);
+    const painReveal = Number(
+      getComputedStyle(requirementsSection)
+        .getPropertyValue("--pain-to-requirements-opacity")
+        .trim()
+    );
+    const requirementsReveal = Number.isFinite(painReveal) ? painReveal : 1;
+
+    requirementsSection.style.setProperty(
+      "--requirements-transition-source-opacity",
+      `${requirementsReveal * (1 - sourceProgress)}`
+    );
+    requirementsSection.style.setProperty(
+      "--requirements-transition-source-offset",
+      `${-12 * sourceProgress}px`
+    );
+    interactionSection.style.setProperty(
+      "--requirements-transition-target-opacity",
+      `${targetProgress}`
+    );
+    interactionSection.style.setProperty(
+      "--requirements-transition-target-offset",
+      `${18 * (1 - targetProgress)}px`
+    );
+    ticking = false;
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  };
+
+  update();
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  reducedMotion.addEventListener("change", requestUpdate);
+  singleColumnLayout.addEventListener("change", requestUpdate);
+}
+
 function initialiseCaseLogoScrollRotation() {
   const logo = document.querySelector(".case-logo img");
 
@@ -3610,7 +4694,7 @@ function initialiseCaseNameGreeting() {
 
   if (!caseName?.querySelector(".site-name-greet")) return;
 
-  const touchPointer = window.matchMedia("(hover: none)");
+  const touchPointer = window.matchMedia("(hover: none), (pointer: coarse)");
 
   caseName.addEventListener("click", (event) => {
     if (!touchPointer.matches) return;
@@ -3620,20 +4704,158 @@ function initialiseCaseNameGreeting() {
   });
 }
 
+function initialiseSignalsSketchLightbox() {
+  const buttons = [...document.querySelectorAll(
+    ".case-study--signals-of-smartphone-addiction .signals-sketch-track [data-signals-sketch-expand]"
+  )];
+  if (!buttons.length) return;
+
+  const monsterCursor = document.querySelector(".monster-cursor");
+  const dialog = document.createElement("dialog");
+  dialog.className = "signals-sketch-lightbox";
+  dialog.setAttribute("aria-label", "Enlarged sketch");
+  dialog.innerHTML = `<button type="button" class="signals-sketch-close" aria-label="Close enlarged sketch" autofocus><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button><img alt="" />`;
+  document.body.append(dialog);
+  const enlarged = dialog.querySelector("img");
+  let opener;
+  dialog.querySelector("button").addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog) dialog.close();
+  });
+  dialog.addEventListener("close", () => {
+    if (monsterCursor) document.body.append(monsterCursor);
+    opener?.focus({ preventScroll: true });
+  });
+
+  buttons.forEach((button) => {
+    const image = button.previousElementSibling;
+    // Account for object-fit letterboxing without changing the sketch layout.
+    const positionButton = () => {
+      if (!image.naturalWidth) return;
+      const scale = Math.min(image.clientWidth / image.naturalWidth, image.clientHeight / image.naturalHeight);
+      button.style.right = `${(image.clientWidth - image.naturalWidth * scale) / 2 + 8}px`;
+      button.style.bottom = `${(image.clientHeight - image.naturalHeight * scale) / 2 + 8}px`;
+    };
+    image.addEventListener("load", positionButton);
+    new ResizeObserver(positionButton).observe(image);
+    positionButton();
+    button.addEventListener("click", () => {
+      opener = button;
+      enlarged.src = image.currentSrc || image.src;
+      enlarged.alt = image.alt;
+      dialog.showModal();
+      if (monsterCursor) dialog.append(monsterCursor);
+    });
+  });
+}
+
+function initialiseSignalsSketchScroll() {
+  const sections = [
+    ...document.querySelectorAll(
+      ".case-study--signals-of-smartphone-addiction [data-signals-sketch-scroll]"
+    ),
+  ];
+
+  if (!sections.length) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const narrowViewport = window.matchMedia("(max-width: 760px)");
+  let ticking = false;
+
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  const update = () => {
+    sections.forEach((section) => {
+      const track = section.querySelector(".signals-sketch-track");
+      if (!track) return;
+
+      const copy = section.querySelector(".signals-design-exploration-copy");
+      const image = track.querySelector("img");
+      if (!copy || !image) return;
+
+      // Align the visible image, including object-fit's horizontal letterboxing.
+      const imageRect = image.getBoundingClientRect();
+      const scale = image.naturalWidth
+        ? Math.min(imageRect.width / image.naturalWidth, imageRect.height / image.naturalHeight)
+        : 0;
+      const imageInset = image.naturalWidth
+        ? (imageRect.width - image.naturalWidth * scale) / 2
+        : 0;
+      const startX = copy.getBoundingClientRect().left - track.parentElement.getBoundingClientRect().left;
+      track.style.setProperty("--signals-sketch-start-x", `${startX}px`);
+      track.style.setProperty("--signals-sketch-image-inset", `${imageInset}px`);
+
+      if (reducedMotion.matches || narrowViewport.matches) {
+        track.style.removeProperty("--signals-sketch-x");
+        return;
+      }
+
+      const maxTravel = Math.max(0, track.scrollWidth - imageInset - section.clientWidth);
+      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+      const scrollDistance = Math.max(1, section.offsetHeight - window.innerHeight);
+      const progress = clamp((window.scrollY - sectionTop) / scrollDistance, 0, 1);
+
+      track.style.setProperty(
+        "--signals-sketch-x",
+        `${Number.parseFloat((-maxTravel * progress).toFixed(2))}px`
+      );
+    });
+
+    ticking = false;
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  };
+
+  sections.forEach((section) => {
+    const image = section.querySelector(".signals-sketch-track img");
+    image?.addEventListener("load", requestUpdate);
+    if (image) new ResizeObserver(requestUpdate).observe(image);
+  });
+
+  update();
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("load", requestUpdate);
+  reducedMotion.addEventListener("change", update);
+  narrowViewport.addEventListener("change", update);
+}
+
 if (!isPrerenderedProject) {
   renderProjectDom();
 }
 
 initialiseHorizontalScroll();
+initialiseRuralRequirementsInteractionTransition();
 initialiseSectionIndicator();
 initialiseReadingProgress();
 initialiseStickyMeta();
 initialiseMediaReveals();
+initialiseOutcomeCountUps();
 initialiseFullBleedParallax();
 initialiseHeartTable();
 initialiseToneVoice();
 initialiseArchitectureDiagram();
 initialiseStackedUserGroups();
+initialiseIntroToCrossfadeTransition();
+if (document.body.classList.contains("case-study--signals-of-smartphone-addiction")) {
+  const sketchScene = document.querySelector("[data-signals-sketch-scroll]");
+  const strategy = document.querySelector('.signals-article-section[data-section-title="Visualisation Strategy"]');
+  const sketchContent = sketchScene?.querySelector(".signals-design-exploration-sticky");
+  if (sketchScene && strategy && sketchContent) {
+    initialiseIntroToCrossfadeTransition({
+      target: strategy,
+      sources: [sketchContent],
+      sketchScene,
+    });
+  }
+}
+initialiseScrollCrossfades();
+initialiseSignalsSketchScroll();
+initialiseSignalsSketchLightbox();
 initialiseCaseLogoScrollRotation();
 initialiseCaseNameGreeting();
 

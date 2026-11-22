@@ -19,9 +19,16 @@ return {
   projectOrder,
   renderParagraphs,
   renderSection,
+  getProjectPageClass,
 };`
 );
-const { projects, projectOrder, renderParagraphs, renderSection } =
+const {
+  projects,
+  projectOrder,
+  renderParagraphs,
+  renderSection,
+  getProjectPageClass,
+} =
   getProjectModule();
 
 const projectUrls = Object.fromEntries(
@@ -37,6 +44,8 @@ const metaDescriptions = {
     "Service design and conversational UX case study for a WhatsApp medical appointment service supporting millions of monthly users.",
   "maternal-health":
     "Conversational UX case study for WhatsApp-based maternal health support, guidance, and triage for pregnant members in Antioquia.",
+  "signals-of-smartphone-addiction":
+    "Personal D3 visualisation case study exploring smartphone usage patterns and signals of potentially addictive behaviour.",
 };
 
 const socialImages = {
@@ -44,6 +53,7 @@ const socialImages = {
   "app-redesign": "assets/images/projects/app-redesign-cover.png",
   "whatsapp-appointments": "assets/images/projects/whatsapp-appointments-cover.png",
   "maternal-health": "assets/images/projects/maternal-health-cover.png",
+  "signals-of-smartphone-addiction": "assets/logo.svg",
 };
 
 function escapeHtml(value = "") {
@@ -88,6 +98,35 @@ function renderJsonLd(data) {
 
 function stripTrailingWhitespace(value = "") {
   return value.replace(/[ \t]+$/gm, "");
+}
+
+function renderProjectMeta(project) {
+  const rows = [
+    ["Skills", project.skills],
+    ["Tools", project.tools],
+    ...(Array.isArray(project.meta)
+      ? project.meta.map((item) => [item.label, item.value])
+      : []),
+  ];
+
+  return rows
+    .map(([label, value], index) => {
+      const id =
+        label === "Skills"
+          ? ' id="project-skills"'
+          : label === "Tools"
+            ? ' id="project-tools"'
+            : "";
+      const renderedValue = Array.isArray(value) ? value.join(" · ") : value;
+      const extraAttribute = index > 1 ? ' data-extra-meta="true"' : "";
+
+      return `
+          <div${extraAttribute}>
+            <h2>${escapeHtml(label)}</h2>
+            <p${id}>${escapeHtml(renderedValue)}</p>
+          </div>`;
+    })
+    .join("");
 }
 
 function renderMedia(project, projectId) {
@@ -217,7 +256,7 @@ function renderProjectPage(projectId) {
     <script src="/cursor.js" defer></script>
     <script src="/project-data.js" defer></script>
   </head>
-  <body data-static-project="true">
+  <body data-static-project="true" class="${getProjectPageClass(projectId)}">
     <header class="case-header">
       <a class="case-name" href="/">
         <span>Diego Cárdenas Mora</span>
@@ -255,14 +294,7 @@ function renderProjectPage(projectId) {
 
       <section class="case-summary" data-section-title="Project Overview">
         <aside class="case-meta">
-          <div>
-            <h2>Skills</h2>
-            <p id="project-skills">${escapeHtml(project.skills)}</p>
-          </div>
-          <div>
-            <h2>Tools</h2>
-            <p id="project-tools">${escapeHtml(project.tools)}</p>
-          </div>
+          ${renderProjectMeta(project)}
         </aside>
         <div class="case-overview">
           <h2>Project Overview</h2>

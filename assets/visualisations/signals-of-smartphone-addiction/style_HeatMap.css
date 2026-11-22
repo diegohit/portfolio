@@ -1,0 +1,73 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 30px;
+  background: #f7f7f7;
+  color: #222;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  max-width: 850px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+#chart {
+  margin-top: 10px;
+}
+
+.tooltip {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  background-color: rgba(26, 42, 79, 0.88);
+  color: #FFF2EF;
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  box-shadow: 0 2px 8px rgba(26, 42, 79, 0.25);
+}
+
+.chart-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.axis-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.legend-label {
+  font-size: 12px;
+}
+
+.heatmap-legend,
+.heatmap-legend text,
+.legend-label {
+  font-family: Helvetica, Arial, sans-serif;
+  fill: #1A2A4F;
+}
+
+.heatmap-legend .legend-label {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.heatmap-legend .legend-title {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+svg {
+  overflow: visible;
+}
+
+label {
+  margin-right: 8px;
+}

@@ -7,8 +7,9 @@ if (year) {
 const homeTitle = document.querySelector(".home-title");
 const homeIcon = document.querySelector(".home-icon");
 const homeHeading = document.querySelector(".home-title h1");
+const portraitPlaceholder = document.querySelector(".portrait-placeholder");
 const greetingNames = document.querySelectorAll(".site-name");
-const touchPointer = window.matchMedia("(hover: none)");
+const touchPointer = window.matchMedia("(hover: none), (pointer: coarse)");
 
 homeIcon?.addEventListener("click", (event) => {
   if (!touchPointer.matches) return;
@@ -32,14 +33,43 @@ greetingNames.forEach((name) => {
   });
 });
 
+portraitPlaceholder?.addEventListener("click", () => {
+  if (!touchPointer.matches) return;
+
+  portraitPlaceholder.classList.toggle("is-photo-muted");
+});
+
 document.querySelectorAll('.project-card a[href="#"]').forEach((link) => {
   link.addEventListener("click", (event) => {
     event.preventDefault();
   });
 });
 
+const projectCategoryButtons = document.querySelectorAll(
+  ".project-switch-button"
+);
+const projectCards = document.querySelectorAll(
+  ".project-card[data-project-category]"
+);
+
+projectCategoryButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const category = button.dataset.projectCategory;
+
+    projectCategoryButtons.forEach((item) => {
+      const isActive = item === button;
+      item.classList.toggle("is-active", isActive);
+      item.setAttribute("aria-selected", String(isActive));
+    });
+
+    projectCards.forEach((card) => {
+      card.hidden = card.dataset.projectCategory !== category;
+    });
+  });
+});
+
 document.querySelectorAll(".project-card-link").forEach((card) => {
-  const outcomes = [...card.querySelectorAll(".project-outcomes p")];
+  const outcomes = [...card.querySelectorAll(".project-outcome-rotator p")];
   let activeOutcome = 0;
   let outcomeTimer;
 
