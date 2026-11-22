@@ -800,7 +800,8 @@ body[data-static-project="true"] main {
   width: 100vw;
   min-height: calc(100svh + 420px + var(--signals-transition-tail));
   margin-left: calc(50% - 50vw);
-  overflow: clip;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .case-study--signals-of-smartphone-addiction .signals-design-exploration-sticky {
@@ -809,7 +810,35 @@ body[data-static-project="true"] main {
   display: grid;
   align-content: start;
   min-height: calc(100svh - var(--case-sticky-offset) - 28px);
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
+}
+
+.case-study--signals-of-smartphone-addiction .signals-design-exploration-layer {
+  width: 100%;
+}
+
+.case-study--signals-of-smartphone-addiction .signals-visualisation-strategy-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  pointer-events: none;
+}
+
+.case-study--signals-of-smartphone-addiction .signals-visualisation-strategy-marker {
+  position: absolute;
+  top: var(--signals-strategy-marker-top, calc(100svh + 420px));
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.case-study--signals-of-smartphone-addiction .signals-visualisation-strategy-flow-space {
+  height: var(--signals-strategy-overflow, 0px);
+  pointer-events: none;
 }
 
 .case-study--signals-of-smartphone-addiction .signals-design-exploration-copy {
@@ -1004,6 +1033,17 @@ body[data-static-project="true"] main {
     display: block;
     min-height: 0;
     overflow: visible;
+  }
+
+  .case-study--signals-of-smartphone-addiction .signals-visualisation-strategy-layer {
+    position: static;
+    margin-top: clamp(72px, 10vw, 132px);
+    pointer-events: auto;
+  }
+
+  .case-study--signals-of-smartphone-addiction .signals-visualisation-strategy-marker,
+  .case-study--signals-of-smartphone-addiction .signals-visualisation-strategy-flow-space {
+    display: none;
   }
 
   .case-study--signals-of-smartphone-addiction .signals-sketch-track {
@@ -4610,6 +4650,17 @@ body[data-static-project="true"] main {
     display: block;
     min-height: 0;
     overflow: visible;
+  }
+
+  .case-study--signals-of-smartphone-addiction .signals-visualisation-strategy-layer {
+    position: static;
+    margin-top: clamp(72px, 10vw, 132px);
+    pointer-events: auto;
+  }
+
+  .case-study--signals-of-smartphone-addiction .signals-visualisation-strategy-marker,
+  .case-study--signals-of-smartphone-addiction .signals-visualisation-strategy-flow-space {
+    display: none;
   }
 
   .case-study--signals-of-smartphone-addiction .signals-sketch-track {

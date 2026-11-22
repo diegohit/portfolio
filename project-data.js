@@ -791,6 +791,12 @@ function renderSignalsArticleMedia(images = [], layout = "") {
 
 function renderSignalsArticleFlow(section) {
   const items = section.items || [];
+  const designExplorationIndex = items.findIndex(
+    (item) => item.mediaLayout === "horizontal-scroll"
+  );
+  const visualisationStrategy = items[designExplorationIndex + 1];
+  const hasSharedStrategyStage =
+    visualisationStrategy?.title === "Visualisation Strategy";
 
   if (section.type !== "signalsArticleFlow" || !items.length) return "";
 
@@ -798,19 +804,44 @@ function renderSignalsArticleFlow(section) {
     <div class="signals-article-flow">
       ${items
         .map(
-          (item) =>
-            item.mediaLayout === "horizontal-scroll"
+          (item, index) =>
+            hasSharedStrategyStage && index === designExplorationIndex + 1
+              ? ""
+              : item.mediaLayout === "horizontal-scroll"
               ? `
                 <section class="signals-article-section signals-article-section--design-exploration" data-section-title="${item.title}">
                   <div class="signals-design-exploration-scroll" data-signals-sketch-scroll>
                     <div class="signals-design-exploration-sticky">
-                      <div class="signals-design-exploration-copy">
-                        <h2>${item.title}</h2>
-                        <p>${item.body}</p>
+                      <div class="signals-design-exploration-layer" data-signals-design-layer>
+                        <div class="signals-design-exploration-copy">
+                          <h2>${item.title}</h2>
+                          <p>${item.body}</p>
+                        </div>
+                        ${renderSignalsArticleMedia(item.media, item.mediaLayout)}
                       </div>
-                      ${renderSignalsArticleMedia(item.media, item.mediaLayout)}
+                      ${
+                        hasSharedStrategyStage
+                          ? `
+                            <section class="signals-article-section signals-visualisation-strategy-layer" data-section-title="${visualisationStrategy.title}" data-signals-strategy-layer>
+                              <h2>${visualisationStrategy.title}</h2>
+                              <p>${visualisationStrategy.body}</p>
+                              ${renderSignalsArticleMedia(visualisationStrategy.media, visualisationStrategy.mediaLayout)}
+                            </section>
+                          `
+                          : ""
+                      }
                     </div>
+                    ${
+                      hasSharedStrategyStage
+                        ? `<span class="signals-visualisation-strategy-marker" data-section-title="${visualisationStrategy.title}" data-signals-strategy-marker aria-hidden="true"></span>`
+                        : ""
+                    }
                   </div>
+                  ${
+                    hasSharedStrategyStage
+                      ? `<div class="signals-visualisation-strategy-flow-space" data-signals-strategy-flow-space aria-hidden="true"></div>`
+                      : ""
+                  }
                 </section>
               `
               : `
@@ -3585,13 +3616,13 @@ function initialiseSectionIndicator() {
   const projectTitle = document.querySelector("#indicator-project-title");
   const currentLabel = document.querySelector("#indicator-section-current");
   const nextLabel = document.querySelector("#indicator-section-next");
-  const sections = [...document.querySelectorAll("[data-section-title]")].map(
-    (section) => ({
+  const sections = [...document.querySelectorAll("[data-section-title]")]
+    .filter((section) => !section.matches("[data-signals-strategy-layer]"))
+    .map((section) => ({
       section,
       heading: section.querySelector("h2"),
       title: section.dataset.sectionTitle,
-    })
-  );
+    }));
   const crossfadeScenes = [
     ...document.querySelectorAll("[data-scroll-crossfade]"),
   ].map((scene) => ({
@@ -4477,11 +4508,19 @@ function initialiseIntroToCrossfadeTransition(options = {}) {
   );
   const meta = document.querySelector(".case-meta");
 
-  if (!designSection || !myRoleSection || !meta) return;
+  if (
+    !designSection ||
+    (!options.sources && (!myRoleSection || !meta))
+  ) return;
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const singleColumnLayout = window.matchMedia("(max-width: 760px)");
-  const fadeTargets = options.sources || [myRoleSection, meta];
+  const fadeTargets = (options.sources || [myRoleSection, meta]).filter(Boolean);
+  const sharedStage = options.sketchScene?.querySelector(
+    ".signals-design-exploration-sticky"
+  );
+  const flowSpacer = options.flowSpacer;
+  const indicatorMarker = options.indicatorMarker;
   let ticking = false;
 
   designSection.classList.add("is-intro-crossfade-target");
@@ -4496,6 +4535,40 @@ function initialiseIntroToCrossfadeTransition(options = {}) {
       target.style.removeProperty("--intro-crossfade-source-opacity");
       target.style.removeProperty("--intro-crossfade-source-offset");
     });
+  };
+
+  const measureSharedStage = () => {
+    if (!options.sketchScene || !sharedStage) return;
+
+    if (reducedMotion.matches || singleColumnLayout.matches) {
+      flowSpacer?.style.removeProperty("--signals-strategy-overflow");
+      indicatorMarker?.style.removeProperty("--signals-strategy-marker-top");
+      clear();
+      return;
+    }
+
+    const scene = options.sketchScene;
+    const transitionTail =
+      Number.parseFloat(
+        getComputedStyle(scene).getPropertyValue("--signals-transition-tail")
+      ) || Math.max(180, window.innerHeight * 0.26);
+    const horizontalScrollDistance = Math.max(
+      1,
+      scene.offsetHeight - window.innerHeight - transitionTail
+    );
+    const strategyOverflow = Math.max(
+      0,
+      designSection.scrollHeight - sharedStage.clientHeight
+    );
+
+    flowSpacer?.style.setProperty(
+      "--signals-strategy-overflow",
+      `${strategyOverflow}px`
+    );
+    indicatorMarker?.style.setProperty(
+      "--signals-strategy-marker-top",
+      `${horizontalScrollDistance + getCaseSectionActiveThreshold()}px`
+    );
   };
 
   const update = () => {
@@ -4559,11 +4632,31 @@ function initialiseIntroToCrossfadeTransition(options = {}) {
     window.requestAnimationFrame(update);
   };
 
+  measureSharedStage();
   update();
   window.addEventListener("scroll", requestUpdate, { passive: true });
-  window.addEventListener("resize", requestUpdate);
-  reducedMotion.addEventListener("change", requestUpdate);
-  singleColumnLayout.addEventListener("change", requestUpdate);
+  window.addEventListener("resize", () => {
+    measureSharedStage();
+    requestUpdate();
+  });
+  window.addEventListener("load", () => {
+    measureSharedStage();
+    requestUpdate();
+  });
+  if (options.sketchScene && typeof ResizeObserver !== "undefined") {
+    new ResizeObserver(() => {
+      measureSharedStage();
+      requestUpdate();
+    }).observe(designSection);
+  }
+  reducedMotion.addEventListener("change", () => {
+    measureSharedStage();
+    requestUpdate();
+  });
+  singleColumnLayout.addEventListener("change", () => {
+    measureSharedStage();
+    requestUpdate();
+  });
 }
 
 function initialiseRuralRequirementsInteractionTransition() {
@@ -4856,13 +4949,17 @@ initialiseStackedUserGroups();
 initialiseIntroToCrossfadeTransition();
 if (document.body.classList.contains("case-study--signals-of-smartphone-addiction")) {
   const sketchScene = document.querySelector("[data-signals-sketch-scroll]");
-  const strategy = document.querySelector('.signals-article-section[data-section-title="Visualisation Strategy"]');
-  const sketchContent = sketchScene?.querySelector(".signals-design-exploration-sticky");
-  if (sketchScene && strategy && sketchContent) {
+  const strategy = sketchScene?.querySelector("[data-signals-strategy-layer]");
+  const designLayer = sketchScene?.querySelector("[data-signals-design-layer]");
+  const flowSpacer = document.querySelector("[data-signals-strategy-flow-space]");
+  const indicatorMarker = sketchScene?.querySelector("[data-signals-strategy-marker]");
+  if (sketchScene && strategy && designLayer) {
     initialiseIntroToCrossfadeTransition({
       target: strategy,
-      sources: [sketchContent],
+      sources: [designLayer],
       sketchScene,
+      flowSpacer,
+      indicatorMarker,
     });
   }
 }
