@@ -4505,22 +4505,28 @@ function initialiseIntroToCrossfadeTransition(options = {}) {
       return;
     }
 
-    const rect = designSection.getBoundingClientRect();
     const start = window.innerHeight * 0.58;
     const distance = Math.max(180, window.innerHeight * 0.26);
-    let targetTop = rect.top;
-    if (options.sketchScene) {
-      // Measure the unanimated target so its entrance cannot feed back into progress.
-      const transform = getComputedStyle(designSection).transform;
-      if (transform !== "none") targetTop -= new DOMMatrixReadOnly(transform).m42;
-    }
-    let progress = Math.min(1, Math.max(0, (start - targetTop) / distance));
+    let progress;
     if (options.sketchScene) {
       const scene = options.sketchScene;
       const sceneTop = scene.getBoundingClientRect().top + window.scrollY;
-      const sketchEnd = sceneTop + Math.max(1, scene.offsetHeight - window.innerHeight);
-      const transitionStart = Math.max(sketchEnd, window.scrollY + targetTop - start);
-      progress = Math.min(1, Math.max(0, (window.scrollY - transitionStart) / distance));
+      const transitionTail =
+        Number.parseFloat(
+          getComputedStyle(scene).getPropertyValue("--signals-transition-tail")
+        ) || Math.max(180, window.innerHeight * 0.26);
+      const horizontalScrollDistance = Math.max(
+        1,
+        scene.offsetHeight - window.innerHeight - transitionTail
+      );
+      const sketchEnd = sceneTop + horizontalScrollDistance;
+      progress = Math.min(
+        1,
+        Math.max(0, (window.scrollY - sketchEnd) / distance)
+      );
+    } else {
+      const rect = designSection.getBoundingClientRect();
+      progress = Math.min(1, Math.max(0, (start - rect.top) / distance));
     }
     const sourceProgress = Math.min(1, progress / 0.5);
     const designProgress =
@@ -4792,7 +4798,14 @@ function initialiseSignalsSketchScroll() {
 
       const maxTravel = Math.max(0, track.scrollWidth - imageInset - section.clientWidth);
       const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-      const scrollDistance = Math.max(1, section.offsetHeight - window.innerHeight);
+      const transitionTail =
+        Number.parseFloat(
+          getComputedStyle(section).getPropertyValue("--signals-transition-tail")
+        ) || Math.max(180, window.innerHeight * 0.26);
+      const scrollDistance = Math.max(
+        1,
+        section.offsetHeight - window.innerHeight - transitionTail
+      );
       const progress = clamp((window.scrollY - sectionTop) / scrollDistance, 0, 1);
 
       track.style.setProperty(

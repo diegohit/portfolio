@@ -796,8 +796,9 @@ body[data-static-project="true"] main {
 
 .case-study--signals-of-smartphone-addiction .signals-design-exploration-scroll {
   position: relative;
+  --signals-transition-tail: max(180px, 26svh);
   width: 100vw;
-  min-height: calc(100svh + 420px);
+  min-height: calc(100svh + 420px + var(--signals-transition-tail));
   margin-left: calc(50% - 50vw);
   overflow: clip;
 }
