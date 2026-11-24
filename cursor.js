@@ -13,23 +13,8 @@ if (canUseCustomCursor) {
   document.documentElement.classList.add("has-monster-cursor");
 
   const cursorImage = cursor.querySelector("img");
-  [openEyesSrc, closedEyesSrc].forEach((src) => {
-    const image = new Image();
-    image.src = src;
-  });
-  let cursorX = window.innerWidth / 2;
-  let cursorY = window.innerHeight / 2;
-  let cursorFrame = null;
-
-  const updateCursor = () => {
-    cursorFrame = null;
-    cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
-  };
-
-  const requestCursorUpdate = () => {
-    if (cursorFrame) return;
-    cursorFrame = window.requestAnimationFrame(updateCursor);
-  };
+  const closedEyesImage = new Image();
+  closedEyesImage.src = closedEyesSrc;
 
   const blink = () => {
     cursorImage.src = closedEyesSrc;
@@ -61,10 +46,8 @@ if (canUseCustomCursor) {
   window.addEventListener(
     "pointermove",
     (event) => {
-      cursorX = event.clientX;
-      cursorY = event.clientY;
+      cursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
       cursor.classList.add("is-visible");
-      requestCursorUpdate();
     },
     { passive: true }
   );
